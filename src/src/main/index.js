@@ -1,20 +1,67 @@
-/* globals INCLUDE_RESOURCES_PATH */
-import { app } from 'electron'
+'use strict'
+
+import { app, BrowserWindow } from 'electron'
 
 /**
- * Set `__resources` path to resources files in renderer process
+ * Set `__static` path to static files in production
+ * https://simulatedgreg.gitbooks.io/electron-vue/content/en/using-static-assets.html
  */
-global.__resources = undefined // eslint-disable-line no-underscore-dangle
-// noinspection BadExpressionStatementJS
-INCLUDE_RESOURCES_PATH // eslint-disable-line no-unused-expressions
-if (__resources === undefined) console.error('[Main-process]: Resources path is undefined')
+if (process.env.NODE_ENV !== 'development') {
+  global.__static = require('path').join(__dirname, '/static').replace(/\\/g, '\\\\')
+}
 
-// Quit when all windows are closed.
-app.on('window-all-closed', function () {
-  // On macOS it is common for applications and their menu bar
-  // to stay active until the user quits explicitly with Cmd + Q
-  if (process.platform !== 'darwin') app.quit()
+let mainWindow
+const winURL = process.env.NODE_ENV === 'development'
+  ? `http://localhost:9080`
+  : `file://${__dirname}/index.html`
+
+function createWindow () {
+  /**
+   * Initial window options
+   */
+  mainWindow = new BrowserWindow({
+    height: 563,
+    useContentSize: true,
+    width: 1000
+  })
+
+  mainWindow.loadURL(winURL)
+
+  mainWindow.on('closed', () => {
+    mainWindow = null
+  })
+}
+
+app.on('ready', createWindow)
+
+app.on('window-all-closed', () => {
+  if (process.platform !== 'darwin') {
+    app.quit()
+  }
 })
 
-// Load here all startup windows
-require('./mainWindow')
+app.on('activate', () => {
+  if (mainWindow === null) {
+    createWindow()
+  }
+})
+
+/**
+ * Auto Updater
+ *
+ * Uncomment the following code below and install `electron-updater` to
+ * support auto updating. Code Signing with a valid certificate is required.
+ * https://simulatedgreg.gitbooks.io/electron-vue/content/en/using-electron-builder.html#auto-updating
+ */
+
+/*
+import { autoUpdater } from 'electron-updater'
+
+autoUpdater.on('update-downloaded', () => {
+  autoUpdater.quitAndInstall()
+})
+
+app.on('ready', () => {
+  if (process.env.NODE_ENV === 'production') autoUpdater.checkForUpdates()
+})
+ */
