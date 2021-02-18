@@ -1,6 +1,16 @@
 #include "TimerOne.h"
 #include "NTC_Thermistor.h"
 
+#include <Adafruit_NeoPixel.h>
+#ifdef __AVR__
+  #include <avr/power.h>
+#endif
+#define PIN        7
+#define NUMPIXELS 8
+
+Adafruit_NeoPixel pixels(NUMPIXELS, PIN, NEO_GRB + NEO_KHZ800);
+#define DELAYVAL 500
+
 const byte OC1A_PIN = 9;
 const byte FAN_A_TACH = 4;
 const byte OC1B_PIN = 10;
@@ -22,10 +32,22 @@ void setup()
   pinMode(FAN_B_TACH, INPUT);
 
   Timer1.initialize(40);
+  
+  #if defined(__AVR_ATtiny85__) && (F_CPU == 16000000)
+  clock_prescale_set(clock_div_1);
+  #endif
+  pixels.begin();
 }
 
 void loop()
 {
+  for(int i=0; i<NUMPIXELS; i++) {
+
+    pixels.setPixelColor(i, pixels.Color(224, 111, 34)); //224, 111, 34
+    pixels.show();
+    delay(DELAYVAL);
+  }
+  
   //Pull some user configured data from the EEPROM, such as fan curve etc.
   //Hardcoded for now
 
@@ -45,13 +67,13 @@ void loop()
   if (inputVar.charAt(0) == 'X'){
     if (inputVar.charAt(1) == 'A')
     {
-      A_AUTO = inputVar.charAt(3);
+      A_AUTO = inputVar.charAt(2) - '0';
         //reset inputVar
         inputVar = "";
     }
     if (inputVar.charAt(1) == 'B')
     {
-      B_AUTO = inputVar.charAt(3);
+      B_AUTO = inputVar.charAt(2) - '0';
       //reset inputVar
       inputVar = "";
     }
