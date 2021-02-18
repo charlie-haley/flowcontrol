@@ -1,15 +1,13 @@
 #include "TimerOne.h"
 #include "NTC_Thermistor.h"
-
 #include <Adafruit_NeoPixel.h>
 #ifdef __AVR__
-  #include <avr/power.h>
+#include <avr/power.h>
 #endif
-#define PIN        7
+#define PIN 7
 #define NUMPIXELS 8
 
 Adafruit_NeoPixel pixels(NUMPIXELS, PIN, NEO_GRB + NEO_KHZ800);
-#define DELAYVAL 500
 
 const byte OC1A_PIN = 9;
 const byte FAN_A_TACH = 4;
@@ -32,44 +30,65 @@ void setup()
   pinMode(FAN_B_TACH, INPUT);
 
   Timer1.initialize(40);
-  
-  #if defined(__AVR_ATtiny85__) && (F_CPU == 16000000)
+
+#if defined(__AVR_ATtiny85__) && (F_CPU == 16000000)
   clock_prescale_set(clock_div_1);
-  #endif
+#endif
   pixels.begin();
 }
 
 void loop()
 {
-  for(int i=0; i<NUMPIXELS; i++) {
-
+  for (int i = 0; i < NUMPIXELS; i++)
+  {
     pixels.setPixelColor(i, pixels.Color(224, 111, 34)); //224, 111, 34
     pixels.show();
-    delay(DELAYVAL);
   }
-  
-  //Pull some user configured data from the EEPROM, such as fan curve etc.
-  //Hardcoded for now
 
-
-  // Instantiation:
-  /**
-      pin - an analog port number to be attached to the thermistor.
-      R0 - reference resistance.
-      Rn - nominal resistance.
-      Tn - nominal temperature in Celsius.
-      B - b-value of a thermistor.
-  */
   NTC_Thermistor case_thermistor(A2, 10000, 10000, 25, 3950);
   double water_temp = case_thermistor.readCelsius();
 
   String inputVar = Serial.readString();
-  if (inputVar.charAt(0) == 'X'){
+  setFanAutoState(inputVar);
+
+  controlFan('A', &A_AUTO, &A_SPEED, OC1A_PIN, inputVar, water_temp);
+  controlFan('B', &B_AUTO, &B_SPEED, OC1B_PIN, inputVar, water_temp);
+
+  printEndOfLoopData(A_SPEED, A_AUTO, B_SPEED, B_AUTO, water_temp);
+}
+
+void controlFan(char fan, bool *fanauto, int *fanspeed, int pinnum, String inputVar, double water_temp)
+{
+  if (*fanauto == false)
+  {
+    if (inputVar.charAt(0) == fan)
+    {
+      inputVar.remove(0, 1);
+      *fanspeed = inputVar.toInt();
+      //reset inputVar
+      inputVar = "";
+    }
+    setPwmDuty(pinnum, *fanspeed);
+  }
+  else
+  {
+    //Auto mode for fan B
+    //Instead of just using water_temp, we want to use all available temp sensors, inc water temp etc. (AVG it?)
+    //User configurable fan curves based on a series of metrics. - Ideally want to stick to onboard temp sensors so it's not dependent on a serial connection to operate
+    *fanspeed = (int)water_temp * 2.2;
+    setPwmDuty(OC1A_PIN, A_SPEED);
+  }
+}
+
+void setFanAutoState(String inputVar)
+{
+  if (inputVar.charAt(0) == 'X')
+  {
     if (inputVar.charAt(1) == 'A')
     {
       A_AUTO = inputVar.charAt(2) - '0';
-        //reset inputVar
-        inputVar = "";
+      //reset inputVar
+      inputVar = "";
     }
     if (inputVar.charAt(1) == 'B')
     {
@@ -78,46 +97,6 @@ void loop()
       inputVar = "";
     }
   }
-
-  if (A_AUTO == false)
-  {
-    if (inputVar.charAt(0) == 'A')
-    {
-      inputVar.remove(0, 1);
-      A_SPEED = inputVar.toInt();
-      //reset inputVar
-      inputVar = "";
-    }
-    setPwmDuty(OC1A_PIN, A_SPEED);
-  }
-  else
-  {
-    //Auto mode for fan A
-    //Instead of just using water_temp, we want to use all available temp sensors, inc water temp etc. (AVG it?)
-    A_SPEED = (int)water_temp*2.2;
-    setPwmDuty(OC1A_PIN, A_SPEED);
-  }
-
-  if (B_AUTO == false)
-  {
-    if (inputVar.charAt(0) == 'B')
-    {
-      inputVar.remove(0, 1);
-      B_SPEED = inputVar.toInt();
-      //reset inputVar
-      inputVar = "";
-    }
-    setPwmDuty(OC1B_PIN, B_SPEED);
-  }
-  else
-  {
-    //Auto mode for fan B
-    //Instead of just using water_temp, we want to use all available temp sensors, inc water temp etc. (AVG it?)
-    B_SPEED = (int)water_temp*2.2;
-    setPwmDuty(OC1B_PIN, B_SPEED);
-  }
-
-  printEndOfLoopData(A_SPEED, A_AUTO, B_SPEED, B_AUTO, water_temp);
 }
 
 void setPwmDuty(byte pin, int duty)
@@ -127,10 +106,10 @@ void setPwmDuty(byte pin, int duty)
 
 void printEndOfLoopData(int fan_a_percent, bool fan_a_auto, int fan_b_percent, bool fan_b_auto, int water_temp)
 {
-  String output = "{\"fan_a\":{\"speed\":" + String(fan_a_percent) + 
-                  ",\"auto\":" + String(fan_a_auto) + 
-                  "},\"fan_b\":{\"speed\":" + String(fan_b_percent) + 
-                  ",\"auto\":" + String(fan_b_auto) + 
+  String output = "{\"fan_a\":{\"speed\":" + String(fan_a_percent) +
+                  ",\"auto\":" + String(fan_a_auto) +
+                  "},\"fan_b\":{\"speed\":" + String(fan_b_percent) +
+                  ",\"auto\":" + String(fan_b_auto) +
                   "},\"temp_water\":" + String(water_temp) + "}";
   Serial.println(output);
 }
