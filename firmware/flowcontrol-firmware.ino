@@ -72,11 +72,11 @@ void controlFan(char fan, bool *fanauto, int *fanspeed, int pinnum, String input
   }
   else
   {
-    //Auto mode for fan B
+    //Auto mode for fan
     //Instead of just using water_temp, we want to use all available temp sensors, inc water temp etc. (AVG it?)
     //User configurable fan curves based on a series of metrics. - Ideally want to stick to onboard temp sensors so it's not dependent on a serial connection to operate
     *fanspeed = (int)water_temp * 2.2;
-    setPwmDuty(OC1A_PIN, A_SPEED);
+    setPwmDuty(pinnum, *fanspeed);
   }
 }
 
