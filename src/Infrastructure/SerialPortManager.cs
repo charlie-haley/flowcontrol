@@ -17,7 +17,7 @@ namespace ServerAppDemo.Infrastructure
         public Data Data { get; set; } 
         public SerialPortManager()
         {
-            _serialPort = new SerialPort("COM3", 9600);
+            _serialPort = new SerialPort("COM13", 9600);
             _serialPort.DtrEnable = true;
             _serialPort.ReceivedBytesThreshold = 10;
             _serialPort.WriteTimeout = 5000;
