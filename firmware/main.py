@@ -8,10 +8,7 @@ uart = UART(0, 9600, parity=None, stop=1, bits=8)
 swriter = uasyncio.StreamWriter(uart, {})
 sreader = uasyncio.StreamReader(uart)
 
-sensor_temp = ADC(1) 
-conversion_factor = 5/65535
-
-#Configure state object
+# Configure state object
 class State:
     Fans = []
     WaterTemp = 20
@@ -26,13 +23,7 @@ state.Fans.append(fan_b)
 
 currentInput = ""
 
-#Main
-
-def steinhart_temperature_C(r, Ro=10000.0, To=25.0, beta=3950.0):
-        steinhart = math.log(r / Ro) / beta      # log(R/Ro) / beta
-        steinhart += 1.0 / (To + 273.15)         # log(R/Ro) / beta + 1/To
-        steinhart = (1.0 / steinhart) - 273.15   # Invert, convert to C
-        return steinhart
+# Main
 
 def average(lst): 
     return sum(lst) / len(lst) 
@@ -59,17 +50,24 @@ async def monitor():
     global state
     global currentInput
     temps = []
+    sensor_temp = ADC(1) 
+    conversion_factor = 5/65535
     while True:
+        # For some reason this is needed to prevent it locking up other async tasks?
+        # Possibly related? https://github.com/micropython/micropython/issues/6866
+        await uasyncio.sleep_ms(1)
+
+        # !! This is rubbish and completely inaccurate, 
+        # !! NTC thermistors aren't linear so a lookup table may be needed
         adcResoulution = 3.3/65535
         reading = sensor_temp.read_u16() * adcResoulution
-        temperature = 25 - (reading - 2.715)/0.001721
+        temperature = 25 - (reading - 2.710)/0.001721
         temps.append(temperature)
-        if len(temps) > 10:
+        if len(temps) > 100:
             state.WaterTemp = int(average(temps))
             temps = []
 
-        # temp = steinhart_temperature_C(resistance)
-        #If input begins with char 'X', enter flow for setting fan state
+        # If input begins with char 'X', enter flow for setting fan state
         if len(currentInput) > 0 and currentInput[0] == 'X':
             for fan in state.Fans:
                 if fan.Position == currentInput[1]:
@@ -78,7 +76,7 @@ async def monitor():
                     currentInput = ""
                     break
         
-        #Set fan states, check if auto and apply rules accordingly
+        # Set fan states, check if auto and apply rules accordingly
         for fan in state.Fans:
             if not fan.Auto:
                 if currentInput[0] == fan.Position:
@@ -89,7 +87,7 @@ async def monitor():
                 fan.Speed = state.WaterTemp * 2.2
             fan.pwm(fan.Speed)
 
-#Run uasyncio event loop
+# Run uasyncio event loop
 loop = uasyncio.get_event_loop()
 loop.create_task(monitor())
 loop.create_task(sender())
