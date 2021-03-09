@@ -1,0 +1,84 @@
+﻿@page "/home"
+@using System.Text.Json
+@using Models
+@inject IJSRuntime JSRuntime
+
+<div class="fan-page">
+    <div class="sensors">
+        <div class="sensors__item">
+            <span class="sensors__item__title">Water</span>
+            <span id="temp-water">@(_waterTemp)c</span>
+        </div>
+        <div class="sensors__item">
+            <span class="sensors__item__title">CLOCK</span>
+            <span id="clock-gpu">@(_gpuClock)MHz</span>
+        </div>
+        <div class="sensors__item">
+            <span class="sensors__item__title">GPU</span>
+            <span id="temp-gpu">@(_gpuTemp)c</span>
+        </div>
+        <div class="sensors__item">
+            <span class="sensors__item__title">CPU</span>
+            <span id="temp-cpu">@(_cpuTemp)c</span>
+        </div>
+    </div>
+    <div class="fan-page">
+        @if(_fans != null)
+        {
+            foreach(var fan in _fans)
+            {
+                <FanItem Fan=@fan/>
+            }
+        }
+
+    </div>
+</div>
+
+@code {
+    private string _waterTemp = string.Empty;
+    private string _gpuTemp = string.Empty;
+    private string _cpuTemp = string.Empty;
+    private string _gpuClock = string.Empty;
+    private List<Fan> _fans = new List<Fan>();
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        base.OnAfterRender(firstRender);
+        if (firstRender)
+        {   
+            while (true)
+            {
+                GetData();
+                await Task.Delay(2000);
+            }
+        }
+    }
+
+    private void GetData()
+    {
+        var jsRequest = new JSRequest();
+        jsRequest.Url = "/datacontroller/getdata";
+        jsRequest.JSInvokeId = "DataCallback";
+        var dotNetReference = DotNetObjectReference.Create(this);
+        JSRuntime.InvokeVoidAsync("MessageRouter.Get", jsRequest.ToJson(), dotNetReference);
+    }
+
+    [JSInvokable("DataCallback")]
+    public void DataCallback(string response)
+    {
+        var options = new JsonSerializerOptions();
+        options.ReadCommentHandling = JsonCommentHandling.Skip;
+        options.AllowTrailingCommas = true;
+        var data = JsonSerializer.Deserialize<Data>(response, options);
+
+        _gpuClock = data.GpuClock;
+        _cpuTemp = data.CpuTemp;
+        _gpuTemp = data.GpuTemp;
+        if(!string.IsNullOrWhiteSpace(data.WaterTemp))
+        {
+            _waterTemp = data.WaterTemp;
+        }
+        _fans = data.Fans;
+
+        StateHasChanged();
+    }
+}
