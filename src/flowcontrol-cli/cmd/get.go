@@ -1,31 +1,108 @@
 package cmd
 
 import (
+	"bufio"
+	"encoding/json"
 	"fmt"
+	"log"
 
 	"github.com/spf13/cobra"
+	"github.com/tarm/serial"
 )
+
+//State TODO: Move to another file
+type State struct {
+	FanA      Fan `json:"fan_a"`
+	FanB      Fan `json:"fan_b"`
+	WaterTemp int `json:"temp_water"`
+}
+
+//Fan struct
+type Fan struct {
+	Speed int
+	Auto  int
+}
 
 // getCmd represents the get command
 var getCmd = &cobra.Command{
-	Use:   "get",
-	Short: "A brief description of your command",
-	Long:  `aaaaaaaaaaaa.`,
+	Use:     "get",
+	Aliases: []string{"g"},
+	Short:   "Return the current state of the fan controller",
+	Long:    `Return the current state of the fan controller.`,
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("get called")
+		state := getState()
+
+		print("FAN     AUTO    SPEED\n")
+		print(fmt.Sprintf("%v       %t     %v \n", "A", tobool(state.FanA.Auto), state.FanA.Speed))
+		print(fmt.Sprintf("%v       %t     %v \n", "B", tobool(state.FanB.Auto), state.FanB.Speed))
+		print("\n")
+		print("SENSOR     TEMP(C)\n")
+		print(fmt.Sprintf("%v       %v\n", "Water", state.WaterTemp))
 	},
+}
+
+var getTempCmd = &cobra.Command{
+	Use:     "temp",
+	Aliases: []string{"sensors", "t"},
+	Short:   "Return a list of sensor data",
+	Long:    `Return a list of sensor data.`,
+	Run: func(cmd *cobra.Command, args []string) {
+		state := getState()
+
+		print("SENSOR     TEMP(C)\n")
+		print(fmt.Sprintf("%v       %v\n", "Water", state.WaterTemp))
+	},
+}
+
+var getFanCmd = &cobra.Command{
+	Use:     "fans",
+	Aliases: []string{"fan", "f"},
+	Short:   "Return a list of fan data",
+	Long:    `Return a list of fan data.`,
+	Run: func(cmd *cobra.Command, args []string) {
+		state := getState()
+
+		print("FAN     AUTO    SPEED\n")
+		print(fmt.Sprintf("%v       %t     %v \n", "A", tobool(state.FanA.Auto), state.FanA.Speed))
+		print(fmt.Sprintf("%v       %t     %v \n", "B", tobool(state.FanB.Auto), state.FanB.Speed))
+	},
+}
+
+func getState() State {
+	var State State
+	c := &serial.Config{Name: "COM13", Baud: 9600}
+
+	s, err := serial.OpenPort(c)
+	if err != nil {
+		log.Fatal(err)
+	}
+	text := ""
+	scanner := bufio.NewScanner(s)
+	for scanner.Scan() {
+		text = scanner.Text()
+		//Ensure json response is well formed before displaying
+		if text[0] == '{' {
+			json.Unmarshal([]byte(text), &State)
+			return State
+		}
+	}
+	if scanner.Err() != nil {
+		log.Fatal(err)
+	}
+	return State
+}
+
+//Is there a nicer way to do this?
+func tobool(integer int) bool {
+	if integer == 1 {
+		return true
+	} else {
+		return false
+	}
 }
 
 func init() {
 	rootCmd.AddCommand(getCmd)
-
-	// Here you will define your flags and configuration settings.
-
-	// Cobra supports Persistent Flags which will work for this command
-	// and all subcommands, e.g.:
-	// getCmd.PersistentFlags().String("foo", "", "A help for foo")
-
-	// Cobra supports local flags which will only run when this command
-	// is called directly, e.g.:
-	// getCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
+	getCmd.AddCommand(getTempCmd)
+	getCmd.AddCommand(getFanCmd)
 }

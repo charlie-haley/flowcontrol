@@ -2,6 +2,7 @@ from machine import Pin, PWM, ADC, UART
 from sys import stdin
 import fan
 import math
+import json
 import uasyncio
 
 uart = UART(0, 9600, parity=None, stop=1, bits=8)
@@ -45,6 +46,7 @@ async def receiver():
     while True:
         res = await sreader.readline()
         currentInput = res.decode()
+        print("Received Input:" + currentInput)
 
 async def monitor():
     global state
@@ -75,11 +77,11 @@ async def monitor():
                     #Clear input
                     currentInput = ""
                     break
-        
+
         # Set fan states, check if auto and apply rules accordingly
         for fan in state.Fans:
             if not fan.Auto:
-                if currentInput[0] == fan.Position:
+                if len(currentInput) > 0 and currentInput[0] == fan.Position:
                     fan.Speed = int(currentInput[1:])
                     #Clear input
                     currentInput = ""

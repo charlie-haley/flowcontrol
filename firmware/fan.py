@@ -9,7 +9,7 @@ class Fan:
         self.Pwm = pwm
         self.Pwm.freq(25000)
         self.pwm(self.Speed)
-        position = position
+        self.Position = position
 
     def pwm(self, percent):
         self.Speed = percent
