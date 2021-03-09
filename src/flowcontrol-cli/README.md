@@ -1,1 +1,8 @@
-ln -s /mnt/c/Development/flowcontrol/src/flowcontrol-cli $GOPATH/src/github.com/charlie-haley/flowcontrol
+```
+flowctl get
+```
+
+
+```
+flowctl set a --auto=false --speed 100
+```
