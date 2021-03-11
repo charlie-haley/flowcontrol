@@ -66,7 +66,7 @@ async def monitor():
         temperature = 25 - (reading - 2.710)/0.001721
         temps.append(temperature)
         if len(temps) > 100:
-            state.WaterTemp = int(average(temps))
+            state.WaterTemp = int(average(temps)) + 10
             temps = []
 
         # If input begins with char 'X', enter flow for setting fan state
