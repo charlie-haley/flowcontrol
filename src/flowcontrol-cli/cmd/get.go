@@ -7,6 +7,7 @@ import (
 	"log"
 
 	"github.com/spf13/cobra"
+	"github.com/spf13/viper"
 	"github.com/tarm/serial"
 )
 
@@ -70,7 +71,11 @@ var getFanCmd = &cobra.Command{
 
 func getState() State {
 	var State State
-	c := &serial.Config{Name: "COM13", Baud: 9600}
+
+	config := getConfig()
+	// print(config.port)
+	// print("\n")
+	c := &serial.Config{Name: config.port, Baud: 9600}
 
 	s, err := serial.OpenPort(c)
 	if err != nil {
@@ -99,6 +104,22 @@ func tobool(integer int) bool {
 	} else {
 		return false
 	}
+}
+
+//Configuration - Needs moving to another struct file
+type Configuration struct {
+	port string
+}
+
+func getConfig() Configuration {
+	var configuration Configuration
+
+	err := viper.Unmarshal(&configuration)
+	if err != nil {
+		fmt.Printf("Unable to decode into struct, %v", err)
+	}
+
+	return configuration
 }
 
 func init() {
