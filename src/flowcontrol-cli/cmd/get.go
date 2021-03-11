@@ -70,12 +70,13 @@ var getFanCmd = &cobra.Command{
 }
 
 func getState() State {
-	var State State
+	var State Stae
 
 	// config := getConfig()
 	// print(config.port)
 	// print("\n")
 	c := &serial.Config{Name: "COM13", Baud: 9600}
+
 
 	s, err := serial.OpenPort(c)
 	if err != nil {

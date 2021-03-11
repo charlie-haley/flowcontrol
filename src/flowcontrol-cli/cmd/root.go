@@ -60,7 +60,6 @@ func initConfig() {
 		// Search config in home directory with name ".flowctl" (without extension).
 		viper.AddConfigPath(home)
 		viper.SetConfigName(".flowctl")
-
 	}
 
 	viper.AutomaticEnv() // read in environment variables that match
