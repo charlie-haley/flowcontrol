@@ -124,6 +124,20 @@ state.Fans.append(fan_b)
 currentInput = ""
 
 # Main
+def getTemperature(adc_u16):
+    adcResoulution = 3.3/65535
+    voltage = adc_u16 * adcResoulution
+    Rd = 10000       
+    Rd_effective = (Rd * 16800.0) / (Rd + 16800.0)
+    Rth = (3.3 - voltage) / voltage * Rd_effective
+    temp = steinhart_temperature_C(Rth)
+    return temp
+
+def steinhart_temperature_C(r, Ro=10000.0, To=25.0, beta=3950.0):
+    steinhart = math.log(r / Ro) / beta      # log(R/Ro) / beta
+    steinhart += 1.0 / (To + 273.15)         # log(R/Ro) / beta + 1/To
+    steinhart = (1.0 / steinhart) - 273.15   # Invert, convert to C
+    return steinhart
 
 def average(lst): 
     return sum(lst) / len(lst) 
@@ -146,24 +160,18 @@ async def receiver():
         res = await sreader.readline()
         currentInput = res.decode()
         print("Received Input:" + currentInput)
-
+  
 async def monitor():
     global state
     global currentInput
     temps = []
     sensor_temp = ADC(1) 
-    conversion_factor = 5/65535
     while True:
         # For some reason this is needed to prevent it locking up other async tasks?
         # Possibly related? https://github.com/micropython/micropython/issues/6866
         await uasyncio.sleep_ms(1)
 
-        # !! This is rubbish and completely inaccurate, 
-        # !! NTC thermistors aren't linear so a lookup table may be needed
-        adcResoulution = 3.3/65535
-        reading = sensor_temp.read_u16() * adcResoulution
-        temperature = 25 - (reading - 2.710)/0.001721
-        temps.append(temperature)
+        temps.append(getTemperature(sensor_temp.read_u16()))
         if len(temps) > 100:
             state.WaterTemp = int(average(temps))
             temps = []
