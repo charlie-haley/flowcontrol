@@ -1,108 +1,12 @@
-<<<<<<< HEAD
 from machine import Pin, PWM, ADC, UART
 from sys import stdin
+from ws2812b import ws2812b
 import fan
 import math
 import json
 import uasyncio
 
-uart = UART(0, 9600, parity=None, stop=1, bits=8)
-swriter = uasyncio.StreamWriter(uart, {})
-sreader = uasyncio.StreamReader(uart)
-
-# Configure state object
-class State:
-    Fans = []
-    WaterTemp = 20
-
-state = State()
-
-fan_a = fan.Fan(PWM(Pin(6)), 'A')
-fan_b = fan.Fan(PWM(Pin(7)), 'B')
-
-state.Fans.append(fan_a)
-state.Fans.append(fan_b)
-
-currentInput = ""
-
-# Main
-
-def average(lst): 
-    return sum(lst) / len(lst) 
-
-async def sender():
-    global state
-    while True:
-        # Update this to json.dumps(state) so the fan count is scalable client side
-        result = ("{\"fan_a\":{\"speed\":" + str(int(fan_a.Speed)) +
-                  ",\"auto\":" + str(fan_a.Auto) +
-                  "},\"fan_b\":{\"speed\":" + str(int(fan_b.Speed)) +
-                  ",\"auto\":" + str(fan_b.Auto) +
-                  "},\"temp_water\":" + str(state.WaterTemp) + "}\n")
-        await swriter.awrite(result)
-
-async def receiver():
-    global state
-    global currentInput
-    while True:
-        res = await sreader.readline()
-        currentInput = res.decode()
-        print("Received Input:" + currentInput)
-
-async def monitor():
-    global state
-    global currentInput
-    temps = []
-    sensor_temp = ADC(1) 
-    conversion_factor = 5/65535
-    while True:
-        # For some reason this is needed to prevent it locking up other async tasks?
-        # Possibly related? https://github.com/micropython/micropython/issues/6866
-        await uasyncio.sleep_ms(1)
-
-        # !! This is rubbish and completely inaccurate, 
-        # !! NTC thermistors aren't linear so a lookup table may be needed
-        adcResoulution = 3.3/65535
-        reading = sensor_temp.read_u16() * adcResoulution
-        temperature = 25 - (reading - 2.710)/0.001721
-        temps.append(temperature)
-        if len(temps) > 100:
-            state.WaterTemp = int(average(temps)) + 10
-            temps = []
-
-        # If input begins with char 'X', enter flow for setting fan state
-        if len(currentInput) > 0 and currentInput[0] == 'X':
-            for fan in state.Fans:
-                if fan.Position == currentInput[1]:
-                    fan.auto(int(currentInput[2]))
-                    #Clear input
-                    currentInput = ""
-                    break
-
-        # Set fan states, check if auto and apply rules accordingly
-        for fan in state.Fans:
-            if not fan.Auto:
-                if len(currentInput) > 0 and currentInput[0] == fan.Position:
-                    fan.Speed = int(currentInput[1:])
-                    #Clear input
-                    currentInput = ""
-            else:
-                fan.Speed = state.WaterTemp * 2.2
-            fan.pwm(fan.Speed)
-
-# Run uasyncio event loop
-loop = uasyncio.get_event_loop()
-loop.create_task(monitor())
-loop.create_task(sender())
-loop.create_task(receiver())
-loop.run_forever()
-=======
-from machine import Pin, PWM, ADC, UART
-from sys import stdin
-import fan
-import math
-import json
-import uasyncio
+strip = ws2812b(8, 0,20)
 
 uart = UART(0, 9600, parity=None, stop=1, bits=8)
 swriter = uasyncio.StreamWriter(uart, {})
@@ -171,6 +75,10 @@ async def monitor():
         # Possibly related? https://github.com/micropython/micropython/issues/6866
         await uasyncio.sleep_ms(1)
 
+        for l in range(8):
+            strip.set_pixel(l, 224, 111, 34)
+        strip.show()
+        
         temps.append(getTemperature(sensor_temp.read_u16()))
         if len(temps) > 100:
             state.WaterTemp = int(average(temps))
@@ -202,4 +110,3 @@ loop.create_task(monitor())
 loop.create_task(sender())
 loop.create_task(receiver())
 loop.run_forever()
->>>>>>> 793529674d0e2f6e8006e03a4047006d16207dde
