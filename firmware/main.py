@@ -74,10 +74,6 @@ async def monitor():
         # For some reason this is needed to prevent it locking up other async tasks?
         # Possibly related? https://github.com/micropython/micropython/issues/6866
         await uasyncio.sleep_ms(1)
-
-        for l in range(8):
-            strip.set_pixel(l, 224, 111, 34)
-        strip.show()
         
         temps.append(getTemperature(sensor_temp.read_u16()))
         if len(temps) > 100:
@@ -103,6 +99,10 @@ async def monitor():
             else:
                 fan.Speed = state.WaterTemp * 2.2
             fan.pwm(fan.Speed)
+
+        for l in range(8):
+            strip.set_pixel(l, 224, 111, 34)
+        strip.show()
 
 # Run uasyncio event loop
 loop = uasyncio.get_event_loop()
