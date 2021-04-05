@@ -5,7 +5,7 @@
                 <FanIcon class="fan-icon"/>
             </div>
             <div class="fan-page__container__title">
-                <span>Bottom Radiator</span>
+                <span>{{ fanName }}</span>
                 <span class="fan-page__container__speed">1634rpm</span>
             </div>
         </div>
@@ -20,7 +20,8 @@ import FanIcon from "./FanIcon.vue";
 export default {
   name: "Fan",
   props: {
-    fanEvent: String
+    fanEvent: String,
+    fanName: String
   },
   components: {
     FanIcon
@@ -29,6 +30,14 @@ export default {
     return {
       fan: {}
     };
+  },
+  methods: {
+    auto: function () {
+      Wails.Events.Emit(this.fanEvent + ":auto", !this.fan.Auto ? 1 : 0)
+    },
+    speed: function () {
+      Wails.Events.Emit(this.fanEvent + ":speed", this.fan.Speed)
+    }
   },
   mounted: function() {
       Wails.Events.On(this.fanEvent, fan => {
@@ -80,7 +89,7 @@ export default {
 .fan-page__container__title{
     display:inline-block;
     width:30%;
-    font-size: 1.5em;
+    font-size: 1.4em;
     padding: 0.5em;
     vertical-align: top;
 }

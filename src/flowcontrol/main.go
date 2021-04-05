@@ -15,8 +15,8 @@ var css string
 func main() {
 
 	app := wails.CreateApp(&wails.AppConfig{
-		Width:  1024,
-		Height: 768,
+		Width:  880,
+		Height: 600,
 		Title:  "flowcontrol",
 		JS:     js,
 		CSS:    css,
