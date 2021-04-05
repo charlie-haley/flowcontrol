@@ -69,17 +69,6 @@ export default {
               this.waterTemp = waterTemp
           }
       });
-
-      Wails.Events.On("fan:a", fanA => {
-          if (fanA) {
-              this.fanA = fanA
-          }
-      });
-      Wails.Events.On("fan:b", fanB => {
-          if (fanB) {
-              this.fanB = fanB
-          }
-      });
   }
 };
 </script>
