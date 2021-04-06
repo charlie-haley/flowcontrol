@@ -12,6 +12,7 @@ import (
 	"strings"
 	"syscall"
 	"time"
+	"fmt"
 
 	"github.com/tarm/serial"
 	"github.com/wailsapp/wails"
@@ -37,6 +38,8 @@ type wailsstruct struct {
 
 func (w *wailsstruct) WailsInit(runtime *wails.Runtime) error {
 	w.runtime = runtime
+	c := &serial.Config{Name: "COM5", Baud: 9600}
+	s, err := serial.OpenPort(c)
 	//Go Routine for fetching stats from the flowcontrol-monitor application
 	go func() {
 		for {
@@ -65,9 +68,6 @@ func (w *wailsstruct) WailsInit(runtime *wails.Runtime) error {
 		for {
 			var State State
 
-			c := &serial.Config{Name: "COM5", Baud: 9600}
-
-			s, err := serial.OpenPort(c)
 			if err != nil {
 				log.Fatal(err)
 			}
@@ -81,6 +81,7 @@ func (w *wailsstruct) WailsInit(runtime *wails.Runtime) error {
 					runtime.Events.Emit("water:temp", State.WaterTemp)
 					runtime.Events.Emit("fan:a", State.FanA)
 					runtime.Events.Emit("fan:b", State.FanB)
+					time.Sleep(50 * time.Millisecond)
 				}
 				if scanner.Err() != nil {
 					log.Fatal(err)
@@ -88,5 +89,39 @@ func (w *wailsstruct) WailsInit(runtime *wails.Runtime) error {
 			}
 		}
 	}()
+	runtime.Events.On("fan:a:auto", func(data ...interface{}) {
+		serialCmd := fmt.Sprintf("X%v%v\n", "A", data[0])
+		n, err := s.Write([]byte(serialCmd))
+		if err != nil {
+			log.Fatal(err)
+			log.Fatal(n)
+		}
+	})
+	runtime.Events.On("fan:b:auto", func(data ...interface{}) {
+		serialCmd := fmt.Sprintf("X%v%v\n", "B", data[0])
+		n, err := s.Write([]byte(serialCmd))
+		if err != nil {
+			log.Fatal(err)
+			log.Fatal(n)
+		}
+	})
+
+	runtime.Events.On("fan:a:speed", func(data ...interface{}) {
+		serialCmd := fmt.Sprintf("%v%v\n", "A", data[0])
+		n, err := s.Write([]byte(serialCmd))
+		if err != nil {
+			log.Fatal(err)
+			log.Fatal(n)
+		}
+	})
+	runtime.Events.On("fan:b:speed", func(data ...interface{}) {
+		serialCmd := fmt.Sprintf("%v%v\n", "B", data[0])
+		n, err := s.Write([]byte(serialCmd))
+		if err != nil {
+			log.Fatal(err)
+			log.Fatal(n)
+		}
+	})
+
 	return nil
 }
