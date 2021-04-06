@@ -30,7 +30,7 @@ As well as the items listed below, you'll need a soldering iron, wire and protot
 - CH340G USB to TTL Serial Adapter Module (Any USB to UART should work, the CH340 is cheap and widely available)
 - Raspberry Pi Pico
 - x2 Male 4-Pin PC Fan Headers
-- x2 Female JST Connectors of your choice (This is used for thermistors)
+- x2 Female/Male JST Connectors of your choice (This is used for thermistors)
 - x2 10k Resistors 
 
 ## Local Development
