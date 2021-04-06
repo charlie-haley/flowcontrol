@@ -1,75 +1,29 @@
 <template>
   <div id="app">
-    <Nav/>
+  <div class="nav-bar">
+      <div class="nav-bar__row">
+          <div class="nav-bar__item">
+            <router-link to="/">Home</router-link>
+          </div>
+          <div class="nav-bar__item">
+              <router-link to="/Led">LED</router-link>
+          </div>
+          <div class="nav-bar__item">
+              <router-link to="/settings">Settings</router-link>
+          </div>
+      </div>
+  </div>
     <div class="fan-page">
-        <div class="sensors">
-            <div class="sensors__item">
-                <span class="sensors__item__title">Water</span>
-                <span id="temp-water">{{waterTemp}}c</span>
-            </div>
-            <div class="sensors__item">
-                <span class="sensors__item__title">CLOCK</span>
-                <span id="clock-gpu">{{gpuClock}}MHz</span>
-            </div>
-            <div class="sensors__item">
-                <span class="sensors__item__title">GPU</span>
-                <span id="temp-gpu">{{gpuTemp}}c</span>
-            </div>
-            <div class="sensors__item">
-                <span class="sensors__item__title">CPU</span>
-                <span id="temp-cpu">{{cpuTemp}}c</span>
-            </div>
-        </div>
-        <div class="fan-page">
-            <Fan fanEvent="fan:a"/>
-            <Fan fanEvent="fan:b"/>
-        </div>
+        <router-view/>
     </div>
   </div>
 </template>
 
 <script>
-import * as Wails from '@wailsapp/runtime';
-import Nav from "./components/Nav.vue";
-import Fan from "./components/Fan.vue";
 import "./assets/css/main.css";
 
 export default {
-  name: "app",
-  components: {
-    Nav,
-    Fan
-  },
-  data() {
-    return {
-      gpuClock: "0",
-      gpuTemp: "0",
-      cpuTemp: "0",
-      waterTemp: "0"
-    };
-  },
-  mounted: function() {
-      Wails.Events.On("gpu:clock", gpuClock => {
-          if (gpuClock) {
-              this.gpuClock = gpuClock
-          }
-      });
-      Wails.Events.On("gpu:temp", gpuTemp => {
-          if (gpuTemp) {
-              this.gpuTemp = gpuTemp
-          }
-      });
-      Wails.Events.On("cpu:temp", cpuTemp => {
-          if (cpuTemp) {
-              this.cpuTemp = cpuTemp
-          }
-      });
-      Wails.Events.On("water:temp", waterTemp => {
-          if (waterTemp) {
-              this.waterTemp = waterTemp
-          }
-      });
-  }
+  name: "app"
 };
 </script>
 
@@ -78,26 +32,37 @@ export default {
   width:100%;
 }
 
-.sensors{
-  display:inline-flex;
-  width:100%;
+.nav-bar{
+    width: 100%;
+    display: inline-flex;
+    padding-bottom: 50px;
+    padding-top: 25px;
+}
+.nav-bar__item{
+    min-width:33%;
+    text-align: center;
+}
+.nav-bar__row{
+    width: 50%;
+    margin: 0 auto;
+    display: inline-flex;
+}
+.nav-bar__item a{ 
+    border:none;
+    background: transparent;
+    border-radius: 20px;
+    color: rgb(146, 92, 78);
+    text-transform: uppercase;
+    font-weight: bold;
+    text-decoration: none;
+    padding: 5px 20px;
+}
+.nav-bar__item .active{ 
+    background-color: #f7ead4;
 }
 
-.sensors__item{
-  width:25%;
-  background-color: #f7ead4;
-  margin: 25px 25px 0px 25px;
-  border-radius: 15px;
-  padding: 10px;
-  font-size: 1.5em;
-  display:block;
-  text-align: center;
-}
-.sensors__item__title{
-  font-size: 0.75em;
-  text-transform: uppercase;
-  font-weight: normal;
-  display:block;
-  text-align: center;
+.nav-bar__item a:hover{ 
+    background-color: #f7ead4;
+    transition: 0.3s;
 }
 </style>

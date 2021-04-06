@@ -2,13 +2,13 @@
   <div class="nav-bar">
       <div class="nav-bar__row">
           <div class="nav-bar__item">
-              <a href="/home">Home</a>
+            <router-link to="/home">Home</router-link>
           </div>
           <div class="nav-bar__item">
-              <a href="/led">LED</a>
+              <router-link to="/Led">LED</router-link>
           </div>
           <div class="nav-bar__item">
-              <a href="/settings">Settings</a>
+              <router-link to="/settings">Settings</router-link>
           </div>
       </div>
   </div>
