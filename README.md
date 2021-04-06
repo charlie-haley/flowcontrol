@@ -33,6 +33,8 @@ As well as the items listed below, you'll need a soldering iron, wire and protot
 - x2 Female/Male JST Connectors of your choice (This is used for thermistors)
 - x2 10k Resistors 
 
+[A PCB design is currently in progress](https://github.com/charlie-haley/flowcontrol/issues/9)
+
 ## Local Development
 
 ### flowcontrol
