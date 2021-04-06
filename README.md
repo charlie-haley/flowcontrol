@@ -25,7 +25,7 @@ go install flowctl
 
 ## Items Needed
 
-As well as the items listed below, you'll need a soldering iron, wire and prototype board. Alternatively, you can use a breadboard and jumper cables.
+As well as the items listed below, you'll need a soldering iron, wire and prototype board.
 
 - CH340G USB to TTL Serial Adapter Module (Any USB to UART should work, the CH340 is cheap and widely available)
 - Raspberry Pi Pico
