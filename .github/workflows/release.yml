@@ -22,7 +22,7 @@ jobs:
 # Setup dotnet
       - uses: actions/setup-dotnet@v1
         with:
-          dotnet-version: 3.1.x
+          dotnet-version: 5.0.x
       - name: Build flowcontrol-monitor
         working-directory: ./src/flowcontrol-monitor
         run: dotnet publish -r win-x64 -c Release /p:PublishSingleFile=true --self-contained True
