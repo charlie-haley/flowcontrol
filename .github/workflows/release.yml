@@ -13,6 +13,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@main
+# Install deps
+      - name: Install wails dependencies
+        run: sudo apt install build-essential libgtk-3-dev libwebkit2gtk-4.0-dev
 # Setup go
       - uses: actions/setup-go@v2
         with:
@@ -30,10 +33,9 @@ jobs:
         run: cp -r ./src/flowcontrol-monitor/bin/Release/net5.0/win-x64/publish/ ./src/flowcontrol/build
 # Compile wails app
       - name: Build project
-        working-directory: ./src/flowcontrol
         run: |
           wails build -x windows/amd64
-          zip -r ./flowcontrol.zip build
+          zip -r ./flowcontrol.zip ./src/flowcontrol/build
           zip -r ./firmware.zip ./firmware
 #Create release
       - name: Create Release
