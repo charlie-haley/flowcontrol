@@ -50,7 +50,7 @@ func (w *wailsstruct) WailsInit(runtime *wails.Runtime) error {
 			exPath := filepath.Dir(cwd)
 			monitorPath := path.Join(exPath, "flowcontrol-monitor.exe")
 			cmd := exec.Command("cmd", "/C", monitorPath)
-			cmd.SysProcAttr = &syscall.SysProcAttr{HideWindow: true}
+			// cmd.SysProcAttr = &syscall.SysProcAttr{HideWindow: true}
 			out, err := cmd.Output()
 			if err != nil {
 				log.Fatal(err)
