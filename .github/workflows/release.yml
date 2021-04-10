@@ -15,7 +15,14 @@ jobs:
       - uses: actions/checkout@main
 # Install deps
       - name: Install wails dependencies
-        run: sudo apt install build-essential libgtk-3-dev libwebkit2gtk-4.0-dev
+        if: ${{ env.ACT }}
+        run: |
+          sudo apt-get -y update
+          DEBIAN_FRONTEND=noninteractive apt-get -y install keyboard-configuration
+          sudo apt-get -y install build-essential libgtk-3-dev libwebkit2gtk-4.0-dev
+      - name: Install wails dependencies
+        if: ${{ !env.ACT }}
+        run: sudo apt-get -y install build-essential libgtk-3-dev libwebkit2gtk-4.0-dev
 # Setup docker for wails cross-compile
       - uses: docker-practice/actions-setup-docker@master
 # Setup go
@@ -38,12 +45,14 @@ jobs:
         run: |
           cd ./src/flowcontrol
           wails build -x windows/amd64
-          zip -r ./flowcontrol.zip ./src/flowcontrol/build
-          zip -r ./firmware.zip ./firmware
+          zip -r ./flowcontrol.zip build
+          cd ../../
+          zip -r ./firmware.zip firmware
 #Create release
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
+        if: ${{ !env.ACT }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
@@ -55,6 +64,7 @@ jobs:
       - name: Upload desktop app asset
         id: upload-desktop-asset 
         uses: actions/upload-release-asset@v1
+        if: ${{ !env.ACT }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
@@ -65,6 +75,7 @@ jobs:
       - name: Upload firmware asset
         id: upload-firmware-asset 
         uses: actions/upload-release-asset@v1
+        if: ${{ !env.ACT }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:

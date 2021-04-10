@@ -52,3 +52,15 @@ dotnet run
 ```
 go install flowctl
 ```
+
+### Github Actions
+```
+docker build -t flowcontrol-actions-pipeline .
+docker run \
+  -d --rm \
+  -v /var/run/docker.sock:/var/run/docker.sock \
+  -v $(pwd):/project \
+  -v $(pwd)/ci-logs:/logs \
+  flowcontrol-actions-pipeline
+tail -f ci-logs/run.log
+```
