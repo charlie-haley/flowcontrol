@@ -28,7 +28,7 @@ jobs:
         run: dotnet publish -r win-x64 -c Release /p:PublishSingleFile=true --self-contained True
       - name: Copy compiled files
         working-directory: ./src/flowcontrol-monitor
-        run: cp -r ./src/flowcontrol-monitor/bin/Release/net5.0/win-x64/publish/ ./src/flowcontrol/build
+        run: cp -r bin/Release/net5.0/win-x64/publish/ ./src/flowcontrol/build
 # Compile wails app
       - name: Build project
         working-directory: ./src/flowcontrol
