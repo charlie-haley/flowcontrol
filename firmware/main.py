@@ -5,7 +5,9 @@ import fan
 import math
 import json
 import uasyncio
+import ujson
 
+# Configure 8 LED ws2812b strip
 strip = ws2812b(8, 0,20)
 
 uart = UART(0, 9600, parity=None, stop=1, bits=8)
@@ -69,7 +71,10 @@ async def monitor():
     global state
     global currentInput
     temps = []
-    sensor_temp = ADC(1) 
+    sensor_temp = ADC(1)
+    c = open('config.json')
+    # Read in config file 
+    config = ujson.loads(c.read())
     while True:
         # For some reason this is needed to prevent it locking up other async tasks?
         # Possibly related? https://github.com/micropython/micropython/issues/6866
@@ -99,9 +104,22 @@ async def monitor():
             else:
                 fan.Speed = state.WaterTemp * 2.2
             fan.pwm(fan.Speed)
+        
+        if len(currentInput) > 0 and currentInput[0] == 'L':
+            print(currentInput)
+            rgb = currentInput.split()
+            config["led"]["r"] = rgb[1]
+            config["led"]["g"] = rgb[2]
+            config["led"]["b"] = rgb[3]
+            c = open('config.json')
+            c.write(ujson.dumps(config))
+            currentInput = ""
 
+        red = int(config["led"]["r"])
+        green = int(config["led"]["g"])
+        blue = int(config["led"]["b"])
         for l in range(8):
-            strip.set_pixel(l, 224, 111, 34)
+            strip.set_pixel(l, red, green, blue)
         strip.show()
 
 # Run uasyncio event loop

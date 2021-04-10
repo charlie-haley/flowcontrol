@@ -1,15 +1,6 @@
 <template>
   <div class="colour-swatch__container">
-     <div class="colour-swatch__item" style="background: rgb(0, 0, 0);"></div>
-     <div class="colour-swatch__item" style="background: rgb(224, 111, 34);"></div>
-     <div class="colour-swatch__item" style="background: rgb(255, 150, 166);"></div>
-     <div class="colour-swatch__item" style="background: rgb(255, 255, 255);"></div>
-     <div class="colour-swatch__item" style="background: rgb(176, 255, 97);"></div>
-     <div class="colour-swatch__item" style="background: rgb(94, 167, 255);"></div>
-     <div class="colour-swatch__item" style="background: rgb(255, 138, 251);"></div>
-     <div class="colour-swatch__item" style="background: rgb(255, 77, 77);"></div>
-     <div class="colour-swatch__item" style="background: rgb(255, 255, 18);"></div>
-     <div class="colour-swatch__item" style="background: rgb(255, 125, 18);"></div>
+     <div v-for="colour in colours" :key="colour" class="colour-swatch__item" v-bind:style="{ background: 'rgb(' + colour + ')' }" v-on:click="setColour(colour)"></div>
   </div>
 </template>
 
@@ -18,20 +9,30 @@ import * as Wails from '@wailsapp/runtime';
 
 export default {
   name: "led",
-  data() {
-    return {
-      gpuClock: "0",
-      gpuTemp: "0",
-      cpuTemp: "0",
-      waterTemp: "0"
-    };
+  data: 
+    function () {
+     return {
+      colours: [
+        "0, 0, 0",
+        "224, 111, 34",
+        "255, 150, 166",
+        "255, 255, 255",
+        "176, 255, 97",
+        "94, 167, 255",
+        "255, 138, 251",
+        "255, 77, 77",
+        "255, 255, 18",
+        "255, 125, 18"
+      ]
+    }
   },
   methods: {
-    colour: function () {
-      Wails.Events.Emit(this.fanEvent + ":speed", this.fan.Speed)
+    setColour: function (colour) {
+      console.log(colour.replace(/,/g,''))
+      Wails.Events.Emit("led:colour", colour.replace(/,/g,''))
     }
   }
-};
+}
 </script>
 
 <style scoped>

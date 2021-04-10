@@ -123,5 +123,13 @@ func (w *wailsstruct) WailsInit(runtime *wails.Runtime) error {
 		}
 	})
 
+	runtime.Events.On("led:colour", func(data ...interface{}) {
+		serialCmd := fmt.Sprintf("%v%v\n", "L ", data[0])
+		n, err := s.Write([]byte(serialCmd))
+		if err != nil {
+			log.Fatal(err)
+			log.Fatal(n)
+		}
+	})
 	return nil
 }
