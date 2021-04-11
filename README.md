@@ -6,6 +6,9 @@ An open source multiplatform PC fan controller.
 Alternatively, head over to [discussions](https://github.com/charlie-haley/flowcontrol/discussions) if you have any questions or ideas.
 
 ## Installation
+### ✔️ Download latest release
+[Download the latest release from here](https://github.com/charlie-haley/flowcontrol/releases), unzip the firmware.zip and upload it to the Raspberry Pi Pico.
+Unzip flowcontrol.zip into a folder of your choice and run `flowcontrol.exe`
 
 
 ### 🛠️ Build from source
