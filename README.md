@@ -7,7 +7,7 @@ Alternatively, head over to [discussions](https://github.com/charlie-haley/flowc
 
 ## Installation
 ### ✔️ Download latest release
-[Download the latest release from here.](https://github.com/charlie-haley/flowcontrol/releases), unzip the firmware.zip and upload it to the Raspberry Pi Pico.
+[Download the latest release from here](https://github.com/charlie-haley/flowcontrol/releases), unzip the firmware.zip and upload it to the Raspberry Pi Pico.
 Unzip flowcontrol.zip into a folder of your choice and run `flowcontrol.exe`
 
 
