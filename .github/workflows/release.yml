@@ -55,9 +55,9 @@ jobs:
       - name: Zip assets
         run: |
           cd ./src/flowcontrol
-          zip -r ./flowcontrol.zip build
+          zip -r /home/runner/work/flowcontrol.zip build
           cd ../../
-          zip -r ./firmware.zip firmware
+          zip -r /home/runner/work/firmware.zip firmware
 #Create release
       - name: Create Release
         id: create_release
@@ -79,7 +79,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./flowcontrol.zip
+          asset_path: /home/runner/work/flowcontrol.zip
           asset_name: flowcontrol.zip
           asset_content_type: application/zip
       - name: Upload firmware asset
@@ -90,6 +90,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./firmware.zip
+          asset_path: /home/runner/work/firmware.zip
           asset_name: firmware.zip
           asset_content_type: application/zip
