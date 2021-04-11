@@ -54,10 +54,10 @@ jobs:
           wails build
       - name: Zip assets
         run: |
-          cd ./src/flowcontrol
-          zip -r /home/runner/work/flowcontrol.zip build
-          cd ../../
-          zip -r /home/runner/work/firmware.zip firmware
+          zip -r flowcontrol.zip ./src/flowcontrol/build
+          zip -r firmware.zip ./firmware
+          cp flowcontrol.zip /home/runner/work/flowcontrol.zip
+          cp firmware.zip /home/runner/work/firmware.zip
 #Create release
       - name: Create Release
         id: create_release
@@ -80,7 +80,7 @@ jobs:
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: /home/runner/work/flowcontrol.zip
-          asset_name: flowcontrol.zip
+          asset_name: flowcontrol-winx64.zip
           asset_content_type: application/zip
       - name: Upload firmware asset
         id: upload-firmware-asset 
