@@ -10,10 +10,10 @@ import (
 	"path"
 	"path/filepath"
 	"strings"
-	// "syscall"
 	"time"
 	"fmt"
 
+	"github.com/charlie-haley/flowcontrol/setup"
 	"github.com/tarm/serial"
 	"github.com/wailsapp/wails"
 )
@@ -38,7 +38,7 @@ type wailsstruct struct {
 
 func (w *wailsstruct) WailsInit(runtime *wails.Runtime) error {
 	w.runtime = runtime
-	c := &serial.Config{Name: "COM5", Baud: 9600}
+	c := &serial.Config{Name: "COM6", Baud: 9600}
 	s, err := serial.OpenPort(c)
 	//Go Routine for fetching stats from the flowcontrol-monitor application
 	go func() {
@@ -50,7 +50,7 @@ func (w *wailsstruct) WailsInit(runtime *wails.Runtime) error {
 			exPath := filepath.Dir(cwd)
 			monitorPath := path.Join(exPath, "flowcontrol-monitor.exe")
 			cmd := exec.Command("cmd", "/C", monitorPath)
-			// cmd.SysProcAttr = &syscall.SysProcAttr{HideWindow: true}
+			setup.SetupCmd(cmd)
 			out, err := cmd.Output()
 			if err != nil {
 				log.Fatal(err)

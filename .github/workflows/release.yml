@@ -42,9 +42,19 @@ jobs:
         run: cp -r ./src/flowcontrol-monitor/bin/Release/net5.0/win-x64/publish/ ./src/flowcontrol/build
 # Compile wails app
       - name: Build project
+        if: ${{ !env.ACT }}
         run: |
           cd ./src/flowcontrol
           wails build -x windows/amd64
+      # If building locally, ensure we don't compile for a specific architecture due to docker in docker requirements
+      - name: Build project
+        if: ${{ env.ACT }}
+        run: |
+          cd ./src/flowcontrol
+          wails build
+      - name: Zip assets
+        run: |
+          cd ./src/flowcontrol
           zip -r ./flowcontrol.zip build
           cd ../../
           zip -r ./firmware.zip firmware
