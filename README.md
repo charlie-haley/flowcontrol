@@ -1,5 +1,5 @@
 # flowcontrol
-https://github.com/charlie-haley/flowcontrol/actions/workflows/release.yml/badge.svg
+![release](https://github.com/charlie-haley/flowcontrol/actions/workflows/release.yml/badge.svg)
 An open source multiplatform PC fan controller.
 
 
