@@ -28,9 +28,9 @@ jobs:
 # Setup go
       - uses: actions/setup-go@v2
         with:
-          go-version: '1.16.4-pre1'
+          go-version: '1.16.3'
       - name: Install wails
-        run: GO111MODULE=on go get -u github.com/wailsapp/wails/cmd/wails
+        run: GO111MODULE=on go get -u github.com/wailsapp/wails/cmd/wails@1.16.4-pre1
 # Setup dotnet
       - uses: actions/setup-dotnet@v1
         with:
