@@ -48,7 +48,7 @@ jobs:
 # DEBUG remove
       - name: Build project
         run: |
-          apt-get -y install tree
+          sudo apt-get -y install tree
           tree ./src/flowcontrol
           tree ./src/flowcontrol/build
 # Setup dotnet
