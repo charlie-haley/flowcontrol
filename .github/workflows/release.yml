@@ -38,7 +38,7 @@ jobs:
         if: ${{ !env.ACT }}
         run: |
           cd ./src/flowcontrol
-          wails build -x windows/amd64
+          wails build -x windows/amd64 --verbose
       # If building locally, ensure we don't compile for a specific architecture due to docker in docker requirements
       - name: Build project
         if: ${{ env.ACT }}
@@ -49,7 +49,6 @@ jobs:
       - name: Build project
         run: |
           sudo apt-get -y install tree
-          tree ./src/flowcontrol
           tree ./src/flowcontrol/build
 # Setup dotnet
       - uses: actions/setup-dotnet@v1
