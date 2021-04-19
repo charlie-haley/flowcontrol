@@ -56,8 +56,8 @@ jobs:
           wails build
       - name: Zip assets
         run: |
-          zip -r flowcontrol.zip ./src/flowcontrol/build
-          zip -r firmware.zip ./firmware
+          zip -rj flowcontrol.zip ./src/flowcontrol/build
+          zip -rj firmware.zip ./firmware
           cp flowcontrol.zip /home/runner/work/flowcontrol.zip
           cp firmware.zip /home/runner/work/firmware.zip
 #Create release
