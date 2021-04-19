@@ -45,6 +45,12 @@ jobs:
         run: |
           cd ./src/flowcontrol
           wails build
+# DEBUG remove
+      - name: Build project
+        run: |
+          apt-get -y install tree
+          tree ./src/flowcontrol
+          tree ./src/flowcontrol/build
 # Setup dotnet
       - uses: actions/setup-dotnet@v1
         with:
