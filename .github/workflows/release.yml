@@ -33,7 +33,7 @@ jobs:
         run: GO111MODULE=on go get -u github.com/wailsapp/wails/cmd/wails
       - name: Update to prerelease
         run: wails update -pre
-# Compile wails app
+# Compile wails app for darwin/amd64
       - name: Build project
         if: ${{ !env.ACT }}
         run: |
@@ -45,11 +45,6 @@ jobs:
         run: |
           cd ./src/flowcontrol
           wails build
-# DEBUG remove
-      - name: Build project
-        run: |
-          sudo apt-get -y install tree
-          tree ./src/flowcontrol/build
 # Setup dotnet
       - uses: actions/setup-dotnet@v1
         with:
@@ -88,7 +83,7 @@ jobs:
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: /home/runner/work/flowcontrol.zip
-          asset_name: flowcontrol-winx64.zip
+          asset_name: flowcontrol-win-x64.zip
           asset_content_type: application/zip
       - name: Upload firmware asset
         id: upload-firmware-asset 
@@ -100,4 +95,72 @@ jobs:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: /home/runner/work/firmware.zip
           asset_name: firmware.zip
+          asset_content_type: application/zip
+##Build OSX 
+# Cleardown old build
+      - name: Clear old assets
+        run: |
+          rm -Rf ./src/flowcontrol/build
+          rm -Rf /home/runner/work/flowcontrol.zip
+      - name: Build flowcontrol-monitor
+        working-directory: ./src/flowcontrol-monitor
+        run: dotnet publish -r osx-x64 -c Release /p:PublishSingleFile=true --self-contained True
+      - name: Copy compiled files
+        run: cp -r ./src/flowcontrol-monitor/bin/Release/net5.0/osx-x64/publish/ ./src/flowcontrol/build
+# Compile wails app
+      - name: Build project
+        if: ${{ !env.ACT }}
+        run: |
+          cd ./src/flowcontrol
+          wails build -x darwin/amd64 --verbose
+#Zip assets
+      - name: Zip assets
+        run: |
+          zip -rj flowcontrol.zip ./src/flowcontrol/build
+          cp flowcontrol.zip /home/runner/work/flowcontrol.zip
+#Upload release assets
+      - name: Upload OSX desktop app asset
+        id: upload-osx-desktop-asset 
+        uses: actions/upload-release-asset@v1
+        if: ${{ !env.ACT }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: /home/runner/work/flowcontrol.zip
+          asset_name: flowcontrol-osx-x64.zip
+          asset_content_type: application/zip
+##Build Linux
+# Cleardown old build
+      - name: Clear old assets
+        run: |
+          rm -Rf ./src/flowcontrol/build
+          rm -Rf /home/runner/work/flowcontrol.zip
+      - name: Build flowcontrol-monitor
+        working-directory: ./src/flowcontrol-monitor
+        run: dotnet publish -r linux-x64 -c Release /p:PublishSingleFile=true --self-contained True
+      - name: Copy compiled files
+        run: cp -r ./src/flowcontrol-monitor/bin/Release/net5.0/linux-x64/publish/ ./src/flowcontrol/build
+# Compile wails app
+      - name: Build project
+        if: ${{ !env.ACT }}
+        run: |
+          cd ./src/flowcontrol
+          wails build -x linux/amd64 --verbose
+#Zip assets
+      - name: Zip assets
+        run: |
+          zip -rj flowcontrol.zip ./src/flowcontrol/build
+          cp flowcontrol.zip /home/runner/work/flowcontrol.zip
+#Upload release assets
+      - name: Upload OSX desktop app asset
+        id: upload-linux-desktop-asset 
+        uses: actions/upload-release-asset@v1
+        if: ${{ !env.ACT }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: /home/runner/work/flowcontrol.zip
+          asset_name: flowcontrol-linux-x64.zip
           asset_content_type: application/zip
