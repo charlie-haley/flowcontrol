@@ -100,8 +100,8 @@ jobs:
 # Cleardown old build
       - name: Clear old assets
         run: |
-          rm -Rf ./src/flowcontrol/build
-          rm -Rf /home/runner/work/flowcontrol.zip
+          sudo rm -Rf ./src/flowcontrol/build
+          sudo rm -Rf /home/runner/work/flowcontrol.zip
       - name: Build flowcontrol-monitor
         working-directory: ./src/flowcontrol-monitor
         run: dotnet publish -r osx-x64 -c Release /p:PublishSingleFile=true --self-contained True
@@ -134,8 +134,8 @@ jobs:
 # Cleardown old build
       - name: Clear old assets
         run: |
-          rm -Rf ./src/flowcontrol/build
-          rm -Rf /home/runner/work/flowcontrol.zip
+          sudo rm -Rf ./src/flowcontrol/build
+          sudo rm -Rf /home/runner/work/flowcontrol.zip
       - name: Build flowcontrol-monitor
         working-directory: ./src/flowcontrol-monitor
         run: dotnet publish -r linux-x64 -c Release /p:PublishSingleFile=true --self-contained True
