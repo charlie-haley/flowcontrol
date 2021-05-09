@@ -12,6 +12,8 @@ var js string
 //go:embed frontend/dist/app.css
 var css string
 
+var appver = "development"
+
 func main() {
 
 	app := wails.CreateApp(&wails.AppConfig{
@@ -23,5 +25,10 @@ func main() {
 		Colour: "#131313",
 	})
 	app.Bind(&wailsstruct{})
+	app.Bind(version)
 	app.Run()
+}
+
+func version() string{
+	return appver;
 }

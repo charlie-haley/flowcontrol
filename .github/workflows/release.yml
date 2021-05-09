@@ -38,7 +38,7 @@ jobs:
         if: ${{ !env.ACT }}
         run: |
           cd ./src/flowcontrol
-          wails build -x windows/amd64 --verbose
+          wails build -x windows/amd64 --verbose -ldflags="-X 'main.appver=${{ github.ref }}'"
       # If building locally, ensure we don't compile for a specific architecture due to docker in docker requirements
       - name: Build project
         if: ${{ env.ACT }}
@@ -113,7 +113,7 @@ jobs:
         if: ${{ !env.ACT }}
         run: |
           cd ./src/flowcontrol
-          wails build -x darwin/amd64 --verbose
+          wails build -x darwin/amd64 --verbose -ldflags="-X 'main.appver=${{ github.ref }}'"
 #Zip assets
       - name: Zip assets
         run: |
@@ -148,7 +148,7 @@ jobs:
         if: ${{ !env.ACT }}
         run: |
           cd ./src/flowcontrol
-          wails build -x linux/amd64 --verbose
+          wails build -x linux/amd64 --verbose -ldflags="-X 'main.appver=${{ github.ref }}'"
 #Zip assets
       - name: Zip assets
         run: |
