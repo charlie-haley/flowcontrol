@@ -1,0 +1,90 @@
+---
+on:
+  pull_request:
+    types: [assigned, opened, synchronize, reopened]
+
+name: Build
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@main
+# Install deps
+      - name: Install wails dependencies
+        if: ${{ env.ACT }}
+        run: |
+          sudo apt-get -y update
+          DEBIAN_FRONTEND=noninteractive apt-get -y install keyboard-configuration
+          sudo apt-get -y install build-essential libgtk-3-dev libwebkit2gtk-4.0-dev
+      - name: Install wails dependencies
+        if: ${{ !env.ACT }}
+        run: sudo apt-get -y install build-essential libgtk-3-dev libwebkit2gtk-4.0-dev
+# Setup docker for wails cross-compile
+      - uses: docker-practice/actions-setup-docker@master
+# Setup go
+      - uses: actions/setup-go@v2
+        with:
+          go-version: '1.16.3'
+      - name: Install wails
+        run: GO111MODULE=on go get -u github.com/wailsapp/wails/cmd/wails
+      - name: Update to prerelease
+        run: wails update -pre
+# Compile wails app for darwin/amd64
+      - name: Build project
+        if: ${{ !env.ACT }}
+        run: |
+          cd ./src/flowcontrol
+          wails build -x windows/amd64 --verbose
+      # If building locally, ensure we don't compile for a specific architecture due to docker in docker requirements
+      - name: Build project
+        if: ${{ env.ACT }}
+        run: |
+          cd ./src/flowcontrol
+          wails build
+# Setup dotnet
+      - uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 5.0.x
+      - name: Build flowcontrol-monitor
+        working-directory: ./src/flowcontrol-monitor
+        run: dotnet publish -r win-x64 -c Release /p:PublishSingleFile=true --self-contained True
+      - name: Copy compiled files
+        run: cp -r ./src/flowcontrol-monitor/bin/Release/net5.0/win-x64/publish/ ./src/flowcontrol/build
+##Build OSX 
+# Cleardown old build
+      - name: Clear old assets
+        run: |
+          sudo rm -Rf flowcontrol.zip
+          sudo rm -Rf ./src/flowcontrol/build
+          sudo rm -Rf /home/runner/work/flowcontrol.zip
+      - name: Build flowcontrol-monitor
+        working-directory: ./src/flowcontrol-monitor
+        run: dotnet publish -r osx-x64 -c Release /p:PublishSingleFile=true --self-contained True
+      - name: Copy compiled files
+        run: cp -r ./src/flowcontrol-monitor/bin/Release/net5.0/osx-x64/publish/ ./src/flowcontrol/build
+# Compile wails app
+      - name: Build project
+        if: ${{ !env.ACT }}
+        run: |
+          cd ./src/flowcontrol
+          wails build -x darwin/amd64 --verbose
+##Build Linux
+# Cleardown old build
+      - name: Clear old assets
+        run: |
+          sudo rm -Rf flowcontrol.zip
+          sudo rm -Rf ./src/flowcontrol/build
+          sudo rm -Rf /home/runner/work/flowcontrol.zip
+      - name: Build flowcontrol-monitor
+        working-directory: ./src/flowcontrol-monitor
+        run: dotnet publish -r linux-x64 -c Release /p:PublishSingleFile=true --self-contained True
+      - name: Copy compiled files
+        run: cp -r ./src/flowcontrol-monitor/bin/Release/net5.0/linux-x64/publish/ ./src/flowcontrol/build
+# Compile wails app
+      - name: Build project
+        if: ${{ !env.ACT }}
+        run: |
+          cd ./src/flowcontrol
+          wails build -x linux/amd64 --verbose
