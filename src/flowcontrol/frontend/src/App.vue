@@ -14,7 +14,9 @@
       </div>
   </div>
     <div class="fan-page">
-        <router-view/>
+        <keep-alive>
+            <router-view :key="$route.fullPath" />
+        </keep-alive>
     </div>
   </div>
 </template>

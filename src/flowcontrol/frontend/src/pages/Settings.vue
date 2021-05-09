@@ -2,7 +2,7 @@
   <div class="settings-appinfo">
       <FanIcon class="fan-icon"/>
       <span class="settings-appinfo-title">Flowcontrol</span><br/>
-      <span class="settings-appinfo-version">v0.1.2</span><br/>
+      <span class="settings-appinfo-version">{{ version }}</span><br/>
       <a href="https://github.com/charlie-haley/flowcontrol">GitHub</a>
   </div>
 </template>
@@ -14,6 +14,17 @@ export default {
   name: "settings",
   components: {
     FanIcon
+  },
+  data() {
+    return {
+      version: " "
+    };
+  },
+  mounted: function() {
+      var self = this;
+      window.backend.version().then(result => {
+        self.version = result;
+      });
   }
 };
 </script>
