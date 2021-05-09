@@ -70,23 +70,6 @@ jobs:
         run: |
           cd ./src/flowcontrol
           wails build -x darwin/amd64 --verbose
-#Zip assets
-      - name: Zip assets
-        run: |
-          zip -rj flowcontrol.zip ./src/flowcontrol/build
-          cp flowcontrol.zip /home/runner/work/flowcontrol.zip
-#Upload release assets
-      - name: Upload OSX desktop app asset
-        id: upload-osx-desktop-asset 
-        uses: actions/upload-release-asset@v1
-        if: ${{ !env.ACT }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: /home/runner/work/flowcontrol.zip
-          asset_name: flowcontrol-osx-x64.zip
-          asset_content_type: application/zip
 ##Build Linux
 # Cleardown old build
       - name: Clear old assets
@@ -105,20 +88,3 @@ jobs:
         run: |
           cd ./src/flowcontrol
           wails build -x linux/amd64 --verbose
-#Zip assets
-      - name: Zip assets
-        run: |
-          zip -rj flowcontrol.zip ./src/flowcontrol/build
-          cp flowcontrol.zip /home/runner/work/flowcontrol.zip
-#Upload release assets
-      - name: Upload OSX desktop app asset
-        id: upload-linux-desktop-asset 
-        uses: actions/upload-release-asset@v1
-        if: ${{ !env.ACT }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: /home/runner/work/flowcontrol.zip
-          asset_name: flowcontrol-linux-x64.zip
-          asset_content_type: application/zip
