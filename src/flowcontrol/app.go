@@ -42,7 +42,6 @@ func (w *wailsstruct) WailsInit(runtime *wails.Runtime) error {
 	s, err := flwserial.GetValidPort()
 	//Go Routine for fetching stats from the flowcontrol-monitor application
 	go func() {
-		if false{
 		for {
 			cwd, err := os.Executable()
 			if err != nil {
@@ -63,7 +62,6 @@ func (w *wailsstruct) WailsInit(runtime *wails.Runtime) error {
 			runtime.Events.Emit("cpu:temp", gpuStats[2])
 			time.Sleep(5 * time.Second)
 		}
-	}
 	}()
 	//Go Routine for getting the state of the controller over serial
 	go func() {
