@@ -10,7 +10,7 @@ import ujson
 # Configure 8 LED ws2812b strip
 strip = ws2812b(8, 0,20)
 
-uart = UART(0, 9600, parity=None, stop=1, bits=8)
+uart = UART(1, 9600, parity=None, stop=1, bits=8)
 swriter = uasyncio.StreamWriter(uart, {})
 sreader = uasyncio.StreamReader(uart)
 
