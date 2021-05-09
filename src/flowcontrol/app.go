@@ -13,8 +13,8 @@ import (
 	"time"
 	"fmt"
 
+	"github.com/charlie-haley/flowcontrol/flwserial"
 	"github.com/charlie-haley/flowcontrol/setup"
-	"github.com/tarm/serial"
 	"github.com/wailsapp/wails"
 )
 
@@ -38,8 +38,8 @@ type wailsstruct struct {
 
 func (w *wailsstruct) WailsInit(runtime *wails.Runtime) error {
 	w.runtime = runtime
-	c := &serial.Config{Name: "COM6", Baud: 9600}
-	s, err := serial.OpenPort(c)
+	
+	s, err := flwserial.GetValidPort()
 	//Go Routine for fetching stats from the flowcontrol-monitor application
 	go func() {
 		for {
