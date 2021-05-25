@@ -26,8 +26,9 @@ Replace `win-x64` with `linux-x64` if you're compiling for Linux or `osx-x64` fo
 ```
 go install flowctl
 ```
+## Building Hardware
 
-## 🗒️ Items Needed
+### 🗒️ Items Needed
 
 As well as the items listed below, you'll need a soldering iron, wire and prototype board.
 
@@ -38,6 +39,8 @@ As well as the items listed below, you'll need a soldering iron, wire and protot
 - x2 10k Resistors 
 
 [A PCB design is currently in progress](https://github.com/charlie-haley/flowcontrol/issues/9)
+
+### 📝 Documentation
 
 ## 💻 Local Development
 
