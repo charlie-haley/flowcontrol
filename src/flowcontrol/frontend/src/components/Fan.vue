@@ -9,8 +9,8 @@
                 <span class="fan-page__container__speed">1634rpm</span>
             </div>
             <div class="fan-page__container__configure">
-              <span v-if="!fan.Auto" alt="Enable manual fan control" class="material-icons" v-on:click="auto">lock_open</span>
-              <span v-if="fan.Auto" alt="Enable auto fan control" class="material-icons" v-on:click="auto">lock</span>
+              <span v-if="!fan.Auto" alt="Enable auto fan control" class="material-icons" v-on:click="auto">lock_open</span>
+              <span v-if="fan.Auto" alt="Enable manual fan control" class="material-icons" v-on:click="auto">lock</span>
             </div>
         </div>
         <input type="range" min="0" max="100" step="1" v-model="fan.Speed" :disabled="fan.Auto == 1" @mouseup="speed"> 
