@@ -1,3 +1,6 @@
+# kicad autosaves
+_autosave-flowcontrol-v*.kicad_pcb
+
 # Logs
 ci-logs
 
