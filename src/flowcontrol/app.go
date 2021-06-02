@@ -4,6 +4,7 @@ import (
 	"bufio"
 	_ "embed"
 	"encoding/json"
+	"fmt"
 	"log"
 	"os"
 	"os/exec"
@@ -11,7 +12,6 @@ import (
 	"path/filepath"
 	"strings"
 	"time"
-	"fmt"
 
 	"github.com/charlie-haley/flowcontrol/flwserial"
 	"github.com/charlie-haley/flowcontrol/setup"
@@ -38,7 +38,7 @@ type wailsstruct struct {
 
 func (w *wailsstruct) WailsInit(runtime *wails.Runtime) error {
 	w.runtime = runtime
-	
+
 	s, err := flwserial.GetValidPort()
 	//Go Routine for fetching stats from the flowcontrol-monitor application
 	go func() {
@@ -81,7 +81,6 @@ func (w *wailsstruct) WailsInit(runtime *wails.Runtime) error {
 					runtime.Events.Emit("water:temp", State.WaterTemp)
 					runtime.Events.Emit("fan:a", State.FanA)
 					runtime.Events.Emit("fan:b", State.FanB)
-					time.Sleep(50 * time.Millisecond)
 				}
 				if scanner.Err() != nil {
 					log.Fatal(err)
