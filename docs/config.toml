@@ -1,0 +1,11 @@
+theme = "hugo-theme-learn"
+baseURL = "http://example.org/"
+languageCode = "en-us"
+title = "My New Hugo Site"
+
+[outputs]
+home = [ "HTML", "RSS", "JSON"]
+
+[params]
+themeVariant = "flowcontrol"
+disableLandingPageButton = true
