@@ -1,73 +1,11 @@
 EESchema-LIBRARY Version 2.4
 #encoding utf-8
 #
-# Connector_Generic_Conn_02x05_Counter_Clockwise
+# +3V3-CH340G_D-SUN-V3.0-rescue
 #
-DEF Connector_Generic_Conn_02x05_Counter_Clockwise J 0 40 Y N 1 F N
-F0 "J" 50 300 50 H V C CNN
-F1 "Connector_Generic_Conn_02x05_Counter_Clockwise" 50 -300 50 H V C CNN
-F2 "" 0 0 50 H I C CNN
-F3 "" 0 0 50 H I C CNN
-$FPLIST
- Connector*:*_2x??_*
-$ENDFPLIST
-DRAW
-S -50 -195 0 -205 1 1 6 N
-S -50 -95 0 -105 1 1 6 N
-S -50 5 0 -5 1 1 6 N
-S -50 105 0 95 1 1 6 N
-S -50 205 0 195 1 1 6 N
-S -50 250 150 -250 1 1 10 f
-S 150 -195 100 -205 1 1 6 N
-S 150 -95 100 -105 1 1 6 N
-S 150 5 100 -5 1 1 6 N
-S 150 105 100 95 1 1 6 N
-S 150 205 100 195 1 1 6 N
-X Pin_1 1 -200 200 150 R 50 50 1 1 P
-X Pin_10 10 300 200 150 L 50 50 1 1 P
-X Pin_2 2 -200 100 150 R 50 50 1 1 P
-X Pin_3 3 -200 0 150 R 50 50 1 1 P
-X Pin_4 4 -200 -100 150 R 50 50 1 1 P
-X Pin_5 5 -200 -200 150 R 50 50 1 1 P
-X Pin_6 6 300 -200 150 L 50 50 1 1 P
-X Pin_7 7 300 -100 150 L 50 50 1 1 P
-X Pin_8 8 300 0 150 L 50 50 1 1 P
-X Pin_9 9 300 100 150 L 50 50 1 1 P
-ENDDRAW
-ENDDEF
-#
-# Switch_SW_Push_Open_Dual
-#
-DEF Switch_SW_Push_Open_Dual SW 0 40 Y N 1 F N
-F0 "SW" 50 100 50 H V L CNN
-F1 "Switch_SW_Push_Open_Dual" 0 -275 50 H V C CNN
-F2 "" 0 200 50 H I C CNN
-F3 "" 0 200 50 H I C CNN
-DRAW
-C -80 -200 20 0 1 0 N
-C -80 0 20 0 1 0 N
-C 80 -200 20 0 1 0 N
-C 80 0 20 0 1 0 N
-P 2 0 1 0 0 -195 0 -215 N
-P 2 0 1 0 0 -155 0 -175 N
-P 2 0 1 0 0 -135 0 -115 N
-P 2 0 1 0 0 -95 0 -75 N
-P 2 0 1 0 0 -55 0 -35 N
-P 2 0 1 0 0 -25 0 45 N
-P 2 0 1 0 100 -225 -100 -225 N
-P 2 0 1 0 100 -25 -100 -25 N
-X 1 1 -200 0 100 R 50 50 0 1 P
-X 2 2 200 0 100 L 50 50 0 1 P
-X 3 3 -200 -200 100 R 50 50 0 1 P
-X 4 4 200 -200 100 L 50 50 0 1 P
-ENDDRAW
-ENDDEF
-#
-# flowcontrol-v0.1-rescue_+3V3-CH340G_D-SUN-V3.0-rescue
-#
-DEF flowcontrol-v0.1-rescue_+3V3-CH340G_D-SUN-V3.0-rescue #PWR 0 0 Y Y 1 F P
+DEF +3V3-CH340G_D-SUN-V3.0-rescue #PWR 0 0 Y Y 1 F P
 F0 "#PWR" 0 -150 50 H I C CNN
-F1 "flowcontrol-v0.1-rescue_+3V3-CH340G_D-SUN-V3.0-rescue" 0 140 50 H V C CNN
+F1 "+3V3-CH340G_D-SUN-V3.0-rescue" 0 140 50 H V C CNN
 F2 "" 0 0 60 H V C CNN
 F3 "" 0 0 60 H V C CNN
 DRAW
@@ -78,11 +16,11 @@ X +3V3 1 0 0 0 U 50 50 1 1 W N
 ENDDRAW
 ENDDEF
 #
-# flowcontrol-v0.1-rescue_+5V-CH340G_D-SUN-V3.0-rescue
+# +5V-CH340G_D-SUN-V3.0-rescue
 #
-DEF flowcontrol-v0.1-rescue_+5V-CH340G_D-SUN-V3.0-rescue #PWR 0 0 Y Y 1 F P
+DEF +5V-CH340G_D-SUN-V3.0-rescue #PWR 0 0 Y Y 1 F P
 F0 "#PWR" 0 -150 50 H I C CNN
-F1 "flowcontrol-v0.1-rescue_+5V-CH340G_D-SUN-V3.0-rescue" 0 140 50 H V C CNN
+F1 "+5V-CH340G_D-SUN-V3.0-rescue" 0 140 50 H V C CNN
 F2 "" 0 0 60 H V C CNN
 F3 "" 0 0 60 H V C CNN
 DRAW
@@ -93,11 +31,11 @@ X +5V 1 0 0 0 U 50 50 1 1 W N
 ENDDRAW
 ENDDEF
 #
-# flowcontrol-v0.1-rescue_C-CH340G_D-SUN-V3.0-rescue
+# C-CH340G_D-SUN-V3.0-rescue
 #
-DEF flowcontrol-v0.1-rescue_C-CH340G_D-SUN-V3.0-rescue C 0 50 N N 1 F N
+DEF C-CH340G_D-SUN-V3.0-rescue C 0 50 N N 1 F N
 F0 "C" 20 100 60 H V L CNN
-F1 "flowcontrol-v0.1-rescue_C-CH340G_D-SUN-V3.0-rescue" 20 -100 60 H V L CNN
+F1 "C-CH340G_D-SUN-V3.0-rescue" 20 -100 60 H V L CNN
 F2 "0603_N" 20 -190 40 H I L CNN
 F3 "" 0 0 60 H V C CNN
 DRAW
@@ -108,11 +46,29 @@ X 2 2 0 -100 70 U 60 60 1 1 P
 ENDDRAW
 ENDDEF
 #
-# flowcontrol-v0.1-rescue_CH340G-CH340G_D-SUN-V3.0-rescue
+# C-Device
 #
-DEF flowcontrol-v0.1-rescue_CH340G-CH340G_D-SUN-V3.0-rescue U 0 50 Y Y 1 F N
+DEF C-Device C 0 10 N Y 1 F N
+F0 "C" 25 100 50 H V L CNN
+F1 "C-Device" 25 -100 50 H V L CNN
+F2 "" 38 -150 50 H I C CNN
+F3 "" 0 0 50 H I C CNN
+$FPLIST
+ C_*
+$ENDFPLIST
+DRAW
+P 2 0 1 20 -80 -30 80 -30 N
+P 2 0 1 20 -80 30 80 30 N
+X ~ 1 0 150 110 D 50 50 1 1 P
+X ~ 2 0 -150 110 U 50 50 1 1 P
+ENDDRAW
+ENDDEF
+#
+# CH340G-CH340G_D-SUN-V3.0-rescue
+#
+DEF CH340G-CH340G_D-SUN-V3.0-rescue U 0 50 Y Y 1 F N
 F0 "U" 0 560 60 H V C CNN
-F1 "flowcontrol-v0.1-rescue_CH340G-CH340G_D-SUN-V3.0-rescue" 0 -460 60 H V C CNN
+F1 "CH340G-CH340G_D-SUN-V3.0-rescue" 0 -460 60 H V C CNN
 F2 "SOIC-16_N" 0 -550 40 H I C CNN
 F3 "" 0 0 60 H V C CNN
 DRAW
@@ -136,11 +92,39 @@ X CTS 9 700 -300 200 L 60 60 1 1 I
 ENDDRAW
 ENDDEF
 #
-# flowcontrol-v0.1-rescue_Conn_01x02_Female-Connector
+# CH340G-ch34x
 #
-DEF flowcontrol-v0.1-rescue_Conn_01x02_Female-Connector J 0 40 Y N 1 F N
+DEF CH340G-ch34x U 0 40 Y Y 1 F N
+F0 "U" 25 475 60 H V C CNN
+F1 "CH340G-ch34x" 0 -475 60 H V C CNN
+F2 "" 100 -200 60 H V C CNN
+F3 "" 100 -200 60 H V C CNN
+DRAW
+S -250 400 250 -400 0 1 0 N
+X GND 1 -450 350 200 R 50 50 1 1 W
+X DSR 10 450 -250 200 L 50 50 1 1 O
+X RI 11 450 -150 200 L 50 50 1 1 O
+X DCD 12 450 -50 200 L 50 50 1 1 O
+X DTR 13 450 50 200 L 50 50 1 1 O
+X RTS 14 450 150 200 L 50 50 1 1 O
+X RS232 15 450 250 200 L 50 50 1 1 I
+X VCC 16 450 350 200 L 50 50 1 1 W
+X TX 2 -450 250 200 R 50 50 1 1 O
+X RX 3 -450 150 200 R 50 50 1 1 I
+X V3 4 -450 50 200 R 50 50 1 1 W
+X D+ 5 -450 -50 200 R 50 50 1 1 B
+X D- 6 -450 -150 200 R 50 50 1 1 B
+X XI 7 -450 -250 200 R 50 50 1 1 I
+X XO 8 -450 -350 200 R 50 50 1 1 I
+X CTS 9 450 -350 200 L 50 50 1 1 O
+ENDDRAW
+ENDDEF
+#
+# Conn_01x02_Female-Connector
+#
+DEF Conn_01x02_Female-Connector J 0 40 Y N 1 F N
 F0 "J" 0 100 50 H V C CNN
-F1 "flowcontrol-v0.1-rescue_Conn_01x02_Female-Connector" 0 -200 50 H V C CNN
+F1 "Conn_01x02_Female-Connector" 0 -200 50 H V C CNN
 F2 "" 0 0 50 H I C CNN
 F3 "" 0 0 50 H I C CNN
 $FPLIST
@@ -156,11 +140,11 @@ X Pin_2 2 -200 -100 150 R 50 50 1 1 P
 ENDDRAW
 ENDDEF
 #
-# flowcontrol-v0.1-rescue_Conn_01x04_Female-Connector
+# Conn_01x04_Female-Connector
 #
-DEF flowcontrol-v0.1-rescue_Conn_01x04_Female-Connector J 0 40 Y N 1 F N
+DEF Conn_01x04_Female-Connector J 0 40 Y N 1 F N
 F0 "J" 0 200 50 H V C CNN
-F1 "flowcontrol-v0.1-rescue_Conn_01x04_Female-Connector" 0 -300 50 H V C CNN
+F1 "Conn_01x04_Female-Connector" 0 -300 50 H V C CNN
 F2 "" 0 0 50 H I C CNN
 F3 "" 0 0 50 H I C CNN
 $FPLIST
@@ -182,11 +166,11 @@ X Pin_4 4 -200 -200 150 R 50 50 1 1 P
 ENDDRAW
 ENDDEF
 #
-# flowcontrol-v0.1-rescue_Conn_01x04_Male-Connector
+# Conn_01x04_Male-Connector
 #
-DEF flowcontrol-v0.1-rescue_Conn_01x04_Male-Connector J 0 40 Y N 1 F N
+DEF Conn_01x04_Male-Connector J 0 40 Y N 1 F N
 F0 "J" 0 200 50 H V C CNN
-F1 "flowcontrol-v0.1-rescue_Conn_01x04_Male-Connector" 0 -300 50 H V C CNN
+F1 "Conn_01x04_Male-Connector" 0 -300 50 H V C CNN
 F2 "" 0 0 50 H I C CNN
 F3 "" 0 0 50 H I C CNN
 $FPLIST
@@ -208,11 +192,32 @@ X Pin_4 4 200 -200 150 L 50 50 1 1 P
 ENDDRAW
 ENDDEF
 #
-# flowcontrol-v0.1-rescue_GND-CH340G_D-SUN-V3.0-rescue
+# Crystal-Device
 #
-DEF flowcontrol-v0.1-rescue_GND-CH340G_D-SUN-V3.0-rescue #PWR 0 0 Y Y 1 F P
+DEF Crystal-Device Y 0 40 N N 1 F N
+F0 "Y" 0 150 50 H V C CNN
+F1 "Crystal-Device" 0 -150 50 H V C CNN
+F2 "" 0 0 50 H I C CNN
+F3 "" 0 0 50 H I C CNN
+$FPLIST
+ Crystal*
+$ENDFPLIST
+DRAW
+S -45 100 45 -100 0 1 12 N
+P 2 0 1 0 -100 0 -75 0 N
+P 2 0 1 20 -75 -50 -75 50 N
+P 2 0 1 20 75 -50 75 50 N
+P 2 0 1 0 100 0 75 0 N
+X 1 1 -150 0 50 R 50 50 1 1 P
+X 2 2 150 0 50 L 50 50 1 1 P
+ENDDRAW
+ENDDEF
+#
+# GND-CH340G_D-SUN-V3.0-rescue
+#
+DEF GND-CH340G_D-SUN-V3.0-rescue #PWR 0 0 Y Y 1 F P
 F0 "#PWR" 0 -250 50 H I C CNN
-F1 "flowcontrol-v0.1-rescue_GND-CH340G_D-SUN-V3.0-rescue" 0 -150 50 H V C CNN
+F1 "GND-CH340G_D-SUN-V3.0-rescue" 0 -150 50 H V C CNN
 F2 "" 0 0 60 H V C CNN
 F3 "" 0 0 60 H V C CNN
 DRAW
@@ -221,11 +226,11 @@ X GND 1 0 0 0 D 50 50 1 1 W N
 ENDDRAW
 ENDDEF
 #
-# flowcontrol-v0.1-rescue_PICO_RP2040-Pico_rp2040
+# PICO_RP2040-Pico_rp2040
 #
-DEF flowcontrol-v0.1-rescue_PICO_RP2040-Pico_rp2040 U 0 40 Y Y 1 F N
+DEF PICO_RP2040-Pico_rp2040 U 0 40 Y Y 1 F N
 F0 "U" -100 1450 50 H V C CNN
-F1 "flowcontrol-v0.1-rescue_PICO_RP2040-Pico_rp2040" -50 1300 50 H V C CNN
+F1 "PICO_RP2040-Pico_rp2040" -50 1300 50 H V C CNN
 F2 "" -100 1450 50 H I C CNN
 F3 "" -100 1450 50 H I C CNN
 DRAW
@@ -273,11 +278,11 @@ X GP6 9 -650 150 100 R 50 50 1 1 T
 ENDDRAW
 ENDDEF
 #
-# flowcontrol-v0.1-rescue_R-CH340G_D-SUN-V3.0-rescue
+# R-CH340G_D-SUN-V3.0-rescue
 #
-DEF flowcontrol-v0.1-rescue_R-CH340G_D-SUN-V3.0-rescue R 0 50 N N 1 F N
+DEF R-CH340G_D-SUN-V3.0-rescue R 0 50 N N 1 F N
 F0 "R" 0 80 60 H V C CNN
-F1 "flowcontrol-v0.1-rescue_R-CH340G_D-SUN-V3.0-rescue" 0 0 40 H V C CNN
+F1 "R-CH340G_D-SUN-V3.0-rescue" 0 0 40 H V C CNN
 F2 "0603_N" 0 -60 40 H I C CNN
 F3 "" 0 0 60 H V C CNN
 DRAW
@@ -287,11 +292,11 @@ X 2 2 200 0 100 L 60 60 1 1 P
 ENDDRAW
 ENDDEF
 #
-# flowcontrol-v0.1-rescue_R-Device
+# R-Device
 #
-DEF flowcontrol-v0.1-rescue_R-Device R 0 0 N Y 1 F N
+DEF R-Device R 0 0 N Y 1 F N
 F0 "R" 80 0 50 V V C CNN
-F1 "flowcontrol-v0.1-rescue_R-Device" 0 0 50 V V C CNN
+F1 "R-Device" 0 0 50 V V C CNN
 F2 "" -70 0 50 V I C CNN
 F3 "" 0 0 50 H I C CNN
 $FPLIST
@@ -304,11 +309,11 @@ X ~ 2 0 -150 50 U 50 50 1 1 P
 ENDDRAW
 ENDDEF
 #
-# flowcontrol-v0.1-rescue_R_Small-Device
+# R_Small-Device
 #
-DEF flowcontrol-v0.1-rescue_R_Small-Device R 0 10 N N 1 F N
+DEF R_Small-Device R 0 10 N N 1 F N
 F0 "R" 30 20 50 H V L CNN
-F1 "flowcontrol-v0.1-rescue_R_Small-Device" 30 -40 50 H V L CNN
+F1 "R_Small-Device" 30 -40 50 H V L CNN
 F2 "" 0 0 50 H I C CNN
 F3 "" 0 0 50 H I C CNN
 $FPLIST
@@ -321,11 +326,11 @@ X ~ 2 0 -100 30 U 50 50 1 1 P
 ENDDRAW
 ENDDEF
 #
-# flowcontrol-v0.1-rescue_XT_2pin-CH340G_D-SUN-V3.0-rescue
+# XT_2pin-CH340G_D-SUN-V3.0-rescue
 #
-DEF flowcontrol-v0.1-rescue_XT_2pin-CH340G_D-SUN-V3.0-rescue Q 0 50 N N 1 F N
+DEF XT_2pin-CH340G_D-SUN-V3.0-rescue Q 0 50 N N 1 F N
 F0 "Q" 0 230 60 H V C CNN
-F1 "flowcontrol-v0.1-rescue_XT_2pin-CH340G_D-SUN-V3.0-rescue" 0 150 60 H V C CNN
+F1 "XT_2pin-CH340G_D-SUN-V3.0-rescue" 0 150 60 H V C CNN
 F2 "" 0 60 40 H I C CNN
 F3 "" 0 0 60 H V C CNN
 DRAW
@@ -337,11 +342,28 @@ X 3 3 200 0 140 L 60 60 1 1 P
 ENDDRAW
 ENDDEF
 #
-# flowcontrol-v0.1-rescue_diode-CH340G_D-SUN-V3.0-rescue
+# connUsb-CH340G_D-SUN-V3.0-rescue
 #
-DEF flowcontrol-v0.1-rescue_diode-CH340G_D-SUN-V3.0-rescue D 0 50 N N 1 F N
+DEF connUsb-CH340G_D-SUN-V3.0-rescue CON 0 50 Y Y 1 F N
+F0 "CON" 0 360 60 H V C CNN
+F1 "connUsb-CH340G_D-SUN-V3.0-rescue" 0 -360 60 H V C CNN
+F2 "" 0 -450 40 H I C CNN
+F3 "" 0 0 60 H V C CNN
+DRAW
+S -200 -300 200 300 1 1 0 f
+X GND 0 400 -200 200 L 60 60 1 1 P
+X 5V 1 400 200 200 L 60 60 1 1 P
+X D- 2 400 100 200 L 60 60 1 1 P
+X D+ 3 400 0 200 L 60 60 1 1 P
+X GND 4 400 -100 200 L 60 60 1 1 P
+ENDDRAW
+ENDDEF
+#
+# diode-CH340G_D-SUN-V3.0-rescue
+#
+DEF diode-CH340G_D-SUN-V3.0-rescue D 0 50 N N 1 F N
 F0 "D" 75 60 60 H V L CNN
-F1 "flowcontrol-v0.1-rescue_diode-CH340G_D-SUN-V3.0-rescue" 75 -60 60 H V L CNN
+F1 "diode-CH340G_D-SUN-V3.0-rescue" 75 -60 60 H V L CNN
 F2 "SMA_N" 75 -150 40 H I L CNN
 F3 "" 0 0 60 H V C CNN
 DRAW
@@ -352,11 +374,11 @@ X C 2 0 100 50 D 60 60 1 1 P
 ENDDRAW
 ENDDEF
 #
-# flowcontrol-v0.1-rescue_diode_LED-CH340G_D-SUN-V3.0-rescue
+# diode_LED-CH340G_D-SUN-V3.0-rescue
 #
-DEF flowcontrol-v0.1-rescue_diode_LED-CH340G_D-SUN-V3.0-rescue D 0 50 N N 1 F N
+DEF diode_LED-CH340G_D-SUN-V3.0-rescue D 0 50 N N 1 F N
 F0 "D" 75 60 60 H V L CNN
-F1 "flowcontrol-v0.1-rescue_diode_LED-CH340G_D-SUN-V3.0-rescue" 75 -60 60 H V L CNN
+F1 "diode_LED-CH340G_D-SUN-V3.0-rescue" 75 -60 60 H V L CNN
 F2 "SMA_N" 75 -150 40 H I L CNN
 F3 "" 0 0 60 H V C CNN
 DRAW
