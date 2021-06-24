@@ -2,7 +2,7 @@
 _autosave-flowcontrol-v*.kicad_pcb
 
 # hugo generated files
-docs/public/*
+docs/public/
 
 # Logs
 ci-logs
