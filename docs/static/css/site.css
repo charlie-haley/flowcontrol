@@ -1,0 +1,62 @@
+:root{
+    
+    --MAIN-TEXT-color:#323232; /* Color of text by default */
+    --MAIN-TITLES-TEXT-color: #5e5e5e; /* Color of titles h2-h3-h4-h5 */
+    --MAIN-LINK-color:rgb(146, 92, 78); /* Color of links */
+    --MAIN-LINK-HOVER-color:rgb(146, 92, 78); /* Color of hovered links */
+    --MAIN-ANCHOR-color: rgb(146, 92, 78); /* color of anchors on titles */
+
+    --MENU-HEADER-BG-color:#f7ead4; /* Background color of menu header */
+    --MENU-HEADER-BORDER-color:#f7ead4; /*Color of menu header border */ 
+
+    --MENU-SEARCH-BG-color:rgb(146, 92, 78); /* Search field background color (by default borders + icons) */
+    --MENU-SEARCH-BOX-color: #f7ead4; /* Override search field border color */
+    --MENU-SEARCH-BOX-ICONS-color: #f7ead4; /* Override search field icons color */
+
+    --MENU-SECTIONS-ACTIVE-BG-color:#f7ead4; /* Background color of the active section and its childs */
+    --MENU-SECTIONS-BG-color:#faf3e8; /* Background color of other sections */
+    --MENU-SECTIONS-LINK-color: rgb(146, 92, 78); /* Color of links in menu */
+    --MENU-SECTIONS-LINK-HOVER-color: rgb(107, 67, 57);  /* Color of links in menu, when hovered */
+    --MENU-SECTION-ACTIVE-CATEGORY-color: rgb(146, 92, 78); /* Color of active category text */
+    --MENU-SECTION-ACTIVE-CATEGORY-BG-color: #f7ead4; /* Color of background for the active category (only) */
+
+    --MENU-VISITED-color: #925c4e; /* Color of 'page visited' icons in menu */
+    --MENU-SECTION-HR-color: #20272b; /* Color of <hr> separator in menu */
+    
+}
+
+body{
+    margin: 0;
+}
+
+.container{
+    width: 64em;
+    max-width: calc(100% - 4em);
+    margin: 0 auto;
+    display: flex;
+}
+
+.container_content{
+    background-color: #f7ead4;
+    margin: 0;
+}
+
+.banner{
+    width: 100%;
+}
+
+.banner_container{
+    width: 50%;
+    height: auto;
+    margin: 0 auto;
+    padding: 10px;
+    position: relative;
+}
+
+.button{
+    background-color: #f7ead4;
+    margin: 25px 25px 0px 25px;
+    border-radius: 15px;
+    padding: 10px;
+    font-size: 1.5em;
+  }

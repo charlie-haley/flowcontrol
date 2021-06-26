@@ -1,0 +1,4 @@
+(sym_lib_table
+  (lib (name flowcontrol-v0.1-rescue)(type Legacy)(uri ${KIPRJMOD}/flowcontrol-v0.1-rescue.lib)(options "")(descr ""))
+  (lib (name CH340G_D-SUN-V3.0-rescue)(type Legacy)(uri /home/charlie/code/modules_from_china/CH340G_D-SUN-V3.0/CH340G_D-SUN-V3.0-rescue.lib)(options "")(descr ""))
+)
