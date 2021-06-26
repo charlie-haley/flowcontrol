@@ -15,7 +15,11 @@ body{
     background-color: #f7ead4;
     margin: 0;
     color:#643e34;
+<<<<<<< HEAD
     font-size: 1.1rem;
+=======
+    font-size: 1.1em;
+>>>>>>> main
 }
 
 .container_content--variant{
@@ -35,6 +39,7 @@ body{
 }
 
 .banner__title{
+<<<<<<< HEAD
     width: 100%;
     color: #f7ead4;
     font-size: 1.5rem;
@@ -47,12 +52,31 @@ h2{
     margin-bottom: 0.1rem;
 }
 
+=======
+    width: 100%;
+    color: #f7ead4;
+    font-size: 1.5em;
+}
+
+h2{
+    width: 100%;
+    color: #925c4e;
+    font-size: 2em;
+    margin-bottom: 0.1em;
+}
+
+>>>>>>> main
 h1{
     width: 100%;
     font-family: 'YoungSerif';
     color: #f7ead4;
+<<<<<<< HEAD
     font-size: 4rem;
     margin-bottom: 0.1rem;
+=======
+    font-size: 4em;
+    margin-bottom: 0.1em;
+>>>>>>> main
 }
 
 h1 img{
@@ -61,12 +85,18 @@ h1 img{
 
 .banner__cta a{
     width: 50%;
+<<<<<<< HEAD
     border: 0.1rem #f7ead4 solid;
     margin: 1rem;
+=======
+    border: 0.1em #f7ead4 solid;
+    margin: 1em;
+>>>>>>> main
 }
 
 .banner__cta{
     margin: 0 auto;
+<<<<<<< HEAD
     padding: 8rem 0rem 4rem 0rem;
 }
 
@@ -74,6 +104,15 @@ h1 img{
     border-radius: 0.5rem;
     padding: 0.5rem;
     font-size: 1.5rem;
+=======
+    padding: 8em 0em 4em 0em;
+}
+
+.button{
+    border-radius: 0.5em;
+    padding: 0.5em;
+    font-size: 1.5em;
+>>>>>>> main
     color: #f7ead4;
     text-decoration: none;
 }
@@ -91,12 +130,17 @@ h1 img{
     text-align: center;
     color:white;
     text-decoration: none;
+<<<<<<< HEAD
     padding: 2rem;
+=======
+    padding: 2em;
+>>>>>>> main
 }
 
 .footer__links a{
     color:#faf3e8;
     text-decoration: none;
+<<<<<<< HEAD
 }
 
 .logo{
@@ -182,4 +226,6 @@ and (min-width : 1824px) {
 only screen and (-webkit-min-device-pixel-ratio : 1.5),
 only screen and (min-device-pixel-ratio : 1.5) {
 /* Styles */
+=======
+>>>>>>> main
 }
