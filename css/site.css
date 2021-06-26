@@ -5,8 +5,8 @@ body{
 }
 
 .container{
-    width: 64em;
-    max-width: calc(100% - 4em);
+    width: 64rem;
+    max-width: calc(100% - 4rem);
     margin: 0 auto;
     display: flex;
 }
@@ -15,7 +15,7 @@ body{
     background-color: #f7ead4;
     margin: 0;
     color:#643e34;
-    font-size: 1.1em;
+    font-size: 1.1rem;
 }
 
 .container_content--variant{
@@ -37,22 +37,22 @@ body{
 .banner__title{
     width: 100%;
     color: #f7ead4;
-    font-size: 1.5em;
+    font-size: 1.5rem;
 }
 
 h2{
     width: 100%;
     color: #925c4e;
-    font-size: 2em;
-    margin-bottom: 0.1em;
+    font-size: 2rem;
+    margin-bottom: 0.1rem;
 }
 
 h1{
     width: 100%;
     font-family: 'YoungSerif';
     color: #f7ead4;
-    font-size: 4em;
-    margin-bottom: 0.1em;
+    font-size: 4rem;
+    margin-bottom: 0.1rem;
 }
 
 h1 img{
@@ -61,19 +61,19 @@ h1 img{
 
 .banner__cta a{
     width: 50%;
-    border: 0.1em #f7ead4 solid;
-    margin: 1em;
+    border: 0.1rem #f7ead4 solid;
+    margin: 1rem;
 }
 
 .banner__cta{
     margin: 0 auto;
-    padding: 8em 0em 4em 0em;
+    padding: 8rem 0rem 4rem 0rem;
 }
 
 .button{
-    border-radius: 0.5em;
-    padding: 0.5em;
-    font-size: 1.5em;
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+    font-size: 1.5rem;
     color: #f7ead4;
     text-decoration: none;
 }
@@ -91,10 +91,50 @@ h1 img{
     text-align: center;
     color:white;
     text-decoration: none;
-    padding: 2em;
+    padding: 2rem;
 }
 
 .footer__links a{
     color:#faf3e8;
     text-decoration: none;
+}
+
+.logo{
+    transform-origin: 43% 49%;
+    transition: transform 3s ease-out;
+}
+.logo:hover {
+    -ms-transform: rotate(1040deg);
+    -moz-transform: rotate(1040deg);
+    -webkit-transform: rotate(1040deg);
+    -o-transform: rotate(1040deg);
+    transform: rotate(1040deg);
+}
+
+
+@media only screen
+and (min-width : 320px)
+and (max-width : 480px) {
+    h1{
+        width: 100%;
+        font-family: 'YoungSerif';
+        color: #f7ead4;
+        font-size: 1.8rem;
+        margin-bottom: 0.1rem;
+    }
+    .banner__title {
+        width: 100%;
+        color: #f7ead4;
+        font-size: 1rem;
+    }
+    .banner__cta{
+        margin: 0 auto;
+        padding: 4rem 0rem 2rem 0rem;
+    }
+    .banner__cta a{
+        width: 50%;
+        border: 0.1rem #f7ead4 solid;
+        margin: 1rem;
+        font-size: 1rem;
+    }
 }
