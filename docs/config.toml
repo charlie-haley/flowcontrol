@@ -8,4 +8,9 @@ home = [ "HTML", "RSS", "JSON"]
 
 [params]
 themeVariant = "flowcontrol"
+<<<<<<< HEAD
 disableLandingPageButton = true
+=======
+disableLandingPageButton = true
+disableNextPrev = true
+>>>>>>> 07227dc531478be4eaad53b5e5ba55c36b25c7d8

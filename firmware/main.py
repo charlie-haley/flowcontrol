@@ -29,6 +29,12 @@ state.Fans.append(fan_b)
 
 currentInput = ""
 
+tachA = Pin(10, Pin.IN, Pin.PULL_DOWN)
+tachB = Pin(11, Pin.IN, Pin.PULL_DOWN)
+
+tachA.irq(trigger = Pin.IRQ_RISING, handler = fan_a.tach)
+tachB.irq(trigger = Pin.IRQ_RISING, handler = fan_b.tach)
+
 # Main
 def getTemperature(adc_u16):
     adcResoulution = 3.3/65535
@@ -53,9 +59,9 @@ async def sender():
     while True:
         # Update this to json.dumps(state) so the fan count is scalable client side
         result = ("{\"fan_a\":{\"speed\":" + str(int(fan_a.Speed)) +
-                  ",\"auto\":" + str(fan_a.Auto) +
+                  ",\"auto\":" + str(fan_a.Auto) + ",\"rpm\":" + str(int(fan_a.Rpm)) +
                   "},\"fan_b\":{\"speed\":" + str(int(fan_b.Speed)) +
-                  ",\"auto\":" + str(fan_b.Auto) +
+                  ",\"auto\":" + str(fan_b.Auto) + ",\"rpm\":" + str(int(fan_b.Rpm)) +
                   "},\"temp_water\":" + str(state.WaterTemp) + "}\n")
         await swriter.awrite(result)
 
