@@ -1,32 +1,7 @@
-:root{
-    
-    --MAIN-TEXT-color:#323232; /* Color of text by default */
-    --MAIN-TITLES-TEXT-color: #5e5e5e; /* Color of titles h2-h3-h4-h5 */
-    --MAIN-LINK-color:rgb(146, 92, 78); /* Color of links */
-    --MAIN-LINK-HOVER-color:rgb(146, 92, 78); /* Color of hovered links */
-    --MAIN-ANCHOR-color: rgb(146, 92, 78); /* color of anchors on titles */
-
-    --MENU-HEADER-BG-color:#f7ead4; /* Background color of menu header */
-    --MENU-HEADER-BORDER-color:#f7ead4; /*Color of menu header border */ 
-
-    --MENU-SEARCH-BG-color:rgb(146, 92, 78); /* Search field background color (by default borders + icons) */
-    --MENU-SEARCH-BOX-color: #f7ead4; /* Override search field border color */
-    --MENU-SEARCH-BOX-ICONS-color: #f7ead4; /* Override search field icons color */
-
-    --MENU-SECTIONS-ACTIVE-BG-color:#f7ead4; /* Background color of the active section and its childs */
-    --MENU-SECTIONS-BG-color:#faf3e8; /* Background color of other sections */
-    --MENU-SECTIONS-LINK-color: rgb(146, 92, 78); /* Color of links in menu */
-    --MENU-SECTIONS-LINK-HOVER-color: rgb(107, 67, 57);  /* Color of links in menu, when hovered */
-    --MENU-SECTION-ACTIVE-CATEGORY-color: rgb(146, 92, 78); /* Color of active category text */
-    --MENU-SECTION-ACTIVE-CATEGORY-BG-color: #f7ead4; /* Color of background for the active category (only) */
-
-    --MENU-VISITED-color: #925c4e; /* Color of 'page visited' icons in menu */
-    --MENU-SECTION-HR-color: #20272b; /* Color of <hr> separator in menu */
-    
-}
-
 body{
     margin: 0;
+    background-color: #925c4e;
+    font-family: 'Montserrat', sans-serif;
 }
 
 .container{
@@ -39,24 +14,87 @@ body{
 .container_content{
     background-color: #f7ead4;
     margin: 0;
+    color:#643e34;
+    font-size: 1.1em;
+}
+
+.container_content--variant{
+    background-color: #faf3e8;
+    margin: 0;
+}
+
+
+.test{
+    padding-top: 100px;
+    padding-bottom: 100px;
 }
 
 .banner{
-    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
 }
 
-.banner_container{
+.banner__title{
+    width: 100%;
+    color: #f7ead4;
+    font-size: 1.5em;
+}
+
+h2{
+    width: 100%;
+    color: #925c4e;
+    font-size: 2em;
+    margin-bottom: 0.1em;
+}
+
+h1{
+    width: 100%;
+    font-family: 'YoungSerif';
+    color: #f7ead4;
+    font-size: 4em;
+    margin-bottom: 0.1em;
+}
+
+h1 img{
+    width: 0.75em;
+}
+
+.banner__cta a{
     width: 50%;
-    height: auto;
+    border: 0.1em #f7ead4 solid;
+    margin: 1em;
+}
+
+.banner__cta{
     margin: 0 auto;
-    padding: 10px;
-    position: relative;
+    padding: 8em 0em 4em 0em;
 }
 
 .button{
-    background-color: #f7ead4;
-    margin: 25px 25px 0px 25px;
-    border-radius: 15px;
-    padding: 10px;
+    border-radius: 0.5em;
+    padding: 0.5em;
     font-size: 1.5em;
-  }
+    color: #f7ead4;
+    text-decoration: none;
+}
+
+.button--primary{
+    background-color: #f7ead4;
+    color: #925c4e;
+    font-weight: bold;
+}
+
+.footer__links{
+    width: 50%;
+    height: auto;
+    margin: 0 auto;
+    text-align: center;
+    color:white;
+    text-decoration: none;
+    padding: 2em;
+}
+
+.footer__links a{
+    color:#faf3e8;
+    text-decoration: none;
+}
