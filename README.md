@@ -1,6 +1,6 @@
 <p align="center" style="text-align: center">
    <a href="https://flowctl.app">
-      <img src="/docs/static/images/flowcontrol-logo.svg" width="60%"><br/>
+      <img src="/docs/static/images/flowcontrol-logo.svg" width="70%"><br/>
    </a>
    An open source, multiplatform fan controller.
 </p>
