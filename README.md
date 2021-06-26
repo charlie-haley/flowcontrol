@@ -1,5 +1,7 @@
-# flowcontrol
-An open source, multiplatform fan controller.
+<p align="center" style="text-align: center">
+   <img src="/docs/static/images/flowcontrol-logo.svg" width="60%"><br/>
+   An open source, multiplatform fan controller.
+</p>
 
 ![release](https://github.com/charlie-haley/flowcontrol/actions/workflows/release.yml/badge.svg)
 
