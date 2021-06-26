@@ -1,12 +1,14 @@
 <p align="center" style="text-align: center">
-   <img src="/docs/static/images/flowcontrol-logo.svg" width="60%"><br/>
+   <a href="https://flowctl.app">
+      <img src="/docs/static/images/flowcontrol-logo.svg" width="60%"><br/>
+   </a>
    An open source, multiplatform fan controller.
 </p>
 
-![release](https://github.com/charlie-haley/flowcontrol/actions/workflows/release.yml/badge.svg)
-
 **This project is still in a very early state. If you'd like to contribute, [please take a look at our outstanding issues](https://github.com/charlie-haley/flowcontrol/issues) and raise a PR** 
 Alternatively, head over to [discussions](https://github.com/charlie-haley/flowcontrol/discussions) if you have any questions or ideas.
+
+![release](https://github.com/charlie-haley/flowcontrol/actions/workflows/release.yml/badge.svg)
 
 ## Installation
 ### ✔️ Download latest release
