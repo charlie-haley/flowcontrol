@@ -68,3 +68,13 @@ go install flowctl
 ```
 act
 ```
+
+## Special Thanks
+
+Huge thank you to all the awesome open source projects that have made this possible!
+- [Wails](https://github.com/wailsapp/wails)
+- [Cobra](https://github.com/spf13/cobra)
+- [Raspberry Pi Pico](https://www.raspberrypi.org/products/raspberry-pi-pico/)
+- [YoungSerif](https://github.com/noirblancrouge/YoungSerif)
+- [KiCad](https://www.kicad.org/)
+- [Hugo](https://gohugo.io/)
