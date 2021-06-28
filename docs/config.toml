@@ -1,7 +1,7 @@
 theme = "hugo-theme-learn"
-baseURL = "http://example.org/"
-languageCode = "en-us"
-title = "My New Hugo Site"
+baseURL = "http://flowctl.app/"
+languageCode = "en-uk"
+title = "flowcontrol"
 
 [outputs]
 home = [ "HTML", "RSS", "JSON"]
