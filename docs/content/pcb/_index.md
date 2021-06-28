@@ -1,5 +1,5 @@
 ---
 title: "PCB"
-weight:  10
-chapter: true
+weight:  15
+chapter: false
 ---

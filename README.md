@@ -10,64 +10,17 @@ Alternatively, head over to [discussions](https://github.com/charlie-haley/flowc
 
 ![release](https://github.com/charlie-haley/flowcontrol/actions/workflows/release.yml/badge.svg)
 
-## Installation
-### ✔️ Download latest release
-[Download the latest release from here](https://github.com/charlie-haley/flowcontrol/releases), unzip the firmware.zip and upload it to the Raspberry Pi Pico.
-Unzip flowcontrol.zip into a folder of your choice and run `flowcontrol.exe`
+## 📝 Getting Started
 
+[Head over to the documentation to get started.](https://flowctl.app/getting-started/requirements/)
 
-### 🛠️ Build from source
-#### flowcontrol
-```
-wails build
-```
-#### flowcontrol-monitor
-```
-dotnet publish -r win-x64 -c Release /p:PublishSingleFile=true --self-contained True
-```
-Replace `win-x64` with `linux-x64` if you're compiling for Linux or `osx-x64` for OSX. More information on [available runtime indentifiers can be found here](https://docs.microsoft.com/en-us/dotnet/core/rid-catalog)
-#### flowcontrol-cli
-```
-go install flowctl
-```
-## Building Hardware
+## ❓ FAQ
 
-### 🗒️ Items Needed
+- Q
+A
 
-As well as the items listed below, you'll need a soldering iron, wire and prototype board.
-
-- CH340G USB to TTL Serial Adapter Module (Any USB to UART should work, the CH340 is cheap and widely available)
-- Raspberry Pi Pico
-- x2 Male 4-Pin PC Fan Headers
-- x2 Female/Male JST Connectors of your choice (This is used for thermistors)
-- x2 10k Resistors 
-
-[A PCB design is currently in progress](https://github.com/charlie-haley/flowcontrol/issues/9)
-
-### 📝 Documentation
-
-## 💻 Local Development
-
-### flowcontrol
-```
-wails serve
-npm run serve
-```
-
-### flowcontrol-monitor
-```
-dotnet run
-```
-
-### flowcontrol-cli
-```
-go install flowctl
-```
-
-### Github Actions
-```
-act
-```
+- Q
+A
 
 ## Special Thanks
 
