@@ -1,5 +1,5 @@
 ---
-title: "Running Locally"
+title: "CLI"
 weight: 10
 ---
 
