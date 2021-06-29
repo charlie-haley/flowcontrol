@@ -9,6 +9,7 @@
 Alternatively, head over to [discussions](https://github.com/charlie-haley/flowcontrol/discussions) if you have any questions or ideas.
 
 ![release](https://github.com/charlie-haley/flowcontrol/actions/workflows/release.yml/badge.svg)
+[![Documentation](https://github.com/charlie-haley/flowcontrol/actions/workflows/release-docs.yml/badge.svg)](https://github.com/charlie-haley/flowcontrol/actions/workflows/release-docs.yml)
 
 ## 📝 Getting Started
 
