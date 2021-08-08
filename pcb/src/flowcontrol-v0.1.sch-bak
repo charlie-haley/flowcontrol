@@ -650,9 +650,9 @@ Wire Wire Line
 	7200 1600 7600 1600
 Wire Wire Line
 	5650 3650 6050 3650
-Text GLabel 9000 2400 2    50   Input ~ 0
-GP0
 Text GLabel 9000 2500 2    50   Input ~ 0
+GP0
+Text GLabel 9000 2400 2    50   Input ~ 0
 GP1
 $Comp
 L flowcontrol-v0.1-rescue:+5V-CH340G_D-SUN-V3.0-rescue #PWR0115
@@ -802,7 +802,7 @@ U 1 1 60CAACD7
 P 2500 1900
 F 0 "J5" H 2550 2317 50  0000 C CNN
 F 1 "Internal USB" H 2550 2226 50  0000 C CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_2x05_P2.54mm_Vertical" H 2500 1900 50  0001 C CNN
+F 2 "Connector_PinSocket_2.54mm:PinSocket_2x05_P2.54mm_Vertical" H 2500 1900 50  0001 C CNN
 F 3 "~" H 2500 1900 50  0001 C CNN
 	1    2500 1900
 	1    0    0    -1  
