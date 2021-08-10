@@ -5,7 +5,7 @@
 <meta name=generator content="Hugo 0.87.0">
 <meta name=description content>
 <link rel=icon href=/images/favicon.png type=image/png>
-<title>Schematic :: flowcontrol</title>
+<title>Docs :: flowcontrol</title>
 <link href=/css/nucleus.css?1628616763 rel=stylesheet>
 <link href=/css/fontawesome-all.min.css?1628616763 rel=stylesheet>
 <link href=/css/hybrid.css?1628616763 rel=stylesheet>
@@ -20,7 +20,7 @@
 <script src=/js/jquery-3.3.1.min.js?1628616763></script>
 <style>:root #header+#content>#left>#rlblock_left{display:none!important}</style>
 </head>
-<body data-url=/pcb/schematic/>
+<body data-url=/development/docs/>
 <nav id=sidebar>
 <div id=header-wrapper>
 <div id=header>
@@ -52,7 +52,8 @@ Requirements
 </li>
 </ul>
 </li>
-<li data-nav-id=/development/ title=Development class=dd-item>
+<li data-nav-id=/development/ title=Development class="dd-item
+parent">
 <a href=/development/overview/>
 Development
 </a>
@@ -82,20 +83,19 @@ PCB
 Firmware
 </a>
 </li>
-<li data-nav-id=/development/docs/ title=Docs class=dd-item>
+<li data-nav-id=/development/docs/ title=Docs class="dd-item active">
 <a href=/development/docs/>
 Docs
 </a>
 </li>
 </ul>
 </li>
-<li data-nav-id=/pcb/ title=PCB class="dd-item
-parent">
+<li data-nav-id=/pcb/ title=PCB class=dd-item>
 <a href=/pcb/schematic/>
 PCB
 </a>
 <ul>
-<li data-nav-id=/pcb/schematic/ title=Schematic class="dd-item active">
+<li data-nav-id=/pcb/schematic/ title=Schematic class=dd-item>
 <a href=/pcb/schematic/>
 Schematic
 </a>
@@ -131,12 +131,17 @@ Assembly
 </span>
 <span id=toc-menu><i class="fas fa-list-alt"></i></span>
 <span class=links>
-<a href=/>flowcontrol</a> > <a href=/pcb/>PCB</a> > Schematic
+<a href=/>flowcontrol</a> > <a href=/development/>Development</a> > Docs
 </span>
 </div>
 <div class=progress>
 <div class=wrapper>
-<nav id=TableOfContents></nav>
+<nav id=TableOfContents>
+<ul>
+<li><a href=#prerequisites>Prerequisites</a></li>
+<li><a href=#running-locally>Running Locally</a></li>
+</ul>
+</nav>
 </div>
 </div>
 </div>
@@ -145,10 +150,16 @@ Assembly
 </div>
 <div id=body-inner>
 <h1>
-Schematic
+Docs
 </h1>
-<p>If you can solder SMD, there&rsquo;s a PCB with <a href=https://github.com/charlie-haley/flowcontrol/tree/main/pcb/gerbers>gerber files</a> available. These will potentially be available pre-soldered at some point in the future.</p>
-<p>The schematic for the PCB can also be <a href=/pcb/files/re02schematic.pdf>found here</a></p>
+<h2 id=prerequisites>Prerequisites</h2>
+<ul>
+<li>Hugo</li>
+</ul>
+<h2 id=running-locally>Running Locally</h2>
+<pre><code>cd src/flowcontrol/docs
+hugo server -D
+</code></pre>
 <footer class=footline>
 </footer>
 </div>
