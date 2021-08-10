@@ -1,5 +1,5 @@
 ---
-title: "Dpcs"
+title: "Docs"
 weight: 25
 ---
 
