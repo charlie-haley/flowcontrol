@@ -34,7 +34,7 @@ jobs:
       - name: Update to prerelease
         run: wails update -pre
 # Compile wails app for darwin/amd64
-      - name: Build project
+      - name: Build project for windows/amd64
         if: ${{ !env.ACT }}
         run: |
           cd ./src/flowcontrol
@@ -67,7 +67,7 @@ jobs:
       - name: Copy compiled files
         run: cp -r ./src/flowcontrol-monitor/bin/Release/net5.0/osx-x64/publish/ ./src/flowcontrol/build
 # Compile wails app
-      - name: Build project
+      - name: Build project for darwin/amd64
         if: ${{ !env.ACT }}
         run: |
           cd ./src/flowcontrol
@@ -85,7 +85,7 @@ jobs:
       - name: Copy compiled files
         run: cp -r ./src/flowcontrol-monitor/bin/Release/net5.0/linux-x64/publish/ ./src/flowcontrol/build
 # Compile wails app
-      - name: Build project
+      - name: Build project for linux/amd64
         if: ${{ !env.ACT }}
         run: |
           cd ./src/flowcontrol
