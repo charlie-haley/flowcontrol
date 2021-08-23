@@ -39,6 +39,7 @@ type wailsstruct struct {
 func (w *wailsstruct) WailsInit(runtime *wails.Runtime) error {
 	w.runtime = runtime
 
+	// This detection should be done with a device identifier or similiar
 	s, err := flwserial.GetValidPort()
 	//Go Routine for fetching stats from the flowcontrol-monitor application
 	go func() {
