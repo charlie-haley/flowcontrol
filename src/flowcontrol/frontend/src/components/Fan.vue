@@ -64,10 +64,12 @@ export default {
 }
 
 .fan-icon {
-  width: 100px;
-  height: 100px;
+  width: 50px;
+  height: 50px;
+  margin: 1.5em;
+  transform-origin: 43% 49%;
   animation-name: spin;
-  animation-duration: 4000ms;
+  animation-duration: 1000ms;
   animation-iteration-count: infinite;
   animation-timing-function: linear;
 }
@@ -100,7 +102,7 @@ export default {
     display:inline-block;
     width:30%;
     font-size: 1.4em;
-    padding: 0.5em;
+    padding: 1em 0em 1em 0em;
     vertical-align: top;
 }
 .fan-page__container__configure{
@@ -114,7 +116,7 @@ export default {
     display: block;
     font-size: 0.8em;
     font-weight: normal;
-    margin-top: 1em;
+    margin-top: 0.5em;
 }
 .fan-page__item input{
     width:100%;

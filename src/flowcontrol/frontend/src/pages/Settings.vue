@@ -1,19 +1,18 @@
 <template>
   <div class="settings-appinfo">
-      <FanIcon class="fan-icon"/>
-      <span class="settings-appinfo-title">Flowcontrol</span><br/>
+      <Logo class="logo"/>
       <span class="settings-appinfo-version">{{ version }}</span><br/>
       <a href="https://github.com/charlie-haley/flowcontrol">GitHub</a>
   </div>
 </template>
 
 <script>
-import FanIcon from "../components/FanIcon.vue";
+import Logo from "../components/Logo.vue";
 
 export default {
   name: "settings",
   components: {
-    FanIcon
+    Logo
   },
   data() {
     return {
@@ -68,9 +67,9 @@ export default {
 .settings-appinfo-version{
   font-size: 1.5em;
 }
-.fan-icon{
+.logo{
   fill: rgb(146, 92, 78);
-  width: 100px;
+  width: 300px;
 }
 
 </style>
