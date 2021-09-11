@@ -5,8 +5,8 @@
                 <FanIcon class="fan-icon"/>
             </div>
             <div class="fan-page__container__title">
-                <span>{{ fanName }}</span>
-                <span class="fan-page__container__speed">1634rpm</span>
+                <span>{{ name }}</span>
+                <span class="fan-page__container__speed">{{fan.Rpm}}rpm</span>
             </div>
             <div class="fan-page__container__configure">
               <span v-if="!fan.Auto" alt="Enable auto fan control" class="material-icons" v-on:click="auto">lock_open</span>
@@ -24,8 +24,8 @@ import FanIcon from "./FanIcon.vue";
 export default {
   name: "Fan",
   props: {
-    fanEvent: String,
-    fanName: String
+    identifier: String,
+    name: String
   },
   components: {
     FanIcon
@@ -37,14 +37,14 @@ export default {
   },
   methods: {
     auto: function () {
-      Wails.Events.Emit(this.fanEvent + ":auto", !this.fan.Auto ? 1 : 0)
+      Wails.Events.Emit(this.identifier + ":auto", !this.fan.Auto ? 1 : 0)
     },
     speed: function () {
-      Wails.Events.Emit(this.fanEvent + ":speed", this.fan.Speed)
+      Wails.Events.Emit(this.identifier + ":speed", this.fan.Speed)
     }
   },
   mounted: function() {
-      Wails.Events.On(this.fanEvent, fan => {
+      Wails.Events.On(this.identifier, fan => {
           if (fan) {
               //Ensure that the slider value doesn't get overwritten if the user is manually controlling the slider
               let speed = this.fan.Speed

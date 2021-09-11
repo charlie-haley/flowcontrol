@@ -18,8 +18,8 @@
               <span id="temp-cpu">{{cpuTemp}}c</span>
           </div>
       </div>
-      <Fan fanEvent="fan:a" fanName="Top Radiator"/>
-      <Fan fanEvent="fan:b" fanName="Bottom Radiator"/>
+      <Fan identifier="fan:a" name="Top Radiator"/>
+      <Fan identifier="fan:b" name="Bottom Radiator"/>
           
   </div>
 </template>

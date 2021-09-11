@@ -29,6 +29,7 @@ type State struct {
 type Fan struct {
 	Speed int
 	Auto  int
+	Rpm   int
 }
 
 type wailsstruct struct {
