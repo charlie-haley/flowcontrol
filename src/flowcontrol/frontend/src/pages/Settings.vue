@@ -33,13 +33,22 @@
     </div>
     <div class="settings__item" :class="selected_theme">
         <div class="settings__item__info">
-            <span class="settings__item__title">RGB control</span>
+            <span class="settings__item__title">RGB Control</span>
             <span class="settings__item__tag">This feature is still experimental and only works with 8 LED WS2812b strips.</span>
         </div>
         <div class="settings__item__controls">
           <ToggleSwitch class="settings__item__controls_switch" v-model="rgb_enabled" />
         </div>
     </div>
+     <div class="settings__item" :class="selected_theme">
+        <div class="settings__item__info">
+            <span class="settings__item__title">Enable Animations</span>
+            <span class="settings__item__tag">Enable animations application wide.</span>
+        </div>
+        <div class="settings__item__controls">
+          <ToggleSwitch class="settings__item__controls_switch" v-model="animations_enabled" />
+        </div>
+    </div>   
     <v-style v-if="selected_theme == 'theme-default'">
         .logo{
           fill: rgb(146, 92, 78);
@@ -76,6 +85,10 @@ export default {
     rgb_enabled: {
         get() { return this.$store.state.rgb_enabled; },
         set(value) { this.$store.commit('enableRgb', value); }
+    },
+    animations_enabled: {
+        get() { return this.$store.state.animations_enabled; },
+        set(value) { this.$store.commit('enableAnimations', value); }
     }
   },
   mounted: function() {

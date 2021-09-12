@@ -15,7 +15,7 @@
         background-color: #f7ead4;
       }
       .slider{
-          background-color:rgba(0, 0, 0, 0.2);
+          background-color:#CEB19E;
       }
     </v-style>
     <v-style v-if="selected_theme == 'theme-dark'">
@@ -29,7 +29,7 @@
         background-color: #494949;;
       }
       .slider{
-          background-color:rgba(0, 0, 0, 0.6);
+          background-color:#8F8A81;
       }
     </v-style>
   </div>

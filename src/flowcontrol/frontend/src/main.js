@@ -23,7 +23,8 @@ Vue.use(Vuex)
 const store = new Vuex.Store({
   state: {
     selected_theme: "theme-default",
-    rgb_enabled: 0
+    rgb_enabled: 0,
+    animations_enabled: 1
   },
   mutations: {
     updateTheme (state, theme) {
@@ -31,6 +32,9 @@ const store = new Vuex.Store({
     },
     enableRgb (state, enabled) {
       state.rgb_enabled = enabled
+    },
+    enableAnimations (state, enabled) {
+      state.animations_enabled = enabled
     }
   }
   })

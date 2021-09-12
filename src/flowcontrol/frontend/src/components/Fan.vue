@@ -15,6 +15,22 @@
         </div>
         <input type="range" min="0" max="100" step="1" v-model="fan.Speed" :disabled="fan.Auto == 1" @mouseup="speed"> 
 
+      <v-style v-if="animations_enabled">
+        .fan-icon {
+          animation-name: spin;
+          animation-duration: 1000ms;
+          animation-iteration-count: infinite;
+          animation-timing-function: linear;
+        }
+        @keyframes spin {
+          from {
+              transform:rotate(0deg);
+          }
+          to {
+              transform:rotate(360deg);
+          }
+        }
+      </v-style>
       <v-style v-if="selected_theme == 'theme-default'">
         .fan-icon{
           fill: rgb(146, 92, 78);
@@ -100,6 +116,10 @@ export default {
         get() { return this.$store.state.selected_theme; },
         set(value) { this.$store.commit('updateTheme', value); }
     },
+    animations_enabled: {
+        get() { return this.$store.state.animations_enabled; },
+        set(value) { this.$store.commit('enableAnimations', value); }
+    }
   },
   methods: {
     auto: function () {
@@ -131,19 +151,6 @@ export default {
   height: 50px;
   margin: 1.5em;
   transform-origin: 43% 49%;
-  animation-name: spin;
-  animation-duration: 1000ms;
-  animation-iteration-count: infinite;
-  animation-timing-function: linear;
-}
-
-@keyframes spin {
-  from {
-      transform:rotate(0deg);
-  }
-  to {
-      transform:rotate(360deg);
-  }
 }
 
 .fan-page__item{
