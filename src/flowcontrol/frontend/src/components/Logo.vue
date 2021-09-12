@@ -41,13 +41,3 @@ export default {
   name: "Logo"
 };
 </script>
-
-<style scoped>
-.cls-1 {
-    fill: #925c4f;
-}
-
-.cls-2 {
-    fill: #945f51;
-}
-</style>

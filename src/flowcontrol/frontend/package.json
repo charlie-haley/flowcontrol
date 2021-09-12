@@ -10,10 +10,12 @@
   "dependencies": {
     "@wailsapp/runtime": "^1.0.10",
     "core-js": "^3.6.4",
+    "es6-promise": "^4.2.8",
     "material-design-icons": "^3.0.1",
     "regenerator-runtime": "^0.13.3",
     "vue": "^2.6.11",
-    "vue-router": "^3.5.1"
+    "vue-router": "^3.5.1",
+    "vuex": "^3.6.2"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^4.2.3",

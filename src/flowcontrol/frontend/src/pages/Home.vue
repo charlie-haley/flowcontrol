@@ -1,19 +1,19 @@
 <template>
   <div>
       <div class="sensors">
-          <div class="sensors__item" :class="$selected_theme">
+          <div class="sensors__item" :class="selected_theme">
               <span class="sensors__item__title">Water</span>
               <span id="temp-water">{{waterTemp}}c</span>
           </div>
-          <div class="sensors__item" :class="$selected_theme">
+          <div class="sensors__item" :class="selected_theme">
               <span class="sensors__item__title">CLOCK</span>
               <span id="clock-gpu">{{gpuClock}}MHz</span>
           </div>
-          <div class="sensors__item" :class="$selected_theme">
+          <div class="sensors__item" :class="selected_theme">
               <span class="sensors__item__title">GPU</span>
               <span id="temp-gpu">{{gpuTemp}}c</span>
           </div>
-          <div class="sensors__item" :class="$selected_theme">
+          <div class="sensors__item" :class="selected_theme">
               <span class="sensors__item__title">CPU</span>
               <span id="temp-cpu">{{cpuTemp}}c</span>
           </div>
@@ -40,6 +40,12 @@ export default {
       cpuTemp: "0",
       waterTemp: "0"
     };
+  },
+  computed: {
+    selected_theme: {
+        get() { return this.$store.state.selected_theme; },
+        set(value) { this.$store.commit('updateTheme', value); }
+    },
   },
   mounted: function() {
       Wails.Events.On("gpu:clock", gpuClock => {

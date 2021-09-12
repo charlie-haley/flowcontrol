@@ -15,9 +15,3 @@ export default {
   name: "FanIcon"
 };
 </script>
-
-<style scoped>
-.cls-1 {
-    fill: #925c4f;
-}
-</style>

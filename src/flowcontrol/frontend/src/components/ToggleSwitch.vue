@@ -1,8 +1,38 @@
 <template>
-  <label class="switch">
-    <input type="checkbox" :checked="checked" @change="change"/>
-    <span class="slider round"></span>
-  </label>
+  <div>
+    <label class="switch">
+      <input type="checkbox" :checked="checked" @change="change"/>
+      <span class="slider round"></span>
+    </label>
+    <v-style v-if="selected_theme == 'theme-default'">
+      input:checked + .slider {
+        background-color: rgb(146, 92, 78);
+      }
+      input:focus + .slider {
+        box-shadow: 0 0 1px rgb(146, 92, 78);
+      }
+      .slider:before{
+        background-color: #f7ead4;
+      }
+      .slider{
+          background-color:rgba(0, 0, 0, 0.2);
+      }
+    </v-style>
+    <v-style v-if="selected_theme == 'theme-dark'">
+      input:checked + .slider {
+        background-color: #f7ead4;
+      }
+      input:focus + .slider {
+        box-shadow: 0 0 1px #f7ead4;
+      }
+      .slider:before{
+        background-color: #494949;;
+      }
+      .slider{
+          background-color:rgba(0, 0, 0, 0.6);
+      }
+    </v-style>
+  </div>
 </template>
 
 <script>
@@ -13,15 +43,21 @@ export default {
         return {
             checked: this.value === this.trueValue
         };
+  },
+  computed: {
+    selected_theme: {
+        get() { return this.$store.state.selected_theme; },
+        set(value) { this.$store.commit('updateTheme', value); }
     },
+  },
   methods: {
         change: function() {
             this.checked = !this.checked;
             if(this.checked){
-              this.$emit('input', this.trueValue);
+              this.$emit('input', this.trueValue ?? 1);
             }
             else{
-              this.$emit('input', this.falseValue);
+              this.$emit('input', this.falseValue ?? 0);
             }
 
         }
@@ -50,7 +86,6 @@ export default {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #cfbc9e;
   -webkit-transition: .4s;
   transition: .4s;
   border-radius: 34px;
@@ -63,18 +98,9 @@ export default {
   width: 20px;
   left: 4px;
   bottom: 4px;
-  background-color: #f7ead4;
   -webkit-transition: .4s;
   transition: .4s;
   border-radius: 50%;
-}
-
-input:checked + .slider {
-  background-color: rgb(146, 92, 78);;
-}
-
-input:focus + .slider {
-  box-shadow: 0 0 1px rgb(146, 92, 78);;
 }
 
 input:checked + .slider:before {
