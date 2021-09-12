@@ -12,7 +12,7 @@ Alternatively, head over to [discussions](https://github.com/charlie-haley/flowc
 [![Documentation](https://github.com/charlie-haley/flowcontrol/actions/workflows/release-docs.yml/badge.svg)](https://github.com/charlie-haley/flowcontrol/actions/workflows/release-docs.yml)
 
 <p align="center" style="text-align: center">
-   <img src="/assets/desktop-demo.gif" width="60%"><br/>
+   <img src="/assets/desktop-demo.gif" width="70%"><br/>
 </p>
 
 ## 📝 Getting Started
