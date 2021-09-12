@@ -11,6 +11,10 @@ Alternatively, head over to [discussions](https://github.com/charlie-haley/flowc
 ![release](https://github.com/charlie-haley/flowcontrol/actions/workflows/release.yml/badge.svg)
 [![Documentation](https://github.com/charlie-haley/flowcontrol/actions/workflows/release-docs.yml/badge.svg)](https://github.com/charlie-haley/flowcontrol/actions/workflows/release-docs.yml)
 
+<p align="center" style="text-align: center">
+   <img src="/assets/desktop-demo.gif" width="60%"><br/>
+</p>
+
 ## 📝 Getting Started
 
 [Head over to the documentation to get started.](https://flowctl.app/getting-started/requirements/)
