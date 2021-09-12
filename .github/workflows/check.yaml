@@ -6,6 +6,8 @@ on:
       - 'docs/**'
       - 'firmware/**'
       - 'pcb/**'
+      - 'assets/**'
+      - '.vscode/**'
       - 'README.md'
       - 'CONTRIBUTING.md'
       - 'LICENSE'
