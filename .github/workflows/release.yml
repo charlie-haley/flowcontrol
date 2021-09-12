@@ -37,8 +37,6 @@ jobs:
           go-version: '1.16.3'
       - name: Install wails
         run: GO111MODULE=on go get -u github.com/wailsapp/wails/cmd/wails
-      - name: Update to prerelease
-        run: wails update -pre
 # Compile wails app for windows/amd6
       - name: Build project for windows/amd6
         if: ${{ !env.ACT }}
