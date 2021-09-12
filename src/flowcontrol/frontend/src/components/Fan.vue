@@ -5,8 +5,8 @@
                 <FanIcon class="fan-icon"/>
             </div>
             <div class="fan-page__container__title">
-                <span>{{ fanName }}</span>
-                <span class="fan-page__container__speed">1634rpm</span>
+                <span>{{ name }}</span>
+                <span class="fan-page__container__speed">{{fan.Rpm}}rpm</span>
             </div>
             <div class="fan-page__container__configure">
               <span v-if="!fan.Auto" alt="Enable auto fan control" class="material-icons" v-on:click="auto">lock_open</span>
@@ -14,6 +14,82 @@
             </div>
         </div>
         <input type="range" min="0" max="100" step="1" v-model="fan.Speed" :disabled="fan.Auto == 1" @mouseup="speed"> 
+
+      <v-style v-if="animations_enabled">
+        .fan-icon {
+          animation-name: spin;
+          animation-duration: 1000ms;
+          animation-iteration-count: infinite;
+          animation-timing-function: linear;
+        }
+        @keyframes spin {
+          from {
+              transform:rotate(0deg);
+          }
+          to {
+              transform:rotate(360deg);
+          }
+        }
+      </v-style>
+      <v-style v-if="selected_theme == 'theme-default'">
+        .fan-icon{
+          fill: rgb(146, 92, 78);
+        }
+        .fan-page__item, .fan-page__container{
+          background-color: #f7ead4;
+        }
+        input[type=range]::-webkit-slider-runnable-track {
+          background: #925c4e;
+        }
+        input[type=range]::-ms-fill-lower {
+          background: #925c4e;
+        }
+        input[type=range]:focus::-ms-fill-lower {
+          background: #925c4e;
+        }
+        input[type=range]:focus::-webkit-slider-runnable-track {
+          background: #ad7566;
+        }
+        input[type=range]::-ms-fill-upper {
+          background: rgba(146, 92, 78, 0.4);
+        }
+        input[type=range]:focus::-ms-fill-upper {
+          background: rgba(146, 92, 78, 0.4);
+        }
+        input[type=range]::-moz-range-track {
+          background: #925c4e;
+        }
+      </v-style>
+      <v-style v-if="selected_theme == 'theme-dark'">
+        .fan-icon{
+          fill: #f7ead4;
+        }
+        .fan-page__item, .fan-page__container{
+          background-color: #494949;
+          color: #f7ead4;
+        }
+        input[type=range]::-webkit-slider-runnable-track {
+          background: #f7ead4;
+        }
+        input[type=range]::-ms-fill-lower {
+          background: #f7ead4;
+        }
+        input[type=range]:focus::-ms-fill-lower {
+          background: #f7ead4;
+        }
+        input[type=range]:focus::-webkit-slider-runnable-track {
+          background: #c2b297;
+        }
+        input[type=range]::-ms-fill-upper {
+          background: rgba(247, 234, 212, 0.4);
+        }
+        input[type=range]:focus::-ms-fill-upper {
+          background: rgba(247, 234, 212, 0.4);
+        }
+        input[type=range]::-moz-range-track {
+          background: #f7ead4;
+        }
+      </v-style>
     </div>
 </template>
 
@@ -24,8 +100,8 @@ import FanIcon from "./FanIcon.vue";
 export default {
   name: "Fan",
   props: {
-    fanEvent: String,
-    fanName: String
+    identifier: String,
+    name: String
   },
   components: {
     FanIcon
@@ -35,16 +111,26 @@ export default {
       fan: {}
     };
   },
+  computed: {
+    selected_theme: {
+        get() { return this.$store.state.selected_theme; },
+        set(value) { this.$store.commit('updateTheme', value); }
+    },
+    animations_enabled: {
+        get() { return this.$store.state.animations_enabled; },
+        set(value) { this.$store.commit('enableAnimations', value); }
+    }
+  },
   methods: {
     auto: function () {
-      Wails.Events.Emit(this.fanEvent + ":auto", !this.fan.Auto ? 1 : 0)
+      Wails.Events.Emit(this.identifier + ":auto", !this.fan.Auto ? 1 : 0)
     },
     speed: function () {
-      Wails.Events.Emit(this.fanEvent + ":speed", this.fan.Speed)
+      Wails.Events.Emit(this.identifier + ":speed", this.fan.Speed)
     }
   },
   mounted: function() {
-      Wails.Events.On(this.fanEvent, fan => {
+      Wails.Events.On(this.identifier, fan => {
           if (fan) {
               //Ensure that the slider value doesn't get overwritten if the user is manually controlling the slider
               let speed = this.fan.Speed
@@ -59,38 +145,20 @@ export default {
 </script>
 
 <style scoped>
-.fan-icon{
-  fill: rgb(146, 92, 78)
-}
 
 .fan-icon {
   width: 50px;
   height: 50px;
   margin: 1.5em;
   transform-origin: 43% 49%;
-  animation-name: spin;
-  animation-duration: 1000ms;
-  animation-iteration-count: infinite;
-  animation-timing-function: linear;
-}
-
-@keyframes spin {
-  from {
-      transform:rotate(0deg);
-  }
-  to {
-      transform:rotate(360deg);
-  }
 }
 
 .fan-page__item{
-  background-color: #f7ead4;
   border-radius: 25px 25px 25px 25px;
   margin: 25px 25px 0px 25px;
   overflow: hidden;
 }
 .fan-page__container{
-  background-color: #f7ead4;
   margin: 25px 25px 0px 25px;
   display:flex;
 }
@@ -135,7 +203,6 @@ input[type=range]:focus {
   outline: none;
 }
 input[type=range]::-webkit-slider-runnable-track {
-  background: #925c4e;
   border: 0;
   width: 100%;
   height: 16.4px;
@@ -151,11 +218,7 @@ input[type=range]::-webkit-slider-thumb {
   cursor: pointer;
   -webkit-appearance: none;
 }
-input[type=range]:focus::-webkit-slider-runnable-track {
-  background: #ad7566;
-}
 input[type=range]::-moz-range-track {
-  background: #925c4e;
   border: 0;
   width: 100%;
   height: 16.4px;
@@ -179,11 +242,9 @@ input[type=range]::-ms-track {
   cursor: pointer;
 }
 input[type=range]::-ms-fill-lower {
-  background: #925c4e;
   border: 0;
 }
 input[type=range]::-ms-fill-upper {
-  background: rgba(146, 92, 78, 0.4);
   border: 0;
 }
 input[type=range]::-ms-thumb {
@@ -195,12 +256,6 @@ input[type=range]::-ms-thumb {
   cursor: pointer;
   margin-top: 0px;
   /*Needed to keep the Edge thumb centred*/
-}
-input[type=range]:focus::-ms-fill-lower {
-  background: #925c4e;
-}
-input[type=range]:focus::-ms-fill-upper {
-  background: rgba(146, 92, 78, 0.4);
 }
 /*TODO: Use one of the selectors from https://stackoverflow.com/a/20541859/7077589 and figure out
 how to remove the virtical space around the range input in IE*/
