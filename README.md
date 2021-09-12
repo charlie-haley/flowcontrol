@@ -17,11 +17,17 @@ Alternatively, head over to [discussions](https://github.com/charlie-haley/flowc
 
 ## ❓ FAQ
 
-- Q
-A
+- **What is this?**<br/>
+A fan controller with open-source hardware, software and a CLI.
 
-- Q
-A
+- **Who's it for?**<br/>
+It's primarily aimed at desktop computer users, but it can fit many use cases.
+
+- **How can I use flowcontrol?**<br/>
+At the moment, you will need the ability to solder so you can build the hardware, if it proves popular I may release some pre-built controllers. [You can find the documentation on building the controller here.](https://flowctl.app/getting-started/requirements/)
+
+- **Why would I use this over X?**<br/>
+This started out as a project for me to use personally, I was tired of expensive fan controllers with proprietary connectors and no Linux support.
 
 ## Special Thanks
 
