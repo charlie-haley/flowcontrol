@@ -2,7 +2,14 @@
 on:
   pull_request:
     types: [assigned, opened, synchronize, reopened]
-
+    paths-ignore:
+      - 'docs/**'
+      - 'firmware/**'
+      - 'pcb/**'
+      - 'README.md'
+      - 'CONTRIBUTING.md'
+      - 'LICENSE'
+  
 name: Build
 
 jobs:
