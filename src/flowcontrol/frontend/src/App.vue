@@ -18,6 +18,21 @@
             <router-view :key="$route.fullPath" />
         </keep-alive>
     </div>
+
+    <!-- Global Theme Styles -->
+    <v-style v-if="$selected_theme == 'theme-default'">
+        html body{
+            background-color: #fffbf5;
+            color:rgb(146, 92, 78);
+        }
+    </v-style>
+    <v-style v-if="$selected_theme == 'theme-dark'">
+        html body{
+            background-color: #fff;
+            color:rgb(146, 92, 78);
+        }
+    </v-style>
+    <!-- End -->
   </div>
 </template>
 
@@ -28,7 +43,7 @@ export default {
   name: "app"
 };
 </script>
-
+      
 <style scoped>
 .fan-page{
   width:100%;

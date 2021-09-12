@@ -7,7 +7,16 @@
     </div>
     <div class="settings__item">
         <div class="settings__item__info">
-          <span class="settings__item__title">Auto fan curve</span>
+            <span class="settings__item__title">Dark Mode</span>
+            <span class="settings__item__tag">Enable dark mode. {{$selected_theme}}</span>
+        </div>
+        <div class="settings__item__controls">
+          <ToggleSwitch class="settings__item__controls_switch" v-model="$selected_theme" trueValue="theme-dark" falseValue="theme-default"/>
+        </div>
+    </div>
+    <div class="settings__item">
+        <div class="settings__item__info">
+          <span class="settings__item__title">Auto fan curve {{$selected_theme}}</span>
           <span class="settings__item__tag">Configure the fan curve for when a fan is in auto mode.</span>
         </div>
         <div class="settings__item__controls">
@@ -60,7 +69,6 @@ export default {
 </script>
 
 <style scoped>
-
 .settings__item__info{
     display: grid;
     grid-template-columns: 1fr;
@@ -148,5 +156,6 @@ export default {
 .logo{
   fill: rgb(146, 92, 78);
   width: 300px;
+  height: 100px;
 }
 </style>

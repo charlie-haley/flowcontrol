@@ -1,6 +1,6 @@
 <template>
   <label class="switch">
-    <input type="checkbox">
+    <input type="checkbox" :checked="checked" @change="change"/>
     <span class="slider round"></span>
   </label>
 </template>
@@ -8,6 +8,24 @@
 <script>
 export default {
   name: "ToggleSwitch",
+  props: ['value', 'trueValue', 'falseValue'],
+  data: function() {
+        return {
+            checked: this.value === this.trueValue
+        };
+    },
+  methods: {
+        change: function() {
+            this.checked = !this.checked;
+            if(this.checked){
+              this.$emit('input', this.trueValue);
+            }
+            else{
+              this.$emit('input', this.falseValue);
+            }
+
+        }
+    }
 };
 </script>
 
@@ -32,7 +50,7 @@ export default {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #cfbc9e;;
+  background-color: #cfbc9e;
   -webkit-transition: .4s;
   transition: .4s;
   border-radius: 34px;

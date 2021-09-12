@@ -10,6 +10,16 @@ Vue.config.devtools = true;
 
 import * as Wails from '@wailsapp/runtime';
 
+//Set default theme
+Vue.prototype.$selected_theme = "theme-default"
+
+//Create a v-style component to allowe rendering style in templates
+Vue.component('v-style', {
+	render: function (createElement) {
+		return createElement('style', this.$slots.default)
+	}
+});
+
 Wails.Init(() => {
 	new Vue({
 		render: (h) => h(App),
