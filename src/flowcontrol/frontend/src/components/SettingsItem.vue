@@ -5,19 +5,27 @@
           <span class="settings__item__tag">{{tag}}</span>
       </div>
       <div class="settings__item__controls">
-        <slot name="control"></slot>
+        <ToggleSwitch v-if="mode == 'toggle'" @input="handleInput" class="settings__item__controls_switch" v-model="toggle" :trueValue="trueValue" :falseValue="falseValue"/>
+        <div v-if="mode == 'expand'">
+          <span v-if="!expanded" slot="control" v-on:click="expanded = true" class="material-icons settings__item__controls_expand">expand_more</span>
+          <span v-if="expanded" slot="control" v-on:click="expanded = false" class="material-icons settings__item__controls_expand">expand_less</span>
+        </div>
+        
+      </div>
+      <div v-show="expanded" class="settings_expanded">
+        <slot/>
       </div>
   </div>
 </template>
 
 <script>
+import ToggleSwitch from "../components/ToggleSwitch.vue";
+
 export default {
   name: "SettingsItem",
-  props: ['title', 'tag'],
-  data: function() {
-        return {
-            checked: this.value === this.trueValue
-        };
+  props: ['value', 'title', 'tag', 'mode', 'trueValue', 'falseValue'],
+  components: {
+    ToggleSwitch,
   },
   computed: {
     selected_theme: {
@@ -25,22 +33,29 @@ export default {
         set(value) { this.$store.commit('updateTheme', value); }
     },
   },
-  methods: {
-        change: function() {
-            this.checked = !this.checked;
-            if(this.checked){
-              this.$emit('input', this.trueValue ?? 1);
-            }
-            else{
-              this.$emit('input', this.falseValue ?? 0);
-            }
-
-        }
+  data () {
+    return {
+      toggle: this.value,
+      expanded: false
     }
+  },
+  methods: {
+    handleInput () {
+      this.$emit('input', this.toggle)
+    },
+    expand () {
+      this.$emit('input', this.toggle)
+    }
+  }
 };
 </script>
 
 <style scoped>
+.settings_expanded{
+  margin:1em 3em 3em 3em;
+  width:100%;
+}
+
 .settings__item__info{
     display: grid;
     grid-template-columns: 1fr;

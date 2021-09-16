@@ -4,19 +4,24 @@
         <Logo class="logo"/>
         <span class="settings-appinfo-version">{{ version }}</span><br/>
     </div>
+    <SettingsItem mode="toggle" v-model="selected_theme" title="Dark Mode" tag="Enable dark mode." trueValue="theme-dark" falseValue="theme-default"/>
+ 
+    <SettingsItem mode="expand" title="Auto fan curve" tag="Configure the fan curve for when a fan is in auto mode.">
+      <input type="radio" v-model="color" value="0">Sensor 1
+      <input type="radio" v-model="color" value="1">Sensor 2
+      <canvas id="chart"></canvas>
+    </SettingsItem>
 
-    <SettingsItem title="Dark Mode" tag="Enable dark mode.">
-      <ToggleSwitch slot="control" class="settings__item__controls_switch" v-model="selected_theme" trueValue="theme-dark" falseValue="theme-default"/>
+    <SettingsItem  mode="expand" title="Home" tag="Select what data to show on the home page.">
     </SettingsItem>
-    <SettingsItem title="Auto fan curve" tag="Configure the fan curve for when a fan is in auto mode.">
-      <span slot="control" class="material-icons settings__item__controls_expand">expand_more</span>
+
+    <SettingsItem  mode="expand" title="Sensors" tag="Assign names to the conncted sensors.">
     </SettingsItem>
-    <SettingsItem title="Sensors" tag="Select what sensor data to show on the home page.">
-      <span slot="control" class="material-icons settings__item__controls_expand">expand_more</span>
-    </SettingsItem>
+
     <SettingsItem title="RGB Control" tag="This feature is still experimental and only works with 8 LED WS2812b strips.">
       <ToggleSwitch slot="control" class="settings__item__controls_switch" v-model="rgb_enabled" />
     </SettingsItem>
+
     <SettingsItem title="Enable Animations" tag="Enable animations application wide.">
       <ToggleSwitch slot="control" class="settings__item__controls_switch" v-model="animations_enabled" />
     </SettingsItem>
@@ -35,6 +40,11 @@
 </template>
 
 <script>
+import Chart from 'chart.js'
+// eslint-disable-next-line no-unused-vars
+import chartOptions from '../assets/js/chartData.js'
+import 'chartjs-plugin-dragdata'
+
 import Logo from "../components/Logo.vue";
 import ToggleSwitch from "../components/ToggleSwitch.vue";
 import SettingsItem from "../components/SettingsItem.vue";
@@ -49,6 +59,7 @@ export default {
   data() {
     return {
       version: " ",
+      color: 0
     };
   },
   computed: {
@@ -66,10 +77,23 @@ export default {
     }
   },
   mounted: function() {
+      this.createChart('chart', chartOptions)
       var self = this;
       window.backend.version().then(result => {
         self.version = result;
       });
+  },
+  methods: {
+    createChart(chartId, chartData) {
+      const ctx = document.getElementById(chartId).getContext('2d');
+      chartData.data.labels = ["30c", "40c", "50c", "60c", "70c", "80c"];
+      chartData.data.datasets[0].data = [20, 20, 25, 35, 75, 100];
+      new Chart(ctx, {
+        type: chartData.type,
+        data: chartData.data,
+        options: chartData.options,
+      })
+    }
   }
 };
 </script>
