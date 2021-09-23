@@ -6,7 +6,7 @@ export default {
           label: '',
           data: [],
           fill: true,
-          tension: 0.3,
+          tension: 0,
           borderWidth: 1,
           pointHitRadius: 25
         }
@@ -20,12 +20,21 @@ export default {
             displayColors: false,
             enabled: false,
             callbacks: {
+                title: function() {},
                 label: function(tooltipItem) {
                        return tooltipItem.yLabel;
                 }
              }
         },
       scales: {
+        xAxes: [{
+          ticks: {
+              display: true,
+              min: 15,
+              max: 60,
+              stepSize: 5
+          }
+      }],
         yAxes: [{
             ticks: {
                 display: false,
@@ -63,6 +72,20 @@ export default {
           else e.target.style.cursor = 'default'
         }
       
+      },
+      annotation: {
+        annotations: [{
+          type: 'line',
+          mode: 'vertical',
+          scaleID: 'y-axis-0',
+          borderColor: '#D32F2F',
+          borderWidth: 2,
+          label: {
+            enabled: true,
+            content: 'Current: 50c',
+            backgroundColor: '#D32F2F'
+          }
+        }]
       },
       plugins: {
         dragData: {

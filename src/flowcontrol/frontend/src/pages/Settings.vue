@@ -44,6 +44,7 @@ import Chart from 'chart.js'
 // eslint-disable-next-line no-unused-vars
 import chartOptions from '../assets/js/chartData.js'
 import 'chartjs-plugin-dragdata'
+import 'chartjs-plugin-annotation'
 
 import Logo from "../components/Logo.vue";
 import ToggleSwitch from "../components/ToggleSwitch.vue";
@@ -86,8 +87,11 @@ export default {
   methods: {
     createChart(chartId, chartData) {
       const ctx = document.getElementById(chartId).getContext('2d');
-      chartData.data.labels = ["30c", "40c", "50c", "60c", "70c", "80c"];
+      chartData.data.labels = ["15c", "25c", "35c", "45c", "55c", "65c"];
       chartData.data.datasets[0].data = [20, 20, 25, 35, 75, 100];
+
+      //Current temp
+      chartData.options.annotation.annotations[0].value=50
       new Chart(ctx, {
         type: chartData.type,
         data: chartData.data,
