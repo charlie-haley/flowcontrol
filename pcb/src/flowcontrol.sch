@@ -14,18 +14,18 @@ Comment3 ""
 Comment4 ""
 $EndDescr
 $Comp
-L flowcontrol-v0.1-rescue:PICO_RP2040-Pico_rp2040 U1
+L flowcontrol-rescue:PICO_RP2040-Pico_rp2040 U1
 U 1 1 604A5D56
-P 5050 4400
-F 0 "U1" H 5025 5765 50  0000 C CNN
-F 1 "PICO_RP2040" H 5025 5674 50  0000 C CNN
-F 2 "Pico:RPi_Pico_SMD_TH" H 4950 5850 50  0001 C CNN
-F 3 "" H 4950 5850 50  0001 C CNN
-	1    5050 4400
+P 4200 4750
+F 0 "U1" H 4175 6115 50  0000 C CNN
+F 1 "PICO_RP2040" H 4175 6024 50  0000 C CNN
+F 2 "Pico:RPi_Pico_SMD_TH" H 4100 6200 50  0001 C CNN
+F 3 "" H 4100 6200 50  0001 C CNN
+	1    4200 4750
 	1    0    0    -1  
 $EndComp
 $Comp
-L flowcontrol-v0.1-rescue:R_Small-Device R1
+L flowcontrol-rescue:R_Small-Device R1
 U 1 1 604B1754
 P 7100 4900
 F 0 "R1" H 7159 4946 50  0000 L CNN
@@ -36,18 +36,18 @@ F 3 "~" H 7100 4900 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L flowcontrol-v0.1-rescue:Conn_01x02_Female-Connector J3
+L flowcontrol-rescue:Conn_01x02_Female-Connector J3
 U 1 1 604C40D7
 P 7300 4700
 F 0 "J3" H 7328 4676 50  0000 L CNN
 F 1 "Temp Sensor (10k Thermistor)" H 7328 4585 50  0000 L CNN
-F 2 "Connector_JST:JST_XH_B2B-XH-A_1x02_P2.50mm_Vertical" H 7300 4700 50  0001 C CNN
+F 2 "Connector_JST:JST_XH_S2B-XH-A-1_1x02_P2.50mm_Horizontal" H 7300 4700 50  0001 C CNN
 F 3 "~" H 7300 4700 50  0001 C CNN
 	1    7300 4700
 	1    0    0    -1  
 $EndComp
 $Comp
-L flowcontrol-v0.1-rescue:R_Small-Device R2
+L flowcontrol-rescue:R_Small-Device R2
 U 1 1 604C8F5D
 P 7100 4050
 F 0 "R2" H 7159 4096 50  0000 L CNN
@@ -58,12 +58,12 @@ F 3 "~" H 7100 4050 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L flowcontrol-v0.1-rescue:Conn_01x02_Female-Connector J4
+L flowcontrol-rescue:Conn_01x02_Female-Connector J4
 U 1 1 604C8F64
 P 7300 3850
 F 0 "J4" H 7328 3826 50  0000 L CNN
 F 1 "Temp Sensor (10k Thermistor)" H 7328 3735 50  0000 L CNN
-F 2 "Connector_JST:JST_XH_B2B-XH-A_1x02_P2.50mm_Vertical" H 7300 3850 50  0001 C CNN
+F 2 "Connector_JST:JST_XH_S2B-XH-A-1_1x02_P2.50mm_Horizontal" H 7300 3850 50  0001 C CNN
 F 3 "~" H 7300 3850 50  0001 C CNN
 	1    7300 3850
 	1    0    0    -1  
@@ -72,122 +72,100 @@ Text GLabel 7000 4800 0    50   Input ~ 0
 GP26
 Text GLabel 7000 3950 0    50   Input ~ 0
 GP27
-Text GLabel 5650 4250 2    50   Input ~ 0
+Text GLabel 4800 4600 2    50   Input ~ 0
 GP27
-Text GLabel 5650 4350 2    50   Input ~ 0
+Text GLabel 4800 4700 2    50   Input ~ 0
 GP26
 $Comp
-L flowcontrol-v0.1-rescue:Conn_01x04_Male-Connector J1
+L flowcontrol-rescue:Conn_01x04_Male-Connector J1
 U 1 1 604CC3B7
-P 2550 3950
-F 0 "J1" H 2658 4231 50  0000 C CNN
-F 1 "Fan 1" H 2658 4140 50  0000 C CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x04_P2.54mm_Horizontal" H 2550 3950 50  0001 C CNN
-F 3 "~" H 2550 3950 50  0001 C CNN
-	1    2550 3950
+P 1000 4250
+F 0 "J1" H 1108 4531 50  0000 C CNN
+F 1 "Fan 3" H 1108 4440 50  0000 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x04_P2.54mm_Horizontal" H 1000 4250 50  0001 C CNN
+F 3 "~" H 1000 4250 50  0001 C CNN
+	1    1000 4250
 	1    0    0    -1  
 $EndComp
 $Comp
-L flowcontrol-v0.1-rescue:Conn_01x04_Male-Connector J2
+L flowcontrol-rescue:Conn_01x04_Male-Connector J2
 U 1 1 604CDDAF
-P 2550 4700
-F 0 "J2" H 2658 4981 50  0000 C CNN
-F 1 "Fan 2" H 2658 4890 50  0000 C CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x04_P2.54mm_Horizontal" H 2550 4700 50  0001 C CNN
-F 3 "~" H 2550 4700 50  0001 C CNN
-	1    2550 4700
+P 1000 5000
+F 0 "J2" H 1108 5281 50  0000 C CNN
+F 1 "Fan 4" H 1108 5190 50  0000 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x04_P2.54mm_Horizontal" H 1000 5000 50  0001 C CNN
+F 3 "~" H 1000 5000 50  0001 C CNN
+	1    1000 5000
 	1    0    0    -1  
 $EndComp
-Text GLabel 2750 4150 2    50   Input ~ 0
+Text GLabel 1200 4450 2    50   Input ~ 0
 GND
-Text GLabel 2750 4900 2    50   Input ~ 0
+Text GLabel 1200 5200 2    50   Input ~ 0
 GND
-Text GLabel 2750 3850 2    50   Input ~ 0
+Text GLabel 1200 4150 2    50   Input ~ 0
 GP6
-Text GLabel 2750 4600 2    50   Input ~ 0
+Text GLabel 1200 4900 2    50   Input ~ 0
 GP7
-Text GLabel 4400 4250 0    50   Input ~ 0
+Text GLabel 3550 4600 0    50   Input ~ 0
 GP6
-Text GLabel 4400 4350 0    50   Input ~ 0
+Text GLabel 3550 4700 0    50   Input ~ 0
 GP7
-Text GLabel 4400 3450 0    50   Input ~ 0
+Text GLabel 3550 3800 0    50   Input ~ 0
 GP0
-Text GLabel 4400 3550 0    50   Input ~ 0
+Text GLabel 3550 3900 0    50   Input ~ 0
 GP1
-$Comp
-L flowcontrol-v0.1-rescue:Conn_01x04_Female-Connector J6
-U 1 1 604C8CFB
-P 4700 6050
-F 0 "J6" H 4728 6026 50  0000 L CNN
-F 1 "Molex 4 Pin" H 4728 5935 50  0000 L CNN
-F 2 "Connector_TE-Connectivity:TE_MATE-N-LOK_350211-1_1x04_P5.08mm_Vertical" H 4700 6050 50  0001 C CNN
-F 3 "~" H 4700 6050 50  0001 C CNN
-	1    4700 6050
-	1    0    0    -1  
-$EndComp
 Wire Wire Line
 	7000 3950 7100 3950
 Connection ~ 7100 3950
 Wire Wire Line
 	7000 4800 7100 4800
 Connection ~ 7100 4800
-$Comp
-L flowcontrol-v0.1-rescue:Conn_01x04_Male-Connector J7
-U 1 1 604E42AE
-P 3150 6050
-F 0 "J7" H 3258 6331 50  0000 C CNN
-F 1 "4 Pin DRGB LED" H 3258 6240 50  0000 C CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x04_P2.54mm_Vertical" H 3150 6050 50  0001 C CNN
-F 3 "~" H 3150 6050 50  0001 C CNN
-	1    3150 6050
-	1    0    0    -1  
-$EndComp
-Text GLabel 3350 6150 2    50   Input ~ 0
+Text GLabel 3400 6750 2    50   Input ~ 0
 DIN
-Text GLabel 5650 4550 2    50   Input ~ 0
+Text GLabel 4800 4900 2    50   Input ~ 0
 DIN
 $Comp
-L flowcontrol-v0.1-rescue:R-Device R3
+L flowcontrol-rescue:R-Device R3
 U 1 1 604F5C88
-P 3100 3800
-F 0 "R3" H 3170 3846 50  0000 L CNN
-F 1 "10k Ω" H 3170 3755 50  0000 L CNN
-F 2 "Resistor_SMD:R_0603_1608Metric" V 3030 3800 50  0001 C CNN
-F 3 "~" H 3100 3800 50  0001 C CNN
-	1    3100 3800
+P 1550 4100
+F 0 "R3" H 1620 4146 50  0000 L CNN
+F 1 "10k Ω" H 1620 4055 50  0000 L CNN
+F 2 "Resistor_SMD:R_0603_1608Metric" V 1480 4100 50  0001 C CNN
+F 3 "~" H 1550 4100 50  0001 C CNN
+	1    1550 4100
 	1    0    0    -1  
 $EndComp
 $Comp
-L flowcontrol-v0.1-rescue:R-Device R4
+L flowcontrol-rescue:R-Device R4
 U 1 1 604F6B2F
-P 3100 4550
-F 0 "R4" H 3170 4596 50  0000 L CNN
-F 1 "10k Ω" H 3170 4505 50  0000 L CNN
-F 2 "Resistor_SMD:R_0603_1608Metric" V 3030 4550 50  0001 C CNN
-F 3 "~" H 3100 4550 50  0001 C CNN
-	1    3100 4550
+P 1550 4850
+F 0 "R4" H 1620 4896 50  0000 L CNN
+F 1 "10k Ω" H 1620 4805 50  0000 L CNN
+F 2 "Resistor_SMD:R_0603_1608Metric" V 1480 4850 50  0001 C CNN
+F 3 "~" H 1550 4850 50  0001 C CNN
+	1    1550 4850
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	2750 3950 3100 3950
+	1200 4250 1550 4250
 Wire Wire Line
-	2750 4700 3100 4700
-Text GLabel 3400 3950 2    50   Input ~ 0
-GP10
-Text GLabel 3400 4700 2    50   Input ~ 0
-GP11
-Connection ~ 3100 4700
+	1200 5000 1550 5000
+Text GLabel 1850 4250 2    50   Input ~ 0
+GP23
+Text GLabel 1850 5000 2    50   Input ~ 0
+GP24
+Connection ~ 1550 5000
 Wire Wire Line
-	3100 4700 3400 4700
+	1550 5000 1850 5000
 Wire Wire Line
-	3400 3950 3100 3950
-Connection ~ 3100 3950
-Text GLabel 4400 4750 0    50   Input ~ 0
-GP10
-Text GLabel 4400 4850 0    50   Input ~ 0
-GP11
+	1850 4250 1550 4250
+Connection ~ 1550 4250
+Text GLabel 4800 5700 2    50   Input ~ 0
+GP26
+Text GLabel 4800 5600 2    50   Input ~ 0
+GP25
 $Comp
-L flowcontrol-v0.1-rescue:CH340G-CH340G_D-SUN-V3.0-rescue U2
+L flowcontrol-rescue:CH340G-CH340G_D-SUN-V3.0-rescue U2
 U 1 1 60C66611
 P 5800 1800
 F 0 "U2" H 5800 2360 60  0000 C CNN
@@ -198,7 +176,7 @@ F 3 "" H 5800 1800 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L flowcontrol-v0.1-rescue:diode-CH340G_D-SUN-V3.0-rescue D1
+L flowcontrol-rescue:diode-CH340G_D-SUN-V3.0-rescue D1
 U 1 1 60C66617
 P 7600 1400
 F 0 "D1" V 7700 1400 60  0000 L CNN
@@ -209,7 +187,7 @@ F 3 "" H 7600 1400 60  0000 C CNN
 	0    -1   -1   0   
 $EndComp
 $Comp
-L flowcontrol-v0.1-rescue:C-CH340G_D-SUN-V3.0-rescue C2
+L flowcontrol-rescue:C-CH340G_D-SUN-V3.0-rescue C2
 U 1 1 60C6661D
 P 3600 2100
 F 0 "C2" H 3620 2200 60  0000 L CNN
@@ -220,7 +198,7 @@ F 3 "" H 3600 2100 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L flowcontrol-v0.1-rescue:R-CH340G_D-SUN-V3.0-rescue R6
+L flowcontrol-rescue:R-CH340G_D-SUN-V3.0-rescue R6
 U 1 1 60C66629
 P 6700 2400
 F 0 "R6" H 6700 2480 60  0000 C CNN
@@ -231,7 +209,7 @@ F 3 "" H 6700 2400 60  0000 C CNN
 	0    1    1    0   
 $EndComp
 $Comp
-L flowcontrol-v0.1-rescue:diode_LED-CH340G_D-SUN-V3.0-rescue D5
+L flowcontrol-rescue:diode_LED-CH340G_D-SUN-V3.0-rescue D5
 U 1 1 60C6662F
 P 6700 2000
 F 0 "D5" H 6775 2060 60  0000 L CNN
@@ -242,7 +220,7 @@ F 3 "" H 6700 2000 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L flowcontrol-v0.1-rescue:C-CH340G_D-SUN-V3.0-rescue C1
+L flowcontrol-rescue:C-CH340G_D-SUN-V3.0-rescue C1
 U 1 1 60C66635
 P 3200 2100
 F 0 "C1" H 3220 2200 60  0000 L CNN
@@ -253,7 +231,7 @@ F 3 "" H 3200 2100 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L flowcontrol-v0.1-rescue:GND-CH340G_D-SUN-V3.0-rescue #PWR0101
+L flowcontrol-rescue:GND-CH340G_D-SUN-V3.0-rescue #PWR0101
 U 1 1 60C66641
 P 2900 2300
 F 0 "#PWR0101" H 2900 2050 50  0001 C CNN
@@ -264,7 +242,7 @@ F 3 "" H 2900 2300 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L flowcontrol-v0.1-rescue:GND-CH340G_D-SUN-V3.0-rescue #PWR0102
+L flowcontrol-rescue:GND-CH340G_D-SUN-V3.0-rescue #PWR0102
 U 1 1 60C66647
 P 3200 2300
 F 0 "#PWR0102" H 3200 2050 50  0001 C CNN
@@ -275,7 +253,7 @@ F 3 "" H 3200 2300 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L flowcontrol-v0.1-rescue:GND-CH340G_D-SUN-V3.0-rescue #PWR0103
+L flowcontrol-rescue:GND-CH340G_D-SUN-V3.0-rescue #PWR0103
 U 1 1 60C6664D
 P 3600 2300
 F 0 "#PWR0103" H 3600 2050 50  0001 C CNN
@@ -286,7 +264,7 @@ F 3 "" H 3600 2300 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L flowcontrol-v0.1-rescue:C-CH340G_D-SUN-V3.0-rescue C4
+L flowcontrol-rescue:C-CH340G_D-SUN-V3.0-rescue C4
 U 1 1 60C66653
 P 4400 2500
 F 0 "C4" H 4420 2600 60  0000 L CNN
@@ -297,7 +275,7 @@ F 3 "" H 4400 2500 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L flowcontrol-v0.1-rescue:C-CH340G_D-SUN-V3.0-rescue C5
+L flowcontrol-rescue:C-CH340G_D-SUN-V3.0-rescue C5
 U 1 1 60C66659
 P 5000 2500
 F 0 "C5" H 5020 2600 60  0000 L CNN
@@ -308,7 +286,7 @@ F 3 "" H 5000 2500 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L flowcontrol-v0.1-rescue:GND-CH340G_D-SUN-V3.0-rescue #PWR0104
+L flowcontrol-rescue:GND-CH340G_D-SUN-V3.0-rescue #PWR0104
 U 1 1 60C6665F
 P 4400 2700
 F 0 "#PWR0104" H 4400 2450 50  0001 C CNN
@@ -319,7 +297,7 @@ F 3 "" H 4400 2700 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L flowcontrol-v0.1-rescue:GND-CH340G_D-SUN-V3.0-rescue #PWR0105
+L flowcontrol-rescue:GND-CH340G_D-SUN-V3.0-rescue #PWR0105
 U 1 1 60C66665
 P 5000 2700
 F 0 "#PWR0105" H 5000 2450 50  0001 C CNN
@@ -330,7 +308,7 @@ F 3 "" H 5000 2700 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L flowcontrol-v0.1-rescue:diode-CH340G_D-SUN-V3.0-rescue D2
+L flowcontrol-rescue:diode-CH340G_D-SUN-V3.0-rescue D2
 U 1 1 60C6666B
 P 8000 1400
 F 0 "D2" V 8100 1400 60  0000 L CNN
@@ -341,7 +319,7 @@ F 3 "" H 8000 1400 60  0000 C CNN
 	0    -1   -1   0   
 $EndComp
 $Comp
-L flowcontrol-v0.1-rescue:+5V-CH340G_D-SUN-V3.0-rescue #PWR0106
+L flowcontrol-rescue:+5V-CH340G_D-SUN-V3.0-rescue #PWR0106
 U 1 1 60C66671
 P 3600 1600
 F 0 "#PWR0106" H 3600 1450 50  0001 C CNN
@@ -352,7 +330,7 @@ F 3 "" H 3600 1600 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L flowcontrol-v0.1-rescue:+5V-CH340G_D-SUN-V3.0-rescue #PWR0107
+L flowcontrol-rescue:+5V-CH340G_D-SUN-V3.0-rescue #PWR0107
 U 1 1 60C66677
 P 7200 1400
 F 0 "#PWR0107" H 7200 1250 50  0001 C CNN
@@ -363,7 +341,7 @@ F 3 "" H 7200 1400 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L flowcontrol-v0.1-rescue:R-CH340G_D-SUN-V3.0-rescue R7
+L flowcontrol-rescue:R-CH340G_D-SUN-V3.0-rescue R7
 U 1 1 60C66689
 P 7600 1900
 F 0 "R7" H 7600 1980 60  0000 C CNN
@@ -374,7 +352,7 @@ F 3 "" H 7600 1900 60  0000 C CNN
 	0    1    1    0   
 $EndComp
 $Comp
-L flowcontrol-v0.1-rescue:diode_LED-CH340G_D-SUN-V3.0-rescue D3
+L flowcontrol-rescue:diode_LED-CH340G_D-SUN-V3.0-rescue D3
 U 1 1 60C6668F
 P 7600 2200
 F 0 "D3" H 7675 2260 60  0000 L CNN
@@ -385,7 +363,7 @@ F 3 "" H 7600 2200 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L flowcontrol-v0.1-rescue:R-CH340G_D-SUN-V3.0-rescue R8
+L flowcontrol-rescue:R-CH340G_D-SUN-V3.0-rescue R8
 U 1 1 60C66695
 P 8000 1900
 F 0 "R8" H 8000 1980 60  0000 C CNN
@@ -396,7 +374,7 @@ F 3 "" H 8000 1900 60  0000 C CNN
 	0    1    1    0   
 $EndComp
 $Comp
-L flowcontrol-v0.1-rescue:diode_LED-CH340G_D-SUN-V3.0-rescue D4
+L flowcontrol-rescue:diode_LED-CH340G_D-SUN-V3.0-rescue D4
 U 1 1 60C6669B
 P 8000 2200
 F 0 "D4" H 8075 2260 60  0000 L CNN
@@ -407,7 +385,7 @@ F 3 "" H 8000 2200 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L flowcontrol-v0.1-rescue:+3V3-CH340G_D-SUN-V3.0-rescue #PWR0108
+L flowcontrol-rescue:+3V3-CH340G_D-SUN-V3.0-rescue #PWR0108
 U 1 1 60C666A1
 P 4000 1600
 F 0 "#PWR0108" H 4000 1450 50  0001 C CNN
@@ -418,7 +396,7 @@ F 3 "" H 4000 1600 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L flowcontrol-v0.1-rescue:+3V3-CH340G_D-SUN-V3.0-rescue #PWR0109
+L flowcontrol-rescue:+3V3-CH340G_D-SUN-V3.0-rescue #PWR0109
 U 1 1 60C666A7
 P 9000 2200
 F 0 "#PWR0109" H 9000 2050 50  0001 C CNN
@@ -429,7 +407,7 @@ F 3 "" H 9000 2200 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L flowcontrol-v0.1-rescue:GND-CH340G_D-SUN-V3.0-rescue #PWR0110
+L flowcontrol-rescue:GND-CH340G_D-SUN-V3.0-rescue #PWR0110
 U 1 1 60C666AD
 P 6700 2700
 F 0 "#PWR0110" H 6700 2450 50  0001 C CNN
@@ -440,18 +418,18 @@ F 3 "" H 6700 2700 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L flowcontrol-v0.1-rescue:GND-CH340G_D-SUN-V3.0-rescue #PWR0111
+L flowcontrol-rescue:GND-CH340G_D-SUN-V3.0-rescue #PWR0111
 U 1 1 60C666B3
-P 6050 3750
-F 0 "#PWR0111" H 6050 3500 50  0001 C CNN
-F 1 "GND" H 6050 3600 50  0000 C CNN
-F 2 "" H 6050 3750 60  0000 C CNN
-F 3 "" H 6050 3750 60  0000 C CNN
-	1    6050 3750
+P 5200 4100
+F 0 "#PWR0111" H 5200 3850 50  0001 C CNN
+F 1 "GND" H 5200 3950 50  0000 C CNN
+F 2 "" H 5200 4100 60  0000 C CNN
+F 3 "" H 5200 4100 60  0000 C CNN
+	1    5200 4100
 	1    0    0    -1  
 $EndComp
 $Comp
-L flowcontrol-v0.1-rescue:R-CH340G_D-SUN-V3.0-rescue R5
+L flowcontrol-rescue:R-CH340G_D-SUN-V3.0-rescue R5
 U 1 1 60C666B9
 P 8500 2400
 F 0 "R5" H 8500 2480 60  0000 C CNN
@@ -469,7 +447,7 @@ NoConn ~ 6500 1900
 NoConn ~ 6500 2000
 NoConn ~ 6500 2100
 $Comp
-L flowcontrol-v0.1-rescue:C-CH340G_D-SUN-V3.0-rescue C3
+L flowcontrol-rescue:C-CH340G_D-SUN-V3.0-rescue C3
 U 1 1 60C666C6
 P 4000 2100
 F 0 "C3" H 4020 2200 60  0000 L CNN
@@ -480,7 +458,7 @@ F 3 "" H 4000 2100 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L flowcontrol-v0.1-rescue:GND-CH340G_D-SUN-V3.0-rescue #PWR0112
+L flowcontrol-rescue:GND-CH340G_D-SUN-V3.0-rescue #PWR0112
 U 1 1 60C666CC
 P 4000 2300
 F 0 "#PWR0112" H 4000 2050 50  0001 C CNN
@@ -491,7 +469,7 @@ F 3 "" H 4000 2300 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L flowcontrol-v0.1-rescue:GND-CH340G_D-SUN-V3.0-rescue #PWR0113
+L flowcontrol-rescue:GND-CH340G_D-SUN-V3.0-rescue #PWR0113
 U 1 1 60C666D2
 P 5000 1400
 F 0 "#PWR0113" H 5000 1150 50  0001 C CNN
@@ -510,7 +488,7 @@ TxD
 Text GLabel 4700 1600 0    50   Input ~ 0
 RxD
 $Comp
-L flowcontrol-v0.1-rescue:C-CH340G_D-SUN-V3.0-rescue C6
+L flowcontrol-rescue:C-CH340G_D-SUN-V3.0-rescue C6
 U 1 1 60C666DC
 P 7200 1800
 F 0 "C6" H 7220 1900 60  0000 L CNN
@@ -521,7 +499,7 @@ F 3 "" H 7200 1800 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L flowcontrol-v0.1-rescue:GND-CH340G_D-SUN-V3.0-rescue #PWR0114
+L flowcontrol-rescue:GND-CH340G_D-SUN-V3.0-rescue #PWR0114
 U 1 1 60C666E2
 P 7200 2000
 F 0 "#PWR0114" H 7200 1750 50  0001 C CNN
@@ -598,7 +576,7 @@ Wire Wire Line
 	8400 1400 8400 1600
 Connection ~ 8000 1600
 Wire Wire Line
-	6050 3650 6050 3750
+	5200 4000 5200 4100
 Wire Wire Line
 	6700 2700 6700 2600
 Wire Wire Line
@@ -649,39 +627,39 @@ Wire Wire Line
 Wire Wire Line
 	7200 1600 7600 1600
 Wire Wire Line
-	5650 3650 6050 3650
+	4800 4000 5200 4000
 Text GLabel 9000 2500 2    50   Input ~ 0
 GP0
 Text GLabel 9000 2400 2    50   Input ~ 0
 GP1
 $Comp
-L flowcontrol-v0.1-rescue:+5V-CH340G_D-SUN-V3.0-rescue #PWR0115
+L flowcontrol-rescue:+5V-CH340G_D-SUN-V3.0-rescue #PWR0115
 U 1 1 60D341CE
-P 5900 3550
-F 0 "#PWR0115" H 5900 3400 50  0001 C CNN
-F 1 "+5V" H 5900 3690 50  0000 C CNN
-F 2 "" H 5900 3550 60  0000 C CNN
-F 3 "" H 5900 3550 60  0000 C CNN
-	1    5900 3550
+P 5050 3900
+F 0 "#PWR0115" H 5050 3750 50  0001 C CNN
+F 1 "+5V" H 5050 4040 50  0000 C CNN
+F 2 "" H 5050 3900 60  0000 C CNN
+F 3 "" H 5050 3900 60  0000 C CNN
+	1    5050 3900
 	1    0    0    -1  
 $EndComp
 $Comp
-L flowcontrol-v0.1-rescue:+3V3-CH340G_D-SUN-V3.0-rescue #PWR0116
+L flowcontrol-rescue:+3V3-CH340G_D-SUN-V3.0-rescue #PWR0116
 U 1 1 60D37EDE
-P 5850 3850
-F 0 "#PWR0116" H 5850 3700 50  0001 C CNN
-F 1 "+3V3" H 5850 3990 50  0000 C CNN
-F 2 "" H 5850 3850 60  0000 C CNN
-F 3 "" H 5850 3850 60  0000 C CNN
-	1    5850 3850
+P 5000 4200
+F 0 "#PWR0116" H 5000 4050 50  0001 C CNN
+F 1 "+3V3" H 5000 4340 50  0000 C CNN
+F 2 "" H 5000 4200 60  0000 C CNN
+F 3 "" H 5000 4200 60  0000 C CNN
+	1    5000 4200
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	5650 3850 5850 3850
+	4800 4200 5000 4200
 Wire Wire Line
-	5650 3550 5900 3550
+	4800 3900 5050 3900
 $Comp
-L flowcontrol-v0.1-rescue:+3V3-CH340G_D-SUN-V3.0-rescue #PWR0117
+L flowcontrol-rescue:+3V3-CH340G_D-SUN-V3.0-rescue #PWR0117
 U 1 1 60D50FA8
 P 7100 3850
 F 0 "#PWR0117" H 7100 3700 50  0001 C CNN
@@ -692,7 +670,7 @@ F 3 "" H 7100 3850 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L flowcontrol-v0.1-rescue:+3V3-CH340G_D-SUN-V3.0-rescue #PWR0118
+L flowcontrol-rescue:+3V3-CH340G_D-SUN-V3.0-rescue #PWR0118
 U 1 1 60D7438E
 P 7100 4700
 F 0 "#PWR0118" H 7100 4550 50  0001 C CNN
@@ -703,7 +681,7 @@ F 3 "" H 7100 4700 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L flowcontrol-v0.1-rescue:GND-CH340G_D-SUN-V3.0-rescue #PWR0119
+L flowcontrol-rescue:GND-CH340G_D-SUN-V3.0-rescue #PWR0119
 U 1 1 60D7C646
 P 7100 4150
 F 0 "#PWR0119" H 7100 3900 50  0001 C CNN
@@ -714,7 +692,7 @@ F 3 "" H 7100 4150 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L flowcontrol-v0.1-rescue:GND-CH340G_D-SUN-V3.0-rescue #PWR0120
+L flowcontrol-rescue:GND-CH340G_D-SUN-V3.0-rescue #PWR0120
 U 1 1 60D7F0CD
 P 7100 5000
 F 0 "#PWR0120" H 7100 4750 50  0001 C CNN
@@ -725,73 +703,42 @@ F 3 "" H 7100 5000 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L flowcontrol-v0.1-rescue:GND-CH340G_D-SUN-V3.0-rescue #PWR0121
+L flowcontrol-rescue:GND-CH340G_D-SUN-V3.0-rescue #PWR0121
 U 1 1 60D84020
-P 4050 6050
-F 0 "#PWR0121" H 4050 5800 50  0001 C CNN
-F 1 "GND" H 4050 5900 50  0000 C CNN
-F 2 "" H 4050 6050 60  0000 C CNN
-F 3 "" H 4050 6050 60  0000 C CNN
-	1    4050 6050
-	1    0    0    -1  
+P 4950 6650
+F 0 "#PWR0121" H 4950 6400 50  0001 C CNN
+F 1 "GND" H 4950 6500 50  0000 C CNN
+F 2 "" H 4950 6650 60  0000 C CNN
+F 3 "" H 4950 6650 60  0000 C CNN
+	1    4950 6650
+	0    1    1    0   
 $EndComp
-Wire Wire Line
-	4500 6150 4500 6050
 $Comp
-L flowcontrol-v0.1-rescue:+5V-CH340G_D-SUN-V3.0-rescue #PWR0122
+L flowcontrol-rescue:+5V-CH340G_D-SUN-V3.0-rescue #PWR0122
 U 1 1 60D932E4
-P 4400 6250
-F 0 "#PWR0122" H 4400 6100 50  0001 C CNN
-F 1 "+5V" H 4400 6390 50  0000 C CNN
-F 2 "" H 4400 6250 60  0000 C CNN
-F 3 "" H 4400 6250 60  0000 C CNN
-	1    4400 6250
+P 4950 6550
+F 0 "#PWR0122" H 4950 6400 50  0001 C CNN
+F 1 "+5V" H 4950 6690 50  0000 C CNN
+F 2 "" H 4950 6550 60  0000 C CNN
+F 3 "" H 4950 6550 60  0000 C CNN
+	1    4950 6550
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	4050 6050 4500 6050
-Connection ~ 4500 6050
+	4750 6850 4850 6850
 Wire Wire Line
-	4400 6250 4500 6250
-$Comp
-L flowcontrol-v0.1-rescue:+5V-CH340G_D-SUN-V3.0-rescue #PWR0123
-U 1 1 60C2CF92
-P 3100 3650
-F 0 "#PWR0123" H 3100 3500 50  0001 C CNN
-F 1 "+5V" H 3100 3790 50  0000 C CNN
-F 2 "" H 3100 3650 60  0000 C CNN
-F 3 "" H 3100 3650 60  0000 C CNN
-	1    3100 3650
-	1    0    0    -1  
-$EndComp
+	1550 3950 1550 4050
 Wire Wire Line
-	3100 3650 3100 3750
+	1550 4700 1550 4800
 $Comp
-L flowcontrol-v0.1-rescue:+5V-CH340G_D-SUN-V3.0-rescue #PWR0124
-U 1 1 60C2FB92
-P 3100 4400
-F 0 "#PWR0124" H 3100 4250 50  0001 C CNN
-F 1 "+5V" H 3100 4540 50  0000 C CNN
-F 2 "" H 3100 4400 60  0000 C CNN
-F 3 "" H 3100 4400 60  0000 C CNN
-	1    3100 4400
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	3100 4400 3100 4500
-Connection ~ 3100 4400
-Connection ~ 3100 3650
-Text GLabel 5900 6100 0    50   Input ~ 0
-RUN
-$Comp
-L flowcontrol-v0.1-rescue:GND-CH340G_D-SUN-V3.0-rescue #PWR0125
+L flowcontrol-rescue:GND-CH340G_D-SUN-V3.0-rescue #PWR0125
 U 1 1 60C87607
-P 6300 6100
-F 0 "#PWR0125" H 6300 5850 50  0001 C CNN
-F 1 "GND" H 6300 5950 50  0000 C CNN
-F 2 "" H 6300 6100 60  0000 C CNN
-F 3 "" H 6300 6100 60  0000 C CNN
-	1    6300 6100
+P 5750 4800
+F 0 "#PWR0125" H 5750 4550 50  0001 C CNN
+F 1 "GND" H 5750 4650 50  0000 C CNN
+F 2 "" H 5750 4800 60  0000 C CNN
+F 3 "" H 5750 4800 60  0000 C CNN
+	1    5750 4800
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
@@ -802,7 +749,7 @@ U 1 1 60CAACD7
 P 2500 1900
 F 0 "J5" H 2550 2317 50  0000 C CNN
 F 1 "Internal USB" H 2550 2226 50  0000 C CNN
-F 2 "Connector_PinSocket_2.54mm:PinSocket_2x05_P2.54mm_Vertical" H 2500 1900 50  0001 C CNN
+F 2 "Connector_PinSocket_2.54mm:PinSocket_2x05_P2.54mm_Horizontal" H 2500 1900 50  0001 C CNN
 F 3 "~" H 2500 1900 50  0001 C CNN
 	1    2500 1900
 	1    0    0    -1  
@@ -810,20 +757,18 @@ $EndComp
 Wire Wire Line
 	2900 2000 2900 2300
 $Comp
-L flowcontrol-v0.1-rescue:GND-CH340G_D-SUN-V3.0-rescue #PWR0126
+L flowcontrol-rescue:GND-CH340G_D-SUN-V3.0-rescue #PWR0126
 U 1 1 60D55E35
-P 3700 5950
-F 0 "#PWR0126" H 3700 5700 50  0001 C CNN
-F 1 "GND" H 3700 5800 50  0000 C CNN
-F 2 "" H 3700 5950 60  0000 C CNN
-F 3 "" H 3700 5950 60  0000 C CNN
-	1    3700 5950
+P 3750 6550
+F 0 "#PWR0126" H 3750 6300 50  0001 C CNN
+F 1 "GND" H 3750 6400 50  0000 C CNN
+F 2 "" H 3750 6550 60  0000 C CNN
+F 3 "" H 3750 6550 60  0000 C CNN
+	1    3750 6550
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	3350 5950 3700 5950
-Text GLabel 5650 4450 2    50   Input ~ 0
-RUN
+	3400 6550 3750 6550
 Wire Wire Line
 	5000 2300 5000 2400
 Wire Wire Line
@@ -845,66 +790,367 @@ Wire Wire Line
 Wire Wire Line
 	4850 2300 5000 2300
 $Comp
-L flowcontrol-v0.1-rescue:+5V-CH340G_D-SUN-V3.0-rescue #PWR0127
+L flowcontrol-rescue:+5V-CH340G_D-SUN-V3.0-rescue #PWR0127
 U 1 1 60D4DF4E
-P 3850 6050
-F 0 "#PWR0127" H 3850 5900 50  0001 C CNN
-F 1 "+5V" H 3850 6190 50  0000 C CNN
-F 2 "" H 3850 6050 60  0000 C CNN
-F 3 "" H 3850 6050 60  0000 C CNN
-	1    3850 6050
+P 3900 6650
+F 0 "#PWR0127" H 3900 6500 50  0001 C CNN
+F 1 "+5V" H 3900 6790 50  0000 C CNN
+F 2 "" H 3900 6650 60  0000 C CNN
+F 3 "" H 3900 6650 60  0000 C CNN
+	1    3900 6650
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	3350 6250 3850 6250
+	3400 6850 3900 6850
 Wire Wire Line
-	3850 6250 3850 6050
+	3900 6850 3900 6650
 $Comp
 L power:+12V #PWR0128
 U 1 1 60D5E24C
-P 3800 4050
-F 0 "#PWR0128" H 3800 3900 50  0001 C CNN
-F 1 "+12V" H 3815 4223 50  0000 C CNN
-F 2 "" H 3800 4050 50  0001 C CNN
-F 3 "" H 3800 4050 50  0001 C CNN
-	1    3800 4050
+P 2250 4350
+F 0 "#PWR0128" H 2250 4200 50  0001 C CNN
+F 1 "+12V" H 2265 4523 50  0000 C CNN
+F 2 "" H 2250 4350 50  0001 C CNN
+F 3 "" H 2250 4350 50  0001 C CNN
+	1    2250 4350
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	3800 4050 2750 4050
+	2250 4350 1200 4350
 $Comp
 L power:+12V #PWR0129
 U 1 1 60D731FF
-P 3800 4800
-F 0 "#PWR0129" H 3800 4650 50  0001 C CNN
-F 1 "+12V" H 3815 4973 50  0000 C CNN
-F 2 "" H 3800 4800 50  0001 C CNN
-F 3 "" H 3800 4800 50  0001 C CNN
-	1    3800 4800
+P 2250 5100
+F 0 "#PWR0129" H 2250 4950 50  0001 C CNN
+F 1 "+12V" H 2265 5273 50  0000 C CNN
+F 2 "" H 2250 5100 50  0001 C CNN
+F 3 "" H 2250 5100 50  0001 C CNN
+	1    2250 5100
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	3800 4800 2750 4800
+	2250 5100 1200 5100
 $Comp
 L power:+12V #PWR0130
 U 1 1 60D76DB0
-P 4500 5950
-F 0 "#PWR0130" H 4500 5800 50  0001 C CNN
-F 1 "+12V" H 4515 6123 50  0000 C CNN
-F 2 "" H 4500 5950 50  0001 C CNN
-F 3 "" H 4500 5950 50  0001 C CNN
-	1    4500 5950
-	1    0    0    -1  
+P 4950 6850
+F 0 "#PWR0130" H 4950 6700 50  0001 C CNN
+F 1 "+12V" H 4965 7023 50  0000 C CNN
+F 2 "" H 4950 6850 50  0001 C CNN
+F 3 "" H 4950 6850 50  0001 C CNN
+	1    4950 6850
+	0    -1   -1   0   
 $EndComp
 $Comp
 L Switch:SW_Push SW1
 U 1 1 60D92F9B
-P 6100 6100
-F 0 "SW1" H 6100 6385 50  0000 C CNN
-F 1 "K2-1102SP-C4SC-04" H 6100 6294 50  0000 C CNN
-F 2 "Button_Switch_SMD:SW_Push_1P1T_NO_6x6mm_H9.5mm" H 6100 6300 50  0001 C CNN
-F 3 "~" H 6100 6300 50  0001 C CNN
-	1    6100 6100
+P 5550 4800
+F 0 "SW1" H 5550 5085 50  0000 C CNN
+F 1 "K2-1102SP-C4SC-04" H 5550 4994 50  0000 C CNN
+F 2 "Button_Switch_SMD:SW_Push_1P1T_NO_6x6mm_H9.5mm" H 5550 5000 50  0001 C CNN
+F 3 "~" H 5550 5000 50  0001 C CNN
+	1    5550 4800
+	1    0    0    -1  
+$EndComp
+$Comp
+L flowcontrol-rescue:Conn_01x04_Male-Connector J8
+U 1 1 617A7B91
+P 1000 5800
+F 0 "J8" H 1108 6081 50  0000 C CNN
+F 1 "Fan 5" H 1108 5990 50  0000 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x04_P2.54mm_Horizontal" H 1000 5800 50  0001 C CNN
+F 3 "~" H 1000 5800 50  0001 C CNN
+	1    1000 5800
+	1    0    0    -1  
+$EndComp
+$Comp
+L flowcontrol-rescue:Conn_01x04_Male-Connector J9
+U 1 1 617A7B97
+P 1000 6550
+F 0 "J9" H 1108 6831 50  0000 C CNN
+F 1 "Fan 6" H 1108 6740 50  0000 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x04_P2.54mm_Horizontal" H 1000 6550 50  0001 C CNN
+F 3 "~" H 1000 6550 50  0001 C CNN
+	1    1000 6550
+	1    0    0    -1  
+$EndComp
+Text GLabel 1200 6000 2    50   Input ~ 0
+GND
+Text GLabel 1200 6750 2    50   Input ~ 0
+GND
+Text GLabel 1200 5700 2    50   Input ~ 0
+GP8
+Text GLabel 1200 6450 2    50   Input ~ 0
+GP9
+$Comp
+L flowcontrol-rescue:R-Device R11
+U 1 1 617A7BA1
+P 1550 5650
+F 0 "R11" H 1620 5696 50  0000 L CNN
+F 1 "10k Ω" H 1620 5605 50  0000 L CNN
+F 2 "Resistor_SMD:R_0603_1608Metric" V 1480 5650 50  0001 C CNN
+F 3 "~" H 1550 5650 50  0001 C CNN
+	1    1550 5650
+	1    0    0    -1  
+$EndComp
+$Comp
+L flowcontrol-rescue:R-Device R12
+U 1 1 617A7BA7
+P 1550 6400
+F 0 "R12" H 1620 6446 50  0000 L CNN
+F 1 "10k Ω" H 1620 6355 50  0000 L CNN
+F 2 "Resistor_SMD:R_0603_1608Metric" V 1480 6400 50  0001 C CNN
+F 3 "~" H 1550 6400 50  0001 C CNN
+	1    1550 6400
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	1200 5800 1550 5800
+Wire Wire Line
+	1200 6550 1550 6550
+Text GLabel 1850 5800 2    50   Input ~ 0
+GP25
+Text GLabel 1850 6550 2    50   Input ~ 0
+GP26
+Connection ~ 1550 6550
+Wire Wire Line
+	1550 6550 1850 6550
+Wire Wire Line
+	1850 5800 1550 5800
+Connection ~ 1550 5800
+Wire Wire Line
+	1550 5500 1550 5600
+Wire Wire Line
+	1550 6250 1550 6350
+$Comp
+L power:+12V #PWR0123
+U 1 1 617A7BC5
+P 2250 5900
+F 0 "#PWR0123" H 2250 5750 50  0001 C CNN
+F 1 "+12V" H 2265 6073 50  0000 C CNN
+F 2 "" H 2250 5900 50  0001 C CNN
+F 3 "" H 2250 5900 50  0001 C CNN
+	1    2250 5900
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2250 5900 1200 5900
+$Comp
+L power:+12V #PWR0124
+U 1 1 617A7BCC
+P 2250 6650
+F 0 "#PWR0124" H 2250 6500 50  0001 C CNN
+F 1 "+12V" H 2265 6823 50  0000 C CNN
+F 2 "" H 2250 6650 50  0001 C CNN
+F 3 "" H 2250 6650 50  0001 C CNN
+	1    2250 6650
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2250 6650 1200 6650
+$Comp
+L flowcontrol-rescue:Conn_01x04_Male-Connector J10
+U 1 1 617AEB09
+P 1000 2800
+F 0 "J10" H 1108 3081 50  0000 C CNN
+F 1 "Fan 1" H 1108 2990 50  0000 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x04_P2.54mm_Horizontal" H 1000 2800 50  0001 C CNN
+F 3 "~" H 1000 2800 50  0001 C CNN
+	1    1000 2800
+	1    0    0    -1  
+$EndComp
+$Comp
+L flowcontrol-rescue:Conn_01x04_Male-Connector J11
+U 1 1 617AEB0F
+P 1000 3550
+F 0 "J11" H 1108 3831 50  0000 C CNN
+F 1 "Fan 2" H 1108 3740 50  0000 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x04_P2.54mm_Horizontal" H 1000 3550 50  0001 C CNN
+F 3 "~" H 1000 3550 50  0001 C CNN
+	1    1000 3550
+	1    0    0    -1  
+$EndComp
+Text GLabel 1200 3000 2    50   Input ~ 0
+GND
+Text GLabel 1200 3750 2    50   Input ~ 0
+GND
+Text GLabel 1200 2700 2    50   Input ~ 0
+GP5
+Text GLabel 1200 3450 2    50   Input ~ 0
+GP4
+$Comp
+L flowcontrol-rescue:R-Device R9
+U 1 1 617AEB19
+P 1550 2650
+F 0 "R9" H 1620 2696 50  0000 L CNN
+F 1 "10k Ω" H 1620 2605 50  0000 L CNN
+F 2 "Resistor_SMD:R_0603_1608Metric" V 1480 2650 50  0001 C CNN
+F 3 "~" H 1550 2650 50  0001 C CNN
+	1    1550 2650
+	1    0    0    -1  
+$EndComp
+$Comp
+L flowcontrol-rescue:R-Device R10
+U 1 1 617AEB1F
+P 1550 3400
+F 0 "R10" H 1620 3446 50  0000 L CNN
+F 1 "10k Ω" H 1620 3355 50  0000 L CNN
+F 2 "Resistor_SMD:R_0603_1608Metric" V 1480 3400 50  0001 C CNN
+F 3 "~" H 1550 3400 50  0001 C CNN
+	1    1550 3400
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	1200 2800 1550 2800
+Wire Wire Line
+	1200 3550 1550 3550
+Text GLabel 1850 2800 2    50   Input ~ 0
+GP21
+Text GLabel 1850 3550 2    50   Input ~ 0
+GP22
+Connection ~ 1550 3550
+Wire Wire Line
+	1550 3550 1850 3550
+Wire Wire Line
+	1850 2800 1550 2800
+Connection ~ 1550 2800
+Wire Wire Line
+	1550 2500 1550 2600
+Wire Wire Line
+	1550 3250 1550 3350
+$Comp
+L power:+12V #PWR0131
+U 1 1 617AEB3D
+P 2250 2900
+F 0 "#PWR0131" H 2250 2750 50  0001 C CNN
+F 1 "+12V" H 2265 3073 50  0000 C CNN
+F 2 "" H 2250 2900 50  0001 C CNN
+F 3 "" H 2250 2900 50  0001 C CNN
+	1    2250 2900
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2250 2900 1200 2900
+$Comp
+L power:+12V #PWR0132
+U 1 1 617AEB44
+P 2250 3650
+F 0 "#PWR0132" H 2250 3500 50  0001 C CNN
+F 1 "+12V" H 2265 3823 50  0000 C CNN
+F 2 "" H 2250 3650 50  0001 C CNN
+F 3 "" H 2250 3650 50  0001 C CNN
+	1    2250 3650
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2250 3650 1200 3650
+Text GLabel 3550 4800 0    50   Input ~ 0
+GP8
+Text GLabel 3550 4900 0    50   Input ~ 0
+GP9
+Text GLabel 3550 4400 0    50   Input ~ 0
+GP5
+Text GLabel 3550 4300 0    50   Input ~ 0
+GP4
+Text GLabel 4800 5400 2    50   Input ~ 0
+GP24
+Wire Wire Line
+	4800 4800 5350 4800
+$Comp
+L flowcontrol-rescue:+3V3-CH340G_D-SUN-V3.0-rescue #PWR0133
+U 1 1 6184A33E
+P 1550 6250
+F 0 "#PWR0133" H 1550 6100 50  0001 C CNN
+F 1 "+3V3" H 1550 6390 50  0000 C CNN
+F 2 "" H 1550 6250 60  0000 C CNN
+F 3 "" H 1550 6250 60  0000 C CNN
+	1    1550 6250
+	1    0    0    -1  
+$EndComp
+$Comp
+L flowcontrol-rescue:+3V3-CH340G_D-SUN-V3.0-rescue #PWR0134
+U 1 1 6184D192
+P 1550 5500
+F 0 "#PWR0134" H 1550 5350 50  0001 C CNN
+F 1 "+3V3" H 1550 5640 50  0000 C CNN
+F 2 "" H 1550 5500 60  0000 C CNN
+F 3 "" H 1550 5500 60  0000 C CNN
+	1    1550 5500
+	1    0    0    -1  
+$EndComp
+$Comp
+L flowcontrol-rescue:+3V3-CH340G_D-SUN-V3.0-rescue #PWR0135
+U 1 1 6184FFEB
+P 1550 4700
+F 0 "#PWR0135" H 1550 4550 50  0001 C CNN
+F 1 "+3V3" H 1550 4840 50  0000 C CNN
+F 2 "" H 1550 4700 60  0000 C CNN
+F 3 "" H 1550 4700 60  0000 C CNN
+	1    1550 4700
+	1    0    0    -1  
+$EndComp
+$Comp
+L flowcontrol-rescue:+3V3-CH340G_D-SUN-V3.0-rescue #PWR0136
+U 1 1 61852F26
+P 1550 3950
+F 0 "#PWR0136" H 1550 3800 50  0001 C CNN
+F 1 "+3V3" H 1550 4090 50  0000 C CNN
+F 2 "" H 1550 3950 60  0000 C CNN
+F 3 "" H 1550 3950 60  0000 C CNN
+	1    1550 3950
+	1    0    0    -1  
+$EndComp
+$Comp
+L flowcontrol-rescue:+3V3-CH340G_D-SUN-V3.0-rescue #PWR0137
+U 1 1 61855EFA
+P 1550 3250
+F 0 "#PWR0137" H 1550 3100 50  0001 C CNN
+F 1 "+3V3" H 1550 3390 50  0000 C CNN
+F 2 "" H 1550 3250 60  0000 C CNN
+F 3 "" H 1550 3250 60  0000 C CNN
+	1    1550 3250
+	1    0    0    -1  
+$EndComp
+$Comp
+L flowcontrol-rescue:+3V3-CH340G_D-SUN-V3.0-rescue #PWR0138
+U 1 1 61859099
+P 1550 2500
+F 0 "#PWR0138" H 1550 2350 50  0001 C CNN
+F 1 "+3V3" H 1550 2640 50  0000 C CNN
+F 2 "" H 1550 2500 60  0000 C CNN
+F 3 "" H 1550 2500 60  0000 C CNN
+	1    1550 2500
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	4950 6650 4950 6750
+Text GLabel 4800 5300 2    50   Input ~ 0
+GP23
+Text GLabel 4800 5200 2    50   Input ~ 0
+GP22
+Text GLabel 4800 5100 2    50   Input ~ 0
+GP21
+Connection ~ 4950 6650
+$Comp
+L SamacSys_Parts:641737-1 J6
+U 1 1 604C8CFB
+P 4950 6550
+F 0 "J6" H 4978 6526 50  0000 L CNN
+F 1 "Molex 4 Pin" H 4978 6041 50  0000 L BNN
+F 2 "LibraryLoader:641737-1" H 4950 6550 50  0001 C CNN
+F 3 "~" H 4950 6550 50  0001 C CNN
+	1    4950 6550
+	1    0    0    -1  
+$EndComp
+$Comp
+L flowcontrol-rescue:Conn_01x04_Male-Connector J7
+U 1 1 604E42AE
+P 3200 6650
+F 0 "J7" H 3308 6931 50  0000 C CNN
+F 1 "4 Pin DRGB LED" H 3308 6840 50  0000 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x04_P2.54mm_Horizontal" H 3200 6650 50  0001 C CNN
+F 3 "~" H 3200 6650 50  0001 C CNN
+	1    3200 6650
 	1    0    0    -1  
 $EndComp
 $EndSCHEMATC
