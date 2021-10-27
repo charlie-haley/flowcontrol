@@ -15,7 +15,7 @@ LibDir=
 [pcbnew]
 version=1
 PageLayoutDescrFile=
-LastNetListRead=flowcontrol-v0.1.net
+LastNetListRead=flowcontrol.net
 CopperLayerCount=2
 BoardThickness=1.6
 AllowMicroVias=0
