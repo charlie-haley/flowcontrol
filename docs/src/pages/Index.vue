@@ -3,8 +3,7 @@
     <div class="pt-8 md:pt-16">
       <div class="flex flex-col items-center">
         <div class="flex flex-col items-center mb-2 text-ui-primary">
-          <Logo full="true" />
-
+          <Logo full=true />
         </div>
         <h1 class="text-ui-primary text-2xl text-center lg:text-2xl">
           open source, multi-platform fan controller.

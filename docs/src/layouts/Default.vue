@@ -125,6 +125,8 @@ export default {
 </script>
 
 <style lang="scss">
+@import './../assets/fonts/stylesheet.css';
+
 :root {
   --color-ui-background: #fffbf5;
   --color-ui-typo: #333333;
