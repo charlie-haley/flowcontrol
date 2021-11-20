@@ -41,4 +41,4 @@ Huge thank you to all the awesome open source projects that have made this possi
 - [Raspberry Pi Pico](https://www.raspberrypi.org/products/raspberry-pi-pico/)
 - [YoungSerif](https://github.com/noirblancrouge/YoungSerif)
 - [KiCad](https://www.kicad.org/)
-- [Hugo](https://gohugo.io/)
+- [Gridsome](https://github.com/gridsome/gridsome)
