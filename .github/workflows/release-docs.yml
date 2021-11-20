@@ -2,7 +2,6 @@
 on:
   push:
     paths:
-      - 'docs/release-docs.yaml'
       - 'docs/**'
 
 name: Release Doc
