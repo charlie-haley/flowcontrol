@@ -6,7 +6,7 @@ _autosave-flowcontrol-v*.kicad_pcb
 *.log
 .cache
 .DS_Store
-src/.temp
+docs/src/.temp
 node_modules
 dist
 !.env.example
