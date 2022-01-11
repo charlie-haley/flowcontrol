@@ -18,8 +18,8 @@
               <span id="temp-cpu">{{cpuTemp}}c</span>
           </div>
       </div>
-      <Fan identifier="fan:a" name="Top Radiator"/>
-      <Fan identifier="fan:b" name="Bottom Radiator"/>
+      <Fan identifier="fan:1" name="Top Radiator"/>
+      <Fan identifier="fan:2" name="Bottom Radiator"/>
           
   </div>
 </template>
@@ -63,7 +63,7 @@ export default {
               this.cpuTemp = cpuTemp
           }
       });
-      Wails.Events.On("water:temp", waterTemp => {
+      Wails.Events.On("sensor:1:value", waterTemp => {
           if (waterTemp) {
               this.waterTemp = waterTemp
           }

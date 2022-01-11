@@ -13,7 +13,7 @@
               <span v-if="fan.Auto" alt="Enable manual fan control" class="material-icons" v-on:click="auto">lock</span>
             </div>
         </div>
-        <input type="range" min="0" max="100" step="1" v-model="fan.Speed" :disabled="fan.Auto == 1" @mouseup="speed"> 
+        <input type="range" min="0" max="100" step="1" v-model="fan.Speed" :disabled="fan.Auto == true" @mouseup="speed"> 
 
       <v-style v-if="animations_enabled">
         .fan-icon {

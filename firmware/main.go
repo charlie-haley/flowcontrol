@@ -13,7 +13,6 @@ import (
 )
 
 var Version = "development"
-var LogLevel = "debug"
 
 /*
  Main
@@ -53,19 +52,16 @@ func main() {
 // goroutine for actioning a command
 func command(in chan string) {
 	s := &State{}
-	// Iterate over each fan and fetch RPM to understand which is connected
-	for i := 1; i <= 6; i++ {
-		// println(i)
-	}
-	// TEMP: This is hardcoded for all 6 fans
+	// TEMP: This is hardcoded for all 6 fans, need to detect
 	s.Fans = append(s.Fans,
-		Fan{Position: 1, Speed: 50, Auto: true, Rpm: 0, TachPin: machine.GPIO21, PwmPin: machine.GPIO5},
-		// Fan{Position: 2, Speed: 100, Auto: true, Rpm: 0, TachPin: machine.GPIO22, PwmPin: machine.GPIO4},
-		// Fan{Position: 3, Speed: 50, Auto: true, Rpm: 0, TachPin: machine.GPIO23, PwmPin: machine.GPIO6},
-		// Fan{Position: 4, Speed: 25, Auto: true, Rpm: 0, TachPin: machine.GPIO24, PwmPin: machine.GPIO7},
-		// Fan{Position: 5, Speed: 100, Auto: true, Rpm: 0, TachPin: machine.GPIO25, PwmPin: machine.GPIO8},
-		// Fan{Position: 6, Speed: 50, Auto: true, Rpm: 0, TachPin: machine.GPIO26, PwmPin: machine.GPIO9},
+		Fan{Position: 1, Auto: true, TachPin: machine.GPIO21, PwmPin: machine.GPIO5},
+		Fan{Position: 2, Auto: true, TachPin: machine.GPIO22, PwmPin: machine.GPIO4},
+		Fan{Position: 3, Auto: true, TachPin: machine.GPIO23, PwmPin: machine.GPIO6},
+		Fan{Position: 4, Auto: true, TachPin: machine.GPIO24, PwmPin: machine.GPIO7},
+		Fan{Position: 5, Auto: true, TachPin: machine.GPIO25, PwmPin: machine.GPIO8},
+		Fan{Position: 6, Auto: true, TachPin: machine.GPIO26, PwmPin: machine.GPIO9},
 	)
+
 	//Attempt to get a temp reading for each sensor -- assume disconnected if reading is negative
 	if getTemp(machine.ADC1) > 0 {
 		s.Sensors = append(s.Sensors, Sensor{Position: 1, Value: getTemp(machine.ADC1), Pin: machine.ADC1})
@@ -87,18 +83,24 @@ func command(in chan string) {
 	for {
 		select {
 		case command := <-in:
+			if command != "" {
+				s.LastMessage = command
+			}
 			if len(command) <= 1 {
 				continue
 			}
 
-			// Mode command - format M<POS><ACT>
+			// Mode command - format M<POS><ACT><VAL>
 			// POS is fan position (1, 2, 3, 4 etc.)
 			// ACT is the action for the fan (A=auto)
-			// e.g M5A would toogle auto mode on fan in position 5
-			if valid, _ := regexp.MatchString("^M\\dA$", command); valid {
+			// VAL: is the value for a given action (optional) (for 'auto', a bool as int)
+			// e.g M5A1 would toogle auto mode on fan in position 5,
+			if valid, _ := regexp.MatchString("^M\\dA(\\d)?$", command); valid {
 				position := int(command[1] - '0')
 				fan := &s.Fans[(position - 1)]
-				fan.Auto = !fan.Auto
+				if command[2] == 'A' {
+					fan.Auto = int(command[3]-'0') == 1
+				}
 			}
 
 			// Speed command - format S<POS><VAL>
@@ -121,15 +123,16 @@ func command(in chan string) {
 			command = ""
 			continue
 		default:
+			updated := updateState(s)
 			for i, _ := range s.Fans {
 				fan := &s.Fans[i]
 				if fan.Auto {
-					fan.Speed, _ = strconv.Atoi(percent)
+					// configurable sensor will need placing here instead of hardcoded value
+					fan.Speed = getCurvePercent(s.Sensors[0].Value, s.Curve)
 					// update fan speed
 					setFanPercent(fan.PwmPin, uint32(fan.Speed))
 				}
 			}
-			updated := updateState(s)
 			// echo state if there's a change
 			if updated {
 				echo(s)
@@ -139,8 +142,6 @@ func command(in chan string) {
 		}
 	}
 }
-
-func getFanSpeed()
 
 // function for echo'ing state json object over uart
 func echo(state *State) {
@@ -199,7 +200,7 @@ func updateState(state *State) bool {
 	return stateUpdated
 }
 
-//WIP
+// fetches the % to set the fan to based on the defined curve using linear interpolation
 func getCurvePercent(temp int, curve []DataPoint) int {
 	for i, dp := range curve {
 		// first iteration is a special case due to not being able to get previous value
@@ -212,17 +213,17 @@ func getCurvePercent(temp int, curve []DataPoint) int {
 			continue
 		}
 		// linear interpolation to calculate current position between data points
-		if temp < dp.Temp && temp > curve[i-1].Temp {
-			x1 := dp.Temp
-			y1 := dp.Percent
-			x2 := curve[i-1].Temp
-			y2 := curve[i-1].Percent
+		if temp <= dp.Temp && temp >= curve[i-1].Temp {
+			x1 := curve[i-1].Temp
+			y1 := curve[i-1].Percent
+			x2 := dp.Temp
+			y2 := dp.Percent
 			return y1 + (temp-x1)*((y2-y1)/(x2-x1))
 		}
-		return dp.Temp
+		continue
 	}
 	// failling everthing, get last data point to be safe
-	return curve[(len(curve) - 1)].Temp
+	return curve[(len(curve) - 1)].Percent
 }
 
 func setFanPercent(pin machine.Pin, speed uint32) {
@@ -241,14 +242,12 @@ func getTemp(pin machine.Pin) int {
 
 	res = 3.3 / 65535
 	v = float64(val) * res
-	rd = 10000
+	rd = 20000 // currently setting resistance to 10k to account for 2 sensors, need to investigate if this is fine https://github.com/charlie-haley/flowcontrol/issues/74
 	rdef = (rd * 16800) / (rd + 16800)
 	rth = (3.3 - v) / v * rdef
 	temp := steinhartTemp(rth)
 
-	// !! TEMP - Dividing reading by 2, it seems due to a hardware issue the reading is wrong, needs further investigation !!
-	// https://github.com/charlie-haley/flowcontrol/issues/74
-	return temp / 2
+	return temp
 }
 
 func steinhartTemp(r float64) int {
@@ -262,9 +261,10 @@ func steinhartTemp(r float64) int {
  State
 */
 type State struct {
-	Sensors Sensors
-	Fans    Fans
-	Curve   []DataPoint
+	Sensors     Sensors
+	Fans        Fans
+	Curve       []DataPoint
+	LastMessage string
 }
 
 type DataPoint struct {
@@ -279,6 +279,7 @@ func (u *State) IsNil() bool {
 func (u *State) MarshalJSONObject(enc *gojay.Encoder) {
 	enc.ArrayKey("sensors", u.Sensors)
 	enc.ArrayKey("fans", u.Fans)
+	enc.StringKey("lastmessage", u.LastMessage)
 }
 
 /*

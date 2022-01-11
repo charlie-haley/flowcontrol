@@ -10,6 +10,7 @@ import (
 	"os/exec"
 	"path"
 	"path/filepath"
+	"strconv"
 	"strings"
 	"time"
 
@@ -18,18 +19,26 @@ import (
 	"github.com/wailsapp/wails"
 )
 
-//State TODO: Move to another file
+// State
 type State struct {
-	FanA      Fan `json:"fan_a"`
-	FanB      Fan `json:"fan_b"`
-	WaterTemp int `json:"temp_water"`
+	Sensors Sensors
+	Fans    Fans
 }
 
-//Fan struct
+//Sensors
+type Sensors []Sensor
+type Sensor struct {
+	Position int
+	Value    int
+}
+
+//Fans
+type Fans []Fan
 type Fan struct {
-	Speed int
-	Auto  int
-	Rpm   int
+	Position int
+	Auto     bool
+	Speed    int
+	Rpm      int
 }
 
 type wailsstruct struct {
@@ -79,10 +88,17 @@ func (w *wailsstruct) WailsInit(runtime *wails.Runtime) error {
 				text = scanner.Text()
 				//Ensure json response is well formed before displaying
 				if text[0] == '{' {
+					println("!!!!!!!!!!!!!!!!!!!!!!!!!!")
+					println(text)
 					json.Unmarshal([]byte(text), &State)
-					runtime.Events.Emit("water:temp", State.WaterTemp)
-					runtime.Events.Emit("fan:a", State.FanA)
-					runtime.Events.Emit("fan:b", State.FanB)
+					for _, sensor := range State.Sensors {
+						p := strconv.Itoa(sensor.Position)
+						runtime.Events.Emit("sensor:"+p+":value", sensor.Value)
+					}
+					for _, fan := range State.Fans {
+						p := strconv.Itoa(fan.Position)
+						runtime.Events.Emit("fan:"+p, fan)
+					}
 				}
 				if scanner.Err() != nil {
 					log.Fatal(err)
@@ -90,16 +106,20 @@ func (w *wailsstruct) WailsInit(runtime *wails.Runtime) error {
 			}
 		}
 	}()
-	runtime.Events.On("fan:a:auto", func(data ...interface{}) {
-		serialCmd := fmt.Sprintf("X%v%v\n", "A", data[0])
+
+	//gross hardcodedness for now
+	runtime.Events.On("fan:1:auto", func(data ...interface{}) {
+		serialCmd := fmt.Sprintf("M%vA%v\r", "1", data[0])
+		println(serialCmd)
 		n, err := s.Write([]byte(serialCmd))
 		if err != nil {
 			log.Fatal(err)
 			log.Fatal(n)
 		}
 	})
-	runtime.Events.On("fan:b:auto", func(data ...interface{}) {
-		serialCmd := fmt.Sprintf("X%v%v\n", "B", data[0])
+	runtime.Events.On("fan:2:auto", func(data ...interface{}) {
+		serialCmd := fmt.Sprintf("M%vA%v\r", "2", data[0])
+		println(serialCmd)
 		n, err := s.Write([]byte(serialCmd))
 		if err != nil {
 			log.Fatal(err)
@@ -107,16 +127,16 @@ func (w *wailsstruct) WailsInit(runtime *wails.Runtime) error {
 		}
 	})
 
-	runtime.Events.On("fan:a:speed", func(data ...interface{}) {
-		serialCmd := fmt.Sprintf("%v%v\n", "A", data[0])
+	runtime.Events.On("fan:1:speed", func(data ...interface{}) {
+		serialCmd := fmt.Sprintf("S%v%v\r", "1", data[0])
 		n, err := s.Write([]byte(serialCmd))
 		if err != nil {
 			log.Fatal(err)
 			log.Fatal(n)
 		}
 	})
-	runtime.Events.On("fan:b:speed", func(data ...interface{}) {
-		serialCmd := fmt.Sprintf("%v%v\n", "B", data[0])
+	runtime.Events.On("fan:2:speed", func(data ...interface{}) {
+		serialCmd := fmt.Sprintf("S%v%v\r", "2", data[0])
 		n, err := s.Write([]byte(serialCmd))
 		if err != nil {
 			log.Fatal(err)
@@ -124,13 +144,5 @@ func (w *wailsstruct) WailsInit(runtime *wails.Runtime) error {
 		}
 	})
 
-	runtime.Events.On("led:colour", func(data ...interface{}) {
-		serialCmd := fmt.Sprintf("%v%v\n", "L ", data[0])
-		n, err := s.Write([]byte(serialCmd))
-		if err != nil {
-			log.Fatal(err)
-			log.Fatal(n)
-		}
-	})
 	return nil
 }
