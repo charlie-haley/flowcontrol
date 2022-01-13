@@ -1,12 +1,12 @@
+//go:build linux
 // +build linux
 
-package flwserial
-
+package serial
 
 import (
 	"errors"
 )
 
-func SetupCmd() {
+func getValidPort() {
 	return nil, errors.New("Not implemented")
 }

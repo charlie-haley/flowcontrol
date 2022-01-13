@@ -2,7 +2,7 @@
 _autosave-flowcontrol-v*.kicad_pcb
 
 # compiled firmware
-firmware/main.uf2
+*.uf2
 
 # gridsome
 *.log

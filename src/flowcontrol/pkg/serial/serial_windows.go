@@ -1,16 +1,18 @@
+//go:build windows
 // +build windows
 
-package flwserial
+package serial
 
 import (
-	"golang.org/x/sys/windows/registry"
-	"github.com/tarm/serial"
-	"log"
 	"bufio"
 	"errors"
+	"log"
+
+	"github.com/tarm/serial"
+	"golang.org/x/sys/windows/registry"
 )
 
-func GetValidPort() (*serial.Port, error) {
+func getValidPort() (*serial.Port, error) {
 	//Find active serial ports from registry key
 	k, err := registry.OpenKey(registry.LOCAL_MACHINE, `HARDWARE\\DEVICEMAP\\SERIALCOMM`, registry.QUERY_VALUE)
 	if err != nil {
@@ -50,5 +52,5 @@ func GetValidPort() (*serial.Port, error) {
 			}
 		}
 	}
-	return nil, errors.New("Error finding valid port")
+	return nil, errors.New("error finding valid port")
 }

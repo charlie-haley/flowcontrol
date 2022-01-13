@@ -18,6 +18,9 @@
               <span id="temp-cpu">{{cpuTemp}}c</span>
           </div>
       </div>
+      <li v-for="item in items" :key="item.message">
+        <Fan identifier="fan:1" name="Fan 1"/>
+      </li>
       <Fan identifier="fan:1" name="Top Radiator"/>
       <Fan identifier="fan:2" name="Bottom Radiator"/>
           
