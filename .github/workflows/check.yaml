@@ -41,14 +41,12 @@ jobs:
           go-version: '1.16.3'
       - name: Install wails
         run: GO111MODULE=on go get -u github.com/wailsapp/wails/cmd/wails
-      - name: Update to prerelease
-        run: wails update -pre
 # Compile wails app for darwin/amd64
       - name: Build project for windows/amd64
         if: ${{ !env.ACT }}
         run: |
           cd ./src/flowcontrol
-          wails build -x windows/amd64 --verbose
+          wails build -x windows/amd64 --verbose --tags "windows,gui"
       # If building locally, ensure we don't compile for a specific architecture due to docker in docker requirements
       - name: Build project
         if: ${{ env.ACT }}
@@ -81,7 +79,7 @@ jobs:
         if: ${{ !env.ACT }}
         run: |
           cd ./src/flowcontrol
-          wails build -x darwin/amd64 --verbose
+          wails build -x darwin/amd64 --verbose --tags "osx,gui"
 ##Build Linux
 # Cleardown old build
       - name: Clear old assets
@@ -99,4 +97,4 @@ jobs:
         if: ${{ !env.ACT }}
         run: |
           cd ./src/flowcontrol
-          wails build -x linux/amd64 --verbose
+          wails build -x linux/amd64 --verbose --tags "linux,gui"

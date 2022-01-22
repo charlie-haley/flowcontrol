@@ -6,10 +6,10 @@ import (
 	"github.com/wailsapp/wails"
 )
 
-//go:embed frontend/dist/app.js
+//go:embed cmd/gui/frontend/dist/app.js
 var js string
 
-//go:embed frontend/dist/app.css
+//go:embed cmd/gui/frontend/dist/app.css
 var css string
 
 var appver = "development"
@@ -24,11 +24,11 @@ func main() {
 		CSS:    css,
 		Colour: "#131313",
 	})
-	app.Bind(&wailsstruct{})
+	app.Bind(&App{})
 	app.Bind(version)
 	app.Run()
 }
 
-func version() string{
-	return appver;
+func version() string {
+	return appver
 }

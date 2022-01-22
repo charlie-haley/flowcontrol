@@ -8,13 +8,13 @@
  "version": "0.1.0",
  "binaryname": "flowcontrol",
  "frontend": {
-  "dir": "frontend",
+  "dir": "cmd/gui/frontend",
   "install": "npm install",
   "build": "npm run build",
   "bridge": "src",
   "serve": "npm run serve"
  },
- "tags": "",
+ "tags": "windows,gui",
  "WailsVersion": "",
  "CrossCompile": false,
  "Platform": "",

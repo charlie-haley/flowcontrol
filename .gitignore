@@ -1,6 +1,8 @@
 # kicad autosaves
 _autosave-flowcontrol-v*.kicad_pcb
 
+# compiled firmware
+*.uf2
 
 # gridsome
 *.log
@@ -469,8 +471,4 @@ $RECYCLE.BIN/
 ##
 ## Visual Studio Code
 ##
-.vscode/*
-!.vscode/settings.json
-!.vscode/tasks.json
-!.vscode/launch.json
-!.vscode/extensions.json
+.vscode/
