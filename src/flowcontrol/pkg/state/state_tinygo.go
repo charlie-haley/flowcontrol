@@ -9,7 +9,7 @@ import (
 )
 
 // update values in state
-func (s State) Update() bool {
+func (s *State) Update() bool {
 	stateUpdated := false
 	//ensure sensor data is up to date
 	var cur sensor.Sensors
