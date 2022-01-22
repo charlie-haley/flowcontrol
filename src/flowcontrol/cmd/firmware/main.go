@@ -134,29 +134,28 @@ func command(in chan string) {
 				}
 			}
 
+			time.Sleep(10 * time.Millisecond)
 			// echo state
 			echo(s)
 			command = ""
 			continue
 		default:
 			updated := s.Update()
-
-			for i, _ := range s.Fans {
-				fan := &s.Fans[i]
-				if fan.Auto {
-					// configurable sensor will need placing here instead of hardcoded value
-					expected := s.Curve.CurrentPercent(s.Sensors[0].Value)
-					// this needs to be here, the loop is potentially trying to update values too fast
-					time.Sleep(10 * time.Millisecond)
-					if fan.Speed != expected {
-						fan.Speed = expected
-						fan.Set(uint32(fan.Speed))
+			// update and echo state if there's a change
+			if updated {
+				for i, _ := range s.Fans {
+					fan := &s.Fans[i]
+					if fan.Auto {
+						// configurable sensor will need placing here instead of hardcoded value
+						expected := s.Curve.CurrentPercent(s.Sensors[0].Value)
+						// this needs to be here, the loop is potentially trying to update values too fast
+						time.Sleep(10 * time.Millisecond)
+						if fan.Speed != expected {
+							fan.Speed = expected
+							fan.Set(uint32(fan.Speed))
+						}
 					}
 				}
-			}
-
-			// echo state if there's a change
-			if updated {
 				echo(s)
 			}
 			continue
