@@ -4,6 +4,7 @@
 package fan
 
 import (
+	"errors"
 	"machine"
 
 	"github.com/francoispqt/gojay"
@@ -22,9 +23,28 @@ type Fan struct {
 // sets the current fan speed in %
 func (f *Fan) Set(speed uint32) {
 	pwm, _ := machine.PWMGroup(f.PwmPin)
+
 	pwm.Configure(machine.PWMConfig{Period: 1e9 / 25000})
 	channel, _ := pwm.Channel(f.PwmPin)
 	pwm.Set(channel, (pwm.Top()/100)*speed)
+}
+
+// gets the current fan speed in %
+func (f *Fan) Get() int {
+	pwm, _ := machine.PWMGroup(f.PwmPin)
+	channel, _ := pwm.Channel(f.PwmPin)
+	val := pwm.Get(channel)
+	return int(val / (pwm.Top() / 100))
+}
+
+// get fan by position
+func (f Fans) GetByPosition(position int) (*Fan, error) {
+	for i, fan := range f {
+		if fan.Position == position {
+			return &f[i], nil
+		}
+	}
+	return nil, errors.New("error finding fan by position")
 }
 
 // Fans

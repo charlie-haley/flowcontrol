@@ -18,12 +18,9 @@
               <span id="temp-cpu">{{cpuTemp}}c</span>
           </div>
       </div>
-      <li v-for="item in items" :key="item.message">
-        <Fan identifier="fan:1" name="Fan 1"/>
+      <li v-for="fan in fans" :key="fan.Position">
+        <Fan :identifier="'fan:'+fan.Position" :name="'Fan '+fan.Position"/>
       </li>
-      <Fan identifier="fan:1" name="Top Radiator"/>
-      <Fan identifier="fan:2" name="Bottom Radiator"/>
-          
   </div>
 </template>
 
@@ -41,7 +38,8 @@ export default {
       gpuClock: "0",
       gpuTemp: "0",
       cpuTemp: "0",
-      waterTemp: "0"
+      waterTemp: "0",
+      fans: []
     };
   },
   computed: {
@@ -51,6 +49,11 @@ export default {
     },
   },
   mounted: function() {
+      Wails.Events.On("state:fans", fans => {
+          if (fans) {
+              this.fans = fans
+          }
+      });
       Wails.Events.On("gpu:clock", gpuClock => {
           if (gpuClock) {
               this.gpuClock = gpuClock

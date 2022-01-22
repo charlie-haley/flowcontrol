@@ -11,19 +11,6 @@ import (
 	"github.com/tarm/serial"
 )
 
-//State TODO: Move to another file
-type State struct {
-	FanA      Fan `json:"fan_a"`
-	FanB      Fan `json:"fan_b"`
-	WaterTemp int `json:"temp_water"`
-}
-
-//Fan struct
-type Fan struct {
-	Speed int
-	Auto  int
-}
-
 // getCmd represents the get command
 var getCmd = &cobra.Command{
 	Use:     "get",

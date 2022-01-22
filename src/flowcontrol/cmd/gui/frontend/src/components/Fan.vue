@@ -123,10 +123,10 @@ export default {
   },
   methods: {
     auto: function () {
-      Wails.Events.Emit(this.identifier + ":auto", !this.fan.Auto ? 1 : 0)
+      Wails.Events.Emit(this.identifier + ":auto", this.identifier.split(':')[1]+":"+(!this.fan.Auto ? 1 : 0))
     },
     speed: function () {
-      Wails.Events.Emit(this.identifier + ":speed", this.fan.Speed)
+      Wails.Events.Emit(this.identifier + ":speed", this.identifier.split(':')[1]+":"+this.fan.Speed)
     }
   },
   mounted: function() {

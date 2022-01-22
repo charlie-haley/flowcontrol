@@ -40,7 +40,7 @@ func getValidPort() (*serial.Port, error) {
 		c := &serial.Config{Name: element, Baud: 9600}
 		s, err = serial.OpenPort(c)
 		if err != nil {
-			log.Print("Can't connect to port")
+			log.Print("can't connect to port")
 			continue
 		}
 		scanner := bufio.NewScanner(s)

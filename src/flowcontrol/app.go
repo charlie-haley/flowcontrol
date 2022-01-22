@@ -1,9 +1,7 @@
 package main
 
 import (
-	"bufio"
 	_ "embed"
-	"encoding/json"
 	"fmt"
 	"log"
 	"os"
@@ -12,45 +10,30 @@ import (
 	"path/filepath"
 	"strconv"
 	"strings"
+	"sync"
 	"time"
 
-	"github.com/charlie-haley/flowcontrol/flwserial"
-	"github.com/charlie-haley/flowcontrol/setup"
+	"github.com/charlie-haley/flowcontrol/pkg/serial"
+	"github.com/charlie-haley/flowcontrol/pkg/setup"
+	"github.com/charlie-haley/flowcontrol/pkg/state"
 	"github.com/wailsapp/wails"
 )
 
-// State
-type State struct {
-	Sensors Sensors
-	Fans    Fans
-}
-
-//Sensors
-type Sensors []Sensor
-type Sensor struct {
-	Position int
-	Value    int
-}
-
-//Fans
-type Fans []Fan
-type Fan struct {
-	Position int
-	Auto     bool
-	Speed    int
-	Rpm      int
-}
-
-type wailsstruct struct {
+type App struct {
 	log     *wails.CustomLogger
 	runtime *wails.Runtime
+	serial  *serial.Serial
 }
 
-func (w *wailsstruct) WailsInit(runtime *wails.Runtime) error {
-	w.runtime = runtime
+var doOnce sync.Once
 
-	// This detection should be done with a device identifier or similiar
-	s, err := flwserial.GetValidPort()
+var a *App
+
+func (app *App) WailsInit(runtime *wails.Runtime) error {
+	app.runtime = runtime
+
+	a = app
+
 	//Go Routine for fetching stats from the flowcontrol-monitor application
 	go func() {
 		for {
@@ -74,75 +57,49 @@ func (w *wailsstruct) WailsInit(runtime *wails.Runtime) error {
 			time.Sleep(5 * time.Second)
 		}
 	}()
+
 	//Go Routine for getting the state of the controller over serial
-	go func() {
-		for {
-			var State State
-
-			if err != nil {
-				log.Fatal(err)
-			}
-			text := ""
-			scanner := bufio.NewScanner(s)
-			for scanner.Scan() {
-				text = scanner.Text()
-				//Ensure json response is well formed before displaying
-				if text[0] == '{' {
-					println("!!!!!!!!!!!!!!!!!!!!!!!!!!")
-					println(text)
-					json.Unmarshal([]byte(text), &State)
-					for _, sensor := range State.Sensors {
-						p := strconv.Itoa(sensor.Position)
-						runtime.Events.Emit("sensor:"+p+":value", sensor.Value)
-					}
-					for _, fan := range State.Fans {
-						p := strconv.Itoa(fan.Position)
-						runtime.Events.Emit("fan:"+p, fan)
-					}
-				}
-				if scanner.Err() != nil {
-					log.Fatal(err)
-				}
-			}
-		}
-	}()
-
-	//gross hardcodedness for now
-	runtime.Events.On("fan:1:auto", func(data ...interface{}) {
-		serialCmd := fmt.Sprintf("M%vA%v\r", "1", data[0])
-		println(serialCmd)
-		n, err := s.Write([]byte(serialCmd))
-		if err != nil {
-			log.Fatal(err)
-			log.Fatal(n)
-		}
-	})
-	runtime.Events.On("fan:2:auto", func(data ...interface{}) {
-		serialCmd := fmt.Sprintf("M%vA%v\r", "2", data[0])
-		println(serialCmd)
-		n, err := s.Write([]byte(serialCmd))
-		if err != nil {
-			log.Fatal(err)
-			log.Fatal(n)
-		}
-	})
-
-	runtime.Events.On("fan:1:speed", func(data ...interface{}) {
-		serialCmd := fmt.Sprintf("S%v%v\r", "1", data[0])
-		n, err := s.Write([]byte(serialCmd))
-		if err != nil {
-			log.Fatal(err)
-			log.Fatal(n)
-		}
-	})
-	runtime.Events.On("fan:2:speed", func(data ...interface{}) {
-		serialCmd := fmt.Sprintf("S%v%v\r", "2", data[0])
-		n, err := s.Write([]byte(serialCmd))
-		if err != nil {
-			log.Fatal(err)
-			log.Fatal(n)
-		}
-	})
+	go emitStateEvents()
 
 	return nil
+}
+
+func emitStateEvents() {
+	for {
+		s, err := a.serial.GetState()
+		if err != nil {
+			log.Fatal(err)
+		}
+		if s != nil {
+			for _, sensor := range *&s.Sensors {
+				a.runtime.Events.Emit(fmt.Sprintf("sensor:%v:value", sensor.Position), sensor.Value)
+			}
+			for _, fan := range *&s.Fans {
+				a.runtime.Events.Emit(fmt.Sprintf("fan:%v", fan.Position), fan)
+			}
+			a.runtime.Events.Emit("state:fans", *&s.Fans)
+			doOnce.Do(func() {
+				configureStateEvents(s)
+			})
+		}
+	}
+}
+
+func configureStateEvents(s *state.State) {
+	if s != nil {
+		for _, fan := range *&s.Fans {
+			a.runtime.Events.On(fmt.Sprintf("fan:%v:auto", fan.Position), func(data ...interface{}) {
+				// this is a bit hacky, need a cleaner way of doing this
+				d := strings.Split(fmt.Sprintf("%v", data[0]), ":")
+				pos, _ := strconv.Atoi(d[0])
+				a.serial.SetMode(pos, fmt.Sprintf("%v", d[1]))
+			})
+			a.runtime.Events.On(fmt.Sprintf("fan:%v:speed", fan.Position), func(data ...interface{}) {
+				println(fmt.Sprintf("%v", data[0]))
+				d := strings.Split(fmt.Sprintf("%v", data[0]), ":")
+				pos, _ := strconv.Atoi(d[0])
+				a.serial.SetSpeed(pos, fmt.Sprintf("%v", d[1]))
+			})
+		}
+	}
 }

@@ -7,12 +7,12 @@ import (
 	"strconv"
 	"time"
 
-	// !! tinygo doesn't support encoding/json - see https://github.com/tinygo-org/tinygo/issues/447 !!
-
 	"github.com/charlie-haley/flowcontrol/pkg/datapoint"
 	"github.com/charlie-haley/flowcontrol/pkg/fan"
 	"github.com/charlie-haley/flowcontrol/pkg/sensor"
 	"github.com/charlie-haley/flowcontrol/pkg/state"
+
+	// !! tinygo doesn't support encoding/json - see https://github.com/tinygo-org/tinygo/issues/447 !!
 	"github.com/francoispqt/gojay"
 )
 
@@ -56,16 +56,15 @@ func main() {
 // goroutine for actioning a command
 func command(in chan string) {
 	s := &state.State{}
-	// TEMP: This is hardcoded for all 6 fans, need to detect
+	// TEMP: This is hardcoded for all 6 fans, need to detect RPM using tach
 	s.Fans = append(s.Fans,
 		fan.Fan{Position: 1, Auto: true, TachPin: machine.GPIO21, PwmPin: machine.GPIO5},
-		fan.Fan{Position: 2, Auto: true, TachPin: machine.GPIO22, PwmPin: machine.GPIO4},
-		fan.Fan{Position: 3, Auto: true, TachPin: machine.GPIO23, PwmPin: machine.GPIO6},
+		//fan.Fan{Position: 2, Auto: true, TachPin: machine.GPIO22, PwmPin: machine.GPIO4},
+		// fan.Fan{Position: 3, Auto: true, TachPin: machine.GPIO23, PwmPin: machine.GPIO6},
 		fan.Fan{Position: 4, Auto: true, TachPin: machine.GPIO24, PwmPin: machine.GPIO7},
-		fan.Fan{Position: 5, Auto: true, TachPin: machine.GPIO25, PwmPin: machine.GPIO8},
-		fan.Fan{Position: 6, Auto: true, TachPin: machine.GPIO26, PwmPin: machine.GPIO9},
+		// fan.Fan{Position: 5, Auto: true, TachPin: machine.GPIO25, PwmPin: machine.GPIO8},
+		// fan.Fan{Position: 6, Auto: true, TachPin: machine.GPIO26, PwmPin: machine.GPIO9},
 	)
-
 	//Attempt to get a temp reading for each sensor -- assume disconnected if reading is negative
 	s1 := sensor.Sensor{Position: 1, Pin: machine.ADC1}
 	s1temp := s1.Temp()
@@ -74,8 +73,11 @@ func command(in chan string) {
 		s.Sensors = append(s.Sensors, s1)
 	}
 	//Position 2 seems broken, it outputs similiar reading to pos 1 https://github.com/charlie-haley/flowcontrol/issues/74
-	// if getTemp(machine.ADC0) > 0 {
-	// 	s.Sensors = append(s.Sensors, Sensor{Position: 2, Value: getTemp(machine.ADC0), Pin: machine.ADC0})
+	// s2 := sensor.Sensor{Position: 2, Pin: machine.ADC0}
+	// s2temp := s2.Temp()
+	// if s2temp > 0 {
+	// 	s2.Value = s2temp
+	// 	s.Sensors = append(s.Sensors, s2)
 	// }
 
 	// Set a default "auto" curve, this will be configured and saved
@@ -101,9 +103,14 @@ func command(in chan string) {
 			// e.g M5A1 would toogle auto mode on fan in position 5,
 			if valid, _ := regexp.MatchString("^M\\dA(\\d)?$", command); valid {
 				position := int(command[1] - '0')
-				fan := &s.Fans[(position - 1)]
-				if command[2] == 'A' {
-					fan.Auto = int(command[3]-'0') == 1
+				fan, err := s.Fans.GetByPosition(position)
+				if err != nil {
+					println(err)
+				}
+				if fan != nil {
+					if command[2] == 'A' {
+						fan.Auto = int(command[3]-'0') == 1
+					}
 				}
 			}
 
@@ -114,11 +121,16 @@ func command(in chan string) {
 			if valid, _ := regexp.MatchString("^S\\d(100|[1-9]?\\d)$", command); valid {
 				percent := command[2:len(command)]
 				position := int(command[1] - '0')
-				fan := &s.Fans[(position - 1)]
-				if !fan.Auto {
-					fan.Speed, _ = strconv.Atoi(percent)
-					// update fan speed
-					fan.Set(uint32(fan.Speed))
+				fan, err := s.Fans.GetByPosition(position)
+				if err != nil {
+					println(err)
+				}
+				if fan != nil {
+					if !fan.Auto {
+						fan.Speed, _ = strconv.Atoi(percent)
+						// update fan speed
+						fan.Set(uint32(fan.Speed))
+					}
 				}
 			}
 
@@ -128,20 +140,25 @@ func command(in chan string) {
 			continue
 		default:
 			updated := s.Update()
+
 			for i, _ := range s.Fans {
 				fan := &s.Fans[i]
 				if fan.Auto {
 					// configurable sensor will need placing here instead of hardcoded value
-					fan.Speed = s.Curve.CurrentPercent(s.Sensors[0].Value)
+					expected := s.Curve.CurrentPercent(s.Sensors[0].Value)
+					// this needs to be here, the loop is potentially trying to update values too fast
+					time.Sleep(10 * time.Millisecond)
+					if fan.Speed != expected {
+						fan.Speed = expected
+						fan.Set(uint32(fan.Speed))
+					}
 				}
-				// update fan speed
-				fan.Set(uint32(fan.Speed))
 			}
+
 			// echo state if there's a change
 			if updated {
 				echo(s)
 			}
-			time.Sleep(100 * time.Millisecond)
 			continue
 		}
 	}
