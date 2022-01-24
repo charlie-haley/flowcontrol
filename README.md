@@ -8,8 +8,8 @@
 **This project is still in a very early state. If you'd like to contribute, [please take a look at our outstanding issues](https://github.com/charlie-haley/flowcontrol/issues) and raise a PR** 
 Alternatively, head over to [discussions](https://github.com/charlie-haley/flowcontrol/discussions) if you have any questions or ideas.
 
-![release](https://github.com/charlie-haley/flowcontrol/actions/workflows/release.yml/badge.svg)
-[![Documentation](https://github.com/charlie-haley/flowcontrol/actions/workflows/release-docs.yml/badge.svg)](https://github.com/charlie-haley/flowcontrol/actions/workflows/release-docs.yml)
+![release](https://github.com/charlie-haley/flowcontrol/actions/build.yml/badge.svg)
+[![Documentation](https://github.com/charlie-haley/flowcontrol/actions/build-docs.yml/badge.svg)](https://github.com/charlie-haley/flowcontrol/actions/build-docs.yml)
 
 <p align="center" style="text-align: center">
    <img src="/assets/desktop-demo.gif" width="70%"><br/>

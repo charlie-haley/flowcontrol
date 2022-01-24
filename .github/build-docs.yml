@@ -4,21 +4,21 @@ on:
     paths:
       - 'docs/**'
 
-name: Release Doc
+name: build docs
 
 jobs:
   build:
-    name: Upload Release Asset
+    name: build docs
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
 
-      - name: Setup Node
+      - name: setup Node
         uses: actions/setup-node@v2
         with:
           node-version: '14'
 
-      - name: Cache dependencies
+      - name: cache dependencies
         uses: actions/cache@v2
         with:
           path: ~/.npm
@@ -35,7 +35,7 @@ jobs:
       - run: npm run build
         working-directory: ./docs
 
-      - name: Deploy
+      - name: deploy
         uses: peaceiris/actions-gh-pages@v3
         if: ${{ github.ref == 'refs/heads/main' }}
         with:
