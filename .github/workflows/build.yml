@@ -55,9 +55,9 @@ jobs:
       - name: setup tinygo
         run: |
           wget https://github.com/charlie-haley/tinygo/releases/download/temp/tinygo
-          mv tinygo /usr/local/tinygo/bin
-          chmod +x /usr/local/tinygo/bin
-          export PATH=$PATH:/usr/local/tinygo/bin
+          mv tinygo /usr/bin/tinygo
+          chmod +x /usr/bin/tinygo
+          export PATH=$PATH:/usr/bin/tinygo
 
       # create release
       - name: create release
