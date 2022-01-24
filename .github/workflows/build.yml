@@ -77,19 +77,27 @@ jobs:
         with: 
           release_url: ${{ steps.create_release.outputs.upload_url }}
           release: startsWith(github.ref, 'refs/tags/v')
+          token: ${{ secrets.GITHUB_TOKEN }}
+          version: ${{ steps.get_version.outputs.VERSION }}
 
       - uses: ./.github/actions/build/linux
         with: 
           release_url: ${{ steps.create_release.outputs.upload_url }}
           release: startsWith(github.ref, 'refs/tags/v')
+          token: ${{ secrets.GITHUB_TOKEN }}
+          version: ${{ steps.get_version.outputs.VERSION }}
 
       - uses: ./.github/actions/build/darwin
         with: 
           release_url: ${{ steps.create_release.outputs.upload_url }}
           release: startsWith(github.ref, 'refs/tags/v')
+          token: ${{ secrets.GITHUB_TOKEN }}
+          version: ${{ steps.get_version.outputs.VERSION }}
 
       # build/release firmware
       - uses: ./.github/actions/build/firmware
         with: 
           release_url: ${{ steps.create_release.outputs.upload_url }}
-          release: startsWith(github.ref, 'refs/tags/v')      
+          release: startsWith(github.ref, 'refs/tags/v')
+          token: ${{ secrets.GITHUB_TOKEN }}
+          version: ${{ steps.get_version.outputs.VERSION }}

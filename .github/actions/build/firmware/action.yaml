@@ -1,4 +1,8 @@
 inputs:
+  token:
+    description: "GitHub token"
+  version: 
+    description: 'The version to release'
   release_url: 
     description: 'The URL of the Release to upload assets to'
   release: 
@@ -9,29 +13,33 @@ runs:
   steps: 
     # set version
     - name: set version
+      shell: bash
       run: |
-        echo "VERSION=${{ steps.get_version.outputs.VERSION }}" >> $GITHUB_ENV
+        echo "VERSION=${{ inputs.version }}" >> $GITHUB_ENV
 
     # compile gui app for linux/amd64
     - name: build project for linux/amd64
+      shell: bash
       run: |
         make firmware
 
     # zip assets
     - name: copy asset
-      if: ${{release}}
+      shell: bash
+      if: ${{inputs.release}}
       run: |
         cp ./dist/firmware/main.uf2 /home/runner/work/flowcontrol-${VERSION/./-}.uf2
 
     # upload linux x64 asset
     - name: Upload firmware asset
-      if: ${{release}}
+      shell: bash
+      if: ${{inputs.release}}
       id: upload-firmware-asset 
       uses: actions/upload-release-asset@v1
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ inputs.token }}
       with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        upload_url: ${{inputs.release_url }}
         asset_path: /home/runner/work/flowcontrol-${VERSION/./-}.uf2
         asset_name: flowcontrol-${VERSION/./-}.uf2
         asset_content_type: application/octet-stream

@@ -1,4 +1,8 @@
 inputs:
+  token:
+    description: "GitHub token"
+  version: 
+    description: 'The version to release'
   release_url: 
     description: 'The URL of the Release to upload assets to'
   release: 
@@ -9,18 +13,21 @@ runs:
   steps: 
     # compile gui app for linux/amd64
     - name: build project for linux/amd64
+      shell: bash
       run: |
-        make VERSION=${{ steps.get_version.outputs.VERSION }} build-gui-linux
+        make VERSION=${{ inputs.version }} build-gui-linux
         make publish-monitor-linux
 
     - name: copy compiled files
-      if: ${{release}}
+      shell: bash
+      if: ${{inputs.release}}
       run: |
         cp -r ./src/flowcontrol-monitor/bin/Release/net5.0/linux-x64/publish/ ./src/flowcontrol/build
 
     # zip assets
-    - name: Zip assets
-      if: ${{release}}
+    - name: zip assets
+      shell: bash
+      if: ${{inputs.release}}
       run: |
         zip -rj flowcontrol.zip ./src/flowcontrol/build
         zip -rj firmware.zip ./firmware
@@ -29,20 +36,22 @@ runs:
 
     # upload linux x64 asset
     - name: upload linux x64 gui asset
-      if: ${{release}}
+      shell: bash
+      if: ${{inputs.release}}
       id: upload-desktop-asset 
       uses: actions/upload-release-asset@v1
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ inputs.token }}
       with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        upload_url: ${{inputs.release_url }}
         asset_path: /home/runner/work/flowcontrol.zip
         asset_name: flowcontrol-linux-x64.zip
         asset_content_type: application/zip
 
     # clean assets
     - name: clean assets
-      if: ${{release}}
+      shell: bash
+      if: ${{inputs.release}}
       run: |
         sudo rm -Rf flowcontrol.zip
         sudo rm -Rf ./src/flowcontrol/build
