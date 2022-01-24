@@ -1,0 +1,95 @@
+---
+on:
+  pull_request:
+    types: [assigned, opened, synchronize, reopened]
+    paths-ignore:
+      - '.github/build-docs.yml'
+      - 'docs/**'
+      - 'firmware/**'
+      - 'pcb/**'
+      - 'assets/**'
+      - '.vscode/**'
+      - 'README.md'
+      - 'CONTRIBUTING.md'
+      - 'LICENSE'
+  push:
+    branches:
+      - main
+
+name: build
+
+jobs:
+  build:
+    name: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@main
+      # get version from tag
+      - name: Get version from tag
+        id: get_version
+        run: echo ::set-output name=VERSION::$(echo $GITHUB_REF | cut -d / -f 3)
+
+      # install deps
+      - name: install wails dependencies
+        run: |
+          sudo apt update
+          sudo apt-get -y install build-essential libgtk-3-dev libwebkit2gtk-4.0-dev
+
+      # setup docker for wails cross-compile
+      - uses: docker-practice/actions-setup-docker@master
+
+      # setup go
+      - uses: actions/setup-go@v2
+        with:
+          go-version: '1.16.3'
+      - name: Install wails
+        run: GO111MODULE=on go get -u github.com/wailsapp/wails/cmd/wails
+
+      # setup dotnet
+      - uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 5.0.x
+      
+      # setup tinygo
+      ## TEMP UNTIL THIS IS MERGED https://github.com/tinygo-org/tinygo/pull/2504
+      - name: setup tinygo
+        run: |
+          wget https://github.com/charlie-haley/tinygo/releases/download/temp/tinygo
+          sudo mv tinygo /usr/bin/tinygo
+          sudo chmod +x /usr/bin/tinygo
+          export PATH=$PATH:/usr/bin/tinygo
+
+      # create release
+      - name: create release
+        if: startsWith(github.ref, 'refs/tags/v')
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          draft: false
+          prerelease: false
+
+      # build/release gui app
+      - uses: ./.github/actions/build/windows
+        with: 
+          release_url: ${{ steps.create_release.outputs.upload_url }}
+          release: startsWith(github.ref, 'refs/tags/v')
+
+      - uses: ./.github/actions/build/linux
+        with: 
+          release_url: ${{ steps.create_release.outputs.upload_url }}
+          release: startsWith(github.ref, 'refs/tags/v')
+
+      - uses: ./.github/actions/build/darwin
+        with: 
+          release_url: ${{ steps.create_release.outputs.upload_url }}
+          release: startsWith(github.ref, 'refs/tags/v')
+
+      # build/release firmware
+      - uses: ./.github/actions/build/firmware
+        with: 
+          release_url: ${{ steps.create_release.outputs.upload_url }}
+          release: startsWith(github.ref, 'refs/tags/v')      
