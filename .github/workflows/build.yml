@@ -73,23 +73,23 @@ jobs:
           prerelease: false
 
       # build/release gui app
-      - uses: ./.github/actions/build/windows
+      - uses: ./.github/actions/build/windows.yaml
         with: 
           release_url: ${{ steps.create_release.outputs.upload_url }}
           release: startsWith(github.ref, 'refs/tags/v')
 
-      - uses: ./.github/actions/build/linux
+      - uses: ./.github/actions/build/linux.yaml
         with: 
           release_url: ${{ steps.create_release.outputs.upload_url }}
           release: startsWith(github.ref, 'refs/tags/v')
 
-      - uses: ./.github/actions/build/darwin
+      - uses: ./.github/actions/build/darwin.yaml
         with: 
           release_url: ${{ steps.create_release.outputs.upload_url }}
           release: startsWith(github.ref, 'refs/tags/v')
 
       # build/release firmware
-      - uses: ./.github/actions/build/firmware
+      - uses: ./.github/actions/build/firmware.yaml
         with: 
           release_url: ${{ steps.create_release.outputs.upload_url }}
           release: startsWith(github.ref, 'refs/tags/v')      
