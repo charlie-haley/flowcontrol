@@ -53,7 +53,7 @@ jobs:
       # setup tinygo
       ## TEMP UNTIL THIS IS MERGED https://github.com/tinygo-org/tinygo/pull/2504
       - name: setup tinygo
-        run:
+        run: |
           wget https://github.com/charlie-haley/tinygo/releases/download/temp/tinygo
           mv tinygo /usr/local/tinygo/bin
           chmod +x /usr/local/tinygo/bin
