@@ -73,23 +73,23 @@ jobs:
           prerelease: false
 
       # build/release gui app
-      - uses: charlie-haley/build/windows@v1
+      - uses: ./.github/actions/build/windows
         with: 
           release_url: ${{ steps.create_release.outputs.upload_url }}
           release: startsWith(github.ref, 'refs/tags/v')
 
-      - uses: charlie-haley/build/linux@v1
+      - uses: ./.github/actions/build/linux
         with: 
           release_url: ${{ steps.create_release.outputs.upload_url }}
           release: startsWith(github.ref, 'refs/tags/v')
 
-      - uses: charlie-haley/build/darwin@v1
+      - uses: ./.github/actions/build/darwin
         with: 
           release_url: ${{ steps.create_release.outputs.upload_url }}
           release: startsWith(github.ref, 'refs/tags/v')
 
       # build/release firmware
-      - uses: charlie-haley/build/firmware@v1
+      - uses: ./.github/actions/build/firmware
         with: 
           release_url: ${{ steps.create_release.outputs.upload_url }}
           release: startsWith(github.ref, 'refs/tags/v')      
