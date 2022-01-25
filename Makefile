@@ -13,8 +13,8 @@ build-firmware: setup
 	cd src/flowcontrol; tinygo build --tags="tinygo" -o=$(ROOT_DIR)/dist/firmware/main.uf2 -target=pico ./cmd/firmware/main.go
 
 build-gui-%: setup
-	npm install --prefix ./flowcontrol/src/flowcontrol/cmd/gui/frontend \
-	cd src/flowcontrol; wails build -x $*/amd64 --tags="$*,gui" --verbose -ldflags="-X 'main.appver=$(VERSION)'"
+	cd $(ROOT_DIR)/src/flowcontrol/cmd/gui/frontend; npm install \
+	cd $(ROOT_DIR)/src/flowcontrol; wails build -x $*/amd64 --tags="$*,gui" --verbose -ldflags="-X 'main.appver=$(VERSION)'"
 
 build-monitor-%: setup
 	if [ "$*" = "windows" ]; then \
