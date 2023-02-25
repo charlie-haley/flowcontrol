@@ -9,7 +9,7 @@ require (
 	github.com/spf13/viper v1.10.1
 	github.com/tarm/serial v0.0.0-20180830185346-98f6abe2eb07
 	github.com/wailsapp/wails v1.16.9
-	golang.org/x/sys v0.0.0-20220111092808-5a964db01320
+	golang.org/x/sys v0.5.0
 )
 
 require (
@@ -43,8 +43,8 @@ require (
 	github.com/subosito/gotenv v1.2.0 // indirect
 	github.com/syossan27/tebata v0.0.0-20180602121909-b283fe4bc5ba // indirect
 	golang.org/x/image v0.0.0-20200430140353-33d19683fad8 // indirect
-	golang.org/x/net v0.0.0-20210813160813-60bc85c4be6d // indirect
-	golang.org/x/text v0.3.7 // indirect
+	golang.org/x/net v0.7.0 // indirect
+	golang.org/x/text v0.7.0 // indirect
 	gopkg.in/ini.v1 v1.66.2 // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 	gopkg.in/yaml.v3 v3.0.0-20210107192922-496545a6307b // indirect
