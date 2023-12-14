@@ -1,3 +1,5 @@
+> **Due to not having to the time to work on this, this project will be archived. It may return in another form in the future.**
+>
 <p align="center" style="text-align: center">
    <a href="https://flowctl.app">
       <img src="/docs/static/images/flowcontrol-logo.svg" width="70%"><br/>
